@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>교육 일정 및 신청 | GARUDA Academy Korea</title>
+<meta name="description" content="가루다 지도자 자격과정 개강 일정을 한 화면에서 확인하고 바로 신청하세요. 코스별 커리큘럼, 잔여석, 수강료, 결제까지 한 번에.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#10232B;--ink-2:#1A343E;--ink-3:#2B4A54;
+  --paper:#EDEEE9;--card:#FBFBF9;--line:#D6D8D0;--line-2:#E5E6E1;
+  --text:#1B2A30;--soft:#5B6B71;
+  --mat:#B4842C;--app:#2F6E73;--aux:#8A6450;--brass:#C08A2E;
+  --ok:#3C6B52;--warn:#B4552C;
+  --r:2px;--pad:clamp(16px,4vw,56px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--text);font-family:'IBM Plex Sans KR',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,.disp{font-family:'Gowun Batang',serif;font-weight:700;line-height:1.3;letter-spacing:-.01em}
+.mono{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+.wrap{max-width:1180px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.eyebrow{font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:.22em;text-transform:uppercase}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+button{font-family:inherit}
+
+header{position:sticky;top:0;z-index:60;background:var(--ink);color:#fff;border-bottom:1px solid rgba(255,255,255,.12)}
+.hd{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-family:'Gowun Batang',serif;font-weight:700;font-size:17px;letter-spacing:.04em;text-decoration:none;color:#fff}
+.logo span{color:var(--brass)}
+.hd nav{display:flex;gap:24px;font-size:13.5px}
+.hd nav a{color:#fff;text-decoration:none;opacity:.75}
+.hd nav a:hover{opacity:1}
+@media(max-width:760px){.hd nav{display:none}}
+
+/* intro strip */
+.top{background:var(--ink);color:#fff;padding:clamp(30px,4.5vw,52px) 0 clamp(24px,3.5vw,38px)}
+.top .eyebrow{color:var(--brass);margin-bottom:14px}
+.top h1{font-size:clamp(24px,4vw,40px);color:#fff;max-width:20ch}
+.top p{margin-top:14px;max-width:52ch;font-size:14.5px;font-weight:300;color:rgba(255,255,255,.72)}
+.stats{display:flex;gap:clamp(18px,4vw,44px);margin-top:26px;padding-top:20px;border-top:1px solid rgba(255,255,255,.16);flex-wrap:wrap}
+.stats div{display:flex;flex-direction:column;gap:3px}
+.stats dt{font:400 10.5px/1 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.stats dd{font:500 19px/1 'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+.stats dd em{font-style:normal;color:var(--brass)}
+
+/* controls */
+.ctrl{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:22px 0 16px;position:sticky;top:60px;background:var(--paper);z-index:50;border-bottom:1px solid var(--line)}
+.chip{font:500 13px/1 'IBM Plex Sans KR',sans-serif;padding:9px 15px;border:1px solid var(--line);background:transparent;border-radius:999px;cursor:pointer;color:var(--soft);transition:.18s}
+.chip:hover{border-color:var(--ink-3);color:var(--text)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.ctrl .sp{flex:1}
+.toggle{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--soft);cursor:pointer;user-select:none}
+.toggle input{width:16px;height:16px;accent-color:var(--ink)}
+
+/* table head */
+.thead{display:grid;grid-template-columns:2fr 1fr 1.3fr 1fr 1fr 116px;gap:14px;padding:14px 18px 10px;
+  font:400 10.5px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+@media(max-width:900px){.thead{display:none}}
+
+/* rows */
+.row{background:var(--card);border:1px solid var(--line);border-radius:var(--r);margin-bottom:8px;position:relative;overflow:hidden}
+.row::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c)}
+.rhead{display:grid;grid-template-columns:2fr 1fr 1.3fr 1fr 1fr 116px;gap:14px;align-items:center;
+  width:100%;padding:16px 18px;background:none;border:0;cursor:pointer;text-align:left;color:inherit;transition:background .18s}
+.rhead:hover{background:#F5F5F2}
+.row.open .rhead{background:#F2F3EF}
+.cname{font-family:'Gowun Batang',serif;font-weight:700;font-size:16.5px;display:flex;align-items:center;gap:9px;min-width:0}
+.cname .arw{font-family:monospace;font-size:11px;color:var(--soft);transition:transform .22s;flex:none}
+.row.open .cname .arw{transform:rotate(90deg)}
+.cname i{font-style:normal;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ckr{font:400 12px/1.4 'IBM Plex Sans KR',sans-serif;color:var(--soft);display:block;margin-top:4px;padding-left:20px}
+.cell{font:400 14px/1.4 'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+.cell.date{font-size:14.5px;font-weight:500}
+.cell.date small{display:block;font-size:11.5px;font-weight:400;color:var(--soft);font-family:'IBM Plex Sans KR',sans-serif;margin-top:2px}
+.cell.cost{font-weight:500;color:var(--c)}
+.mlabel{display:none}
+.seat{display:flex;align-items:center;gap:8px}
+.seat .track{width:38px;height:5px;background:var(--line-2);flex:none}
+.seat .fill{height:100%;background:var(--c)}
+.seat b{font:500 13px/1 'IBM Plex Mono',monospace}
+.badge{display:inline-block;font:500 11px/1 'IBM Plex Sans KR',sans-serif;padding:5px 9px;border-radius:999px;border:1px solid var(--line);color:var(--soft);background:#fff;margin-top:6px}
+.badge.o{border-color:#B9CBC0;color:var(--ok);background:#F1F7F3}
+.badge.w{border-color:#E0C0AE;color:var(--warn);background:#FBF3EE}
+.apply{padding:11px 14px;border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:var(--r);font:600 13px/1 'IBM Plex Sans KR',sans-serif;cursor:pointer;white-space:nowrap;transition:.18s}
+.apply:hover{background:var(--ink-2)}
+.apply[disabled]{background:transparent;color:var(--soft);border-color:var(--line);cursor:not-allowed}
+
+@media(max-width:900px){
+  .rhead{grid-template-columns:1fr 1fr;gap:12px 16px;padding:16px}
+  .cname{grid-column:1/-1}
+  .ckr{padding-left:0}
+  .rhead .apply{grid-column:1/-1;width:100%;padding:13px}
+  .mlabel{display:block;font:400 10px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:5px}
+}
+
+/* detail */
+.detail{display:none;padding:0 18px 22px;border-top:1px solid var(--line-2)}
+.row.open .detail{display:block}
+.dgrid{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(20px,3vw,42px);padding-top:22px}
+@media(max-width:820px){.dgrid{grid-template-columns:1fr}}
+.dgrid h4{font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin-bottom:14px}
+.curr{list-style:none;counter-reset:d}
+.curr li{counter-increment:d;display:grid;grid-template-columns:52px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line-2)}
+.curr li:first-child{border-top:0;padding-top:0}
+.curr .dn{font:500 11px/1.5 'IBM Plex Mono',monospace;color:var(--c);letter-spacing:.04em}
+.curr .dt{display:block;font-weight:600;font-size:14.5px}
+.curr .dd{display:block;font-size:13.5px;color:var(--soft);margin-top:3px}
+.info{border:1px solid var(--line);background:#fff;padding:18px;border-radius:var(--r)}
+.info dl{display:flex;flex-direction:column;gap:13px}
+.info dt{font:400 10.5px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:3px}
+.info dd{font-size:13.5px}
+.sesspick{margin-top:16px}
+.sesspick label{display:flex;gap:10px;align-items:flex-start;padding:11px 12px;border:1px solid var(--line);border-radius:var(--r);margin-bottom:7px;cursor:pointer;font-size:13.5px;background:#fff;transition:.16s}
+.sesspick label:hover{border-color:var(--ink-3)}
+.sesspick input:checked+span{font-weight:600}
+.sesspick label:has(input:checked){border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+.sesspick input{margin-top:3px;accent-color:var(--ink);flex:none}
+.sesspick small{display:block;color:var(--soft);font-weight:400;margin-top:2px}
+.dcta{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:18px;padding-top:18px;border-top:1px solid var(--line-2)}
+.dcta .tot{font:500 17px/1 'IBM Plex Mono',monospace;color:var(--c)}
+.dcta .tot small{display:block;font:400 11px/1 'IBM Plex Sans KR',sans-serif;color:var(--soft);margin-bottom:5px}
+.dcta button{flex:1;min-width:180px;padding:15px;background:var(--brass);color:#12232B;border:0;border-radius:var(--r);font:600 14.5px/1 'IBM Plex Sans KR',sans-serif;cursor:pointer;transition:.18s}
+.dcta button:hover{filter:brightness(1.08)}
+
+/* notes */
+.notes{background:var(--ink);color:#fff;margin-top:40px;padding:clamp(36px,5vw,60px) 0}
+.notes .eyebrow{color:var(--brass);margin-bottom:12px}
+.notes h2{color:#fff;font-size:clamp(20px,3vw,27px);margin-bottom:26px}
+.nlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.14)}
+.nlist div{background:var(--ink);padding:20px}
+.nlist dt{font:400 10.5px/1 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin-bottom:8px}
+.nlist dd{font-size:14px;color:rgba(255,255,255,.85)}
+footer{background:var(--ink);color:rgba(255,255,255,.45);padding:30px 0;font-size:12.5px;border-top:1px solid rgba(255,255,255,.1)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* modal */
+.ov{position:fixed;inset:0;background:rgba(16,35,43,.62);z-index:100;display:none;align-items:center;justify-content:center;padding:16px}
+.ov.show{display:flex}
+.modal{background:var(--paper);width:100%;max-width:520px;max-height:92vh;overflow:auto;border-radius:var(--r);box-shadow:0 24px 60px -20px rgba(0,0,0,.5)}
+.mtop{background:var(--ink);color:#fff;padding:20px 24px;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;position:sticky;top:0}
+.mtop .eyebrow{color:var(--brass);margin-bottom:7px}
+.mtop h3{color:#fff;font-size:19px}
+.x{background:none;border:0;color:rgba(255,255,255,.65);font-size:22px;line-height:1;cursor:pointer;padding:0 2px}
+.x:hover{color:#fff}
+.mbody{padding:22px 24px 26px}
+.sumbox{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:20px}
+.sumbox dl{display:flex;flex-direction:column;gap:9px}
+.sumbox div{display:flex;justify-content:space-between;gap:14px;font-size:13.5px}
+.sumbox dt{color:var(--soft)}
+.sumbox dd{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;text-align:right}
+.sumbox .grand{border-top:1px solid var(--line);padding-top:11px;margin-top:3px;font-size:15px}
+.sumbox .grand dd{font-weight:600;color:var(--brass)}
+.mbody h4{font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--soft);margin:20px 0 11px}
+.mbody h4:first-child{margin-top:0}
+.f{display:flex;flex-direction:column;gap:12px}
+.f label.lb{font-size:12px;font-weight:500;color:var(--soft);display:block;margin-bottom:5px}
+.f input{width:100%;padding:12px 13px;border:1px solid var(--line);background:#fff;border-radius:var(--r);font:400 14px/1.5 'IBM Plex Sans KR',sans-serif}
+.f input:focus{border-color:var(--ink);outline:none;box-shadow:0 0 0 3px rgba(16,35,43,.08)}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opts label{display:block;padding:13px;border:1px solid var(--line);background:#fff;border-radius:var(--r);cursor:pointer;font-size:13.5px;transition:.16s}
+.opts label:has(input:checked){border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts b{display:block;font-weight:600}
+.opts small{color:var(--soft);font-size:11.5px}
+.pay{width:100%;margin-top:22px;padding:16px;background:var(--brass);color:#12232B;border:0;border-radius:var(--r);font:600 15px/1 'IBM Plex Sans KR',sans-serif;cursor:pointer}
+.pay:hover{filter:brightness(1.08)}
+.fine{font-size:11.5px;color:var(--soft);margin-top:12px;line-height:1.55}
+.done{text-align:center;padding:26px 6px}
+.done .ic{width:46px;height:46px;border-radius:50%;background:#F1F7F3;border:1px solid #B9CBC0;color:var(--ok);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:20px}
+.done h3{font-size:20px;margin-bottom:9px}
+.done p{font-size:14px;color:var(--soft)}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hd">
+    <a href="/" class="logo">GARUDA <span>ACADEMY</span> KOREA</a>
+    <nav><a href="#list">교육 일정</a><a href="#notes">인증 안내</a><a href="#">문의</a></nav>
+  </div>
+</header>
+
+<section class="top">
+  <div class="wrap">
+    <p class="eyebrow">Schedule &amp; Enrolment</p>
+    <h1>개강 일정을 확인하고<br>바로 신청하세요</h1>
+    <p>코스명을 누르면 일자별 커리큘럼이 펼쳐집니다. 선행 조건이 없어 원하는 과정부터 시작할 수 있습니다.</p>
+    <dl class="stats">
+      <div><dt>개설 과정</dt><dd>9개</dd></div>
+      <div><dt>모집중 기수</dt><dd><em id="k-open">0</em>개</dd></div>
+      <div><dt>최단 과정</dt><dd>3일 · 12시간</dd></div>
+      <div><dt>국제 인증</dt><dd>PMA</dd></div>
+    </dl>
+  </div>
+</section>
+
+<div class="wrap" id="list">
+  <div class="ctrl">
+    <button class="chip" data-f="all" aria-pressed="true">전체</button>
+    <button class="chip" data-f="Mat" aria-pressed="false">Matwork</button>
+    <button class="chip" data-f="Apparatus" aria-pressed="false">Apparatus</button>
+    <button class="chip" data-f="Auxiliary" aria-pressed="false">Auxiliary</button>
+    <span class="sp"></span>
+    <label class="toggle"><input type="checkbox" id="onlyopen"> 모집중만 보기</label>
+  </div>
+
+  <div class="thead">
+    <span>코스</span><span>기간</span><span>다음 개강</span><span>잔여석</span><span>수강료</span><span></span>
+  </div>
+  <div id="rows"></div>
+</div>
+
+<section class="notes" id="notes">
+  <div class="wrap">
+    <p class="eyebrow">Certification</p>
+    <h2>모든 코스 공통 사항</h2>
+    <dl class="nlist">
+      <div><dt>자격증</dt><dd>과정 이수 후 인증시험을 거쳐 자격증이 발급됩니다.</dd></div>
+      <div><dt>자격 유지</dt><dd>발급일로부터 2년 이내 리뷰 과정 1회 이수.</dd></div>
+      <div><dt>국제 인증</dt><dd>미국 PMA 보수교육 학점으로 인정됩니다.</dd></div>
+      <div><dt>수강 조건</dt><dd>코스 간 선행 조건 없음. 원하는 과정부터 시작.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <nav style="display:flex;gap:18px;flex-wrap:wrap"><a href="/" style="text-decoration:none;color:inherit">홈</a><a href="/pilates/" style="text-decoration:none;color:inherit">필라테스 스튜디오</a><a href="/barre/" style="text-decoration:none;color:inherit">바레 스튜디오</a><a href="/academy/" style="text-decoration:none;color:inherit">자격과정 일정</a><a href="/studios/" style="text-decoration:none;color:inherit">공식 스튜디오</a></nav><span>GARUDA Academy Korea &amp; Asia</span>
+  <span>일정 및 수강료는 변동될 수 있습니다.</span>
+</div></footer>
+
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="mt">
+  <div class="modal">
+    <div class="mtop">
+      <div><p class="eyebrow">Enrolment</p><h3 id="mt">수강 신청</h3></div>
+      <button class="x" id="close" aria-label="닫기">&times;</button>
+    </div>
+    <div class="mbody" id="mbody"></div>
+  </div>
+</div>
+
+<script src="/assets/data/courses.js"></script>
+<script>
+const C = window.GARUDA_COURSES;
+const COLOR={Mat:'var(--mat)',Apparatus:'var(--app)',Auxiliary:'var(--aux)'};
+const DEPOSIT=300000;
+const man=n=>(n/10000).toLocaleString('ko-KR')+'만원';
+const won=n=>n.toLocaleString('ko-KR')+'원';
+const fmt=s=>{const[,m,d]=s.split('-');return `${+m}월 ${+d}일`};
+const range=(a,b)=>`${fmt(a)} – ${fmt(b)}`;
+const yr=s=>s.split('-')[0];
+
+/* 상태 */
+const st=s=>s[3]===0?['마감','']:s[3]<=3?['마감임박','w']:['모집중','o'];
+const nextS=c=>c.s.find(s=>s[3]>0)||c.s[0];
+
+document.getElementById('k-open').textContent=C.reduce((n,c)=>n+c.s.filter(s=>s[3]>0).length,0);
+
+/* 렌더 */
+document.getElementById('rows').innerHTML=C.map(c=>{
+ const s=nextS(c),[lab,cls]=st(s),full=s[3]===0,pct=(s[2]-s[3])/s[2]*100;
+ return `<article class="row" data-cat="${c.cat}" data-open="${full?0:1}" style="--c:${COLOR[c.cat]}">
+  <div class="rhead" role="button" tabindex="0" aria-expanded="false">
+    <span class="cname"><span class="arw">▶</span><i>${c.en}</i></span>
+    <span class="cell"><span class="mlabel">기간</span>${c.d}일 · ${c.h}h</span>
+    <span class="cell date"><span class="mlabel">다음 개강</span>${range(s[0],s[1])}<small>${yr(s[0])}년 · ${lab==='마감'?'다음 기수 대기':lab}</small></span>
+    <span class="cell"><span class="mlabel">잔여석</span>
+      <span class="seat"><span class="track"><span class="fill" style="width:${pct}%"></span></span><b>${s[3]}/${s[2]}</b></span>
+    </span>
+    <span class="cell cost"><span class="mlabel">수강료</span>${man(c.c)}</span>
+    <button class="apply" data-id="${c.id}" ${full?'disabled':''}>${full?'대기 신청':'신청하기'}</button>
+  </div>
+  <div class="detail">
+    <div class="dgrid">
+      <div>
+        <h4>커리큘럼 · ${c.d}일 ${c.h}시간</h4>
+        <ol class="curr">${c.curr.map((m,i)=>`<li><span class="dn">DAY ${i+1}</span><span><span class="dt">${m[0]}</span><span class="dd">${m[1]}</span></span></li>`).join('')}</ol>
+      </div>
+      <div>
+        <div class="info">
+          <dl>
+            <div><dt>한글 명칭</dt><dd>${c.kr}</dd></div>
+            <div><dt>수강 대상</dt><dd>${c.who}</dd></div>
+            <div><dt>필요 장비</dt><dd>${c.eq}</dd></div>
+            <div><dt>수료 후</dt><dd>인증시험 합격 시 자격증 발급 · PMA 학점 인정</dd></div>
+          </dl>
+        </div>
+        <div class="sesspick">
+          <h4 style="margin:18px 0 10px">기수 선택</h4>
+          ${c.s.map((x,i)=>{const[l,k]=st(x);return `
+            <label><input type="radio" name="s-${c.id}" value="${i}" ${x[3]===0?'disabled':''} ${x[3]>0&&!c.s.slice(0,i).some(p=>p[3]>0)?'checked':''}>
+            <span>${range(x[0],x[1])}<small>${yr(x[0])}년 · 잔여 ${x[3]}석 · ${l}</small></span></label>`}).join('')}
+        </div>
+        <div class="dcta">
+          <span class="tot"><small>수강료</small>${won(c.c)}</span>
+          <button class="apply2" data-id="${c.id}">신청하고 결제하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ </article>`}).join('');
+
+/* 펼치기 */
+document.getElementById('rows').addEventListener('click',e=>{
+  const btn=e.target.closest('.apply,.apply2');
+  if(btn){e.stopPropagation();if(!btn.disabled)openModal(btn.dataset.id);return}
+  const h=e.target.closest('.rhead');if(!h)return;
+  const row=h.closest('.row'),on=row.classList.toggle('open');
+  h.setAttribute('aria-expanded',on);
+});
+
+document.getElementById('rows').addEventListener('keydown',e=>{
+  const h=e.target.closest('.rhead');
+  if(h&&(e.key==='Enter'||e.key===' ')){e.preventDefault();h.click()}
+});
+
+/* 필터 */
+function apply(){
+  const f=document.querySelector('.chip[aria-pressed="true"]').dataset.f;
+  const only=document.getElementById('onlyopen').checked;
+  document.querySelectorAll('.row').forEach(r=>{
+    const okCat=(f==='all'||r.dataset.cat===f), okOpen=(!only||r.dataset.open==='1');
+    r.style.display=(okCat&&okOpen)?'':'none';
+  });
+}
+document.querySelectorAll('.chip').forEach(ch=>ch.addEventListener('click',()=>{
+  document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed','false'));
+  ch.setAttribute('aria-pressed','true');apply();
+}));
+document.getElementById('onlyopen').addEventListener('change',apply);
+
+/* 결제 모달 */
+const ov=document.getElementById('ov'),mb=document.getElementById('mbody');
+function openModal(id){
+  const c=C.find(x=>x.id===id);
+  const r=document.querySelector(`input[name="s-${id}"]:checked`);
+  const s=r?c.s[+r.value]:nextS(c);
+  mb.innerHTML=`
+   <div class="sumbox"><dl>
+     <div><dt>과정</dt><dd style="font-family:'IBM Plex Sans KR'">${c.en}</dd></div>
+     <div><dt>일정</dt><dd>${yr(s[0])}. ${range(s[0],s[1])}</dd></div>
+     <div><dt>교육량</dt><dd>${c.d}일 · ${c.h}시간</dd></div>
+     <div class="grand"><dt>수강료</dt><dd>${won(c.c)}</dd></div>
+   </dl></div>
+   <h4>결제 방식</h4>
+   <div class="opts">
+     <label><input type="radio" name="pt" value="full" checked><b>전액 결제</b><small>${won(c.c)}</small></label>
+     <label><input type="radio" name="pt" value="dep"><b>예약금 결제</b><small>${won(DEPOSIT)} · 잔액 개강일 납부</small></label>
+   </div>
+   <h4>신청자 정보</h4>
+   <div class="f">
+     <div><label class="lb" for="f1">성함</label><input id="f1" required></div>
+     <div><label class="lb" for="f2">연락처</label><input id="f2" inputmode="tel" placeholder="010-0000-0000" required></div>
+     <div><label class="lb" for="f3">이메일</label><input id="f3" type="email" placeholder="name@example.com" required></div>
+     <div><label class="lb" for="f4">스튜디오명 (선택)</label><input id="f4"></div>
+   </div>
+   <h4>결제 수단</h4>
+   <div class="opts">
+     <label><input type="radio" name="pm" value="card" checked><b>신용카드</b><small>일시불 / 할부</small></label>
+     <label><input type="radio" name="pm" value="kakao"><b>카카오페이</b><small>간편결제</small></label>
+     <label><input type="radio" name="pm" value="bank"><b>계좌이체</b><small>실시간 이체</small></label>
+     <label><input type="radio" name="pm" value="np"><b>무통장입금</b><small>가상계좌 발급</small></label>
+   </div>
+   <button class="pay" id="pay">결제 진행하기</button>
+   <p class="fine">개강 14일 전까지 전액 환불, 7일 전까지 50% 환불됩니다. 결제 시 이용약관 및 환불 규정에 동의하는 것으로 간주합니다.</p>`;
+  document.getElementById('pay').onclick=()=>{
+    const dep=document.querySelector('input[name="pt"]:checked').value==='dep';
+    mb.innerHTML=`<div class="done"><div class="ic">✓</div>
+      <h3>신청이 접수되었습니다</h3>
+      <p>${c.en} · ${range(s[0],s[1])}<br>${dep?'예약금 '+won(DEPOSIT):'수강료 '+won(c.c)} 결제 단계로 이동합니다.<br><br>
+      <span style="font-size:12.5px">※ 실제 결제 연동(PG)이 필요한 화면입니다.</span></p></div>`;
+  };
+  ov.classList.add('show');document.body.style.overflow='hidden';
+}
+function close(){ov.classList.remove('show');document.body.style.overflow=''}
+document.getElementById('close').onclick=close;
+ov.addEventListener('click',e=>{if(e.target===ov)close()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ov.classList.contains('show'))close()});
+</script>
+</body>
+</html>
