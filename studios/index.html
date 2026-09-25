@@ -10,12 +10,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#10232B;--ink-2:#1A343E;
-  --paper:#EDEEE9;--card:#FBFBF9;--line:#D6D8D0;--line-2:#E5E6E1;
-  --text:#1B2A30;--soft:#5B6B71;--brass:#C08A2E;
-  --mat:#B4842C;--app:#2F6E73;--barre:#8A6450;
+  --ink:#32383E;--ink-2:#3D444B;
+  --paper:#F4F5F5;--card:#FFFFFF;--line:#D6D6D6;--line-2:#E6E7E7;
+  --text:#222222;--soft:#62686D;--accent:#EC008C;--accent-tx:#C8007A;--accent-lt:#FF7AC2;
+  --mat:#5C6E67;--app:#4A6072;--barre:#8E4A72;
   --r:2px;--pad:clamp(18px,5vw,60px);
 }
+header,.hero,.rights,footer{--accent-tx:var(--accent-lt)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--paper);color:var(--text);font-family:'IBM Plex Sans KR',system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
@@ -23,14 +24,14 @@ h1,h2,h3{font-family:'Gowun Batang',serif;font-weight:700;line-height:1.3;letter
 .wrap{max-width:1140px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
 .eyebrow{font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:.22em;text-transform:uppercase}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 section{padding:clamp(50px,7vw,88px) 0}
 .sec-head{margin-bottom:clamp(24px,3.5vw,40px);max-width:58ch}
-.sec-head .eyebrow{color:var(--brass);margin-bottom:13px}
+.sec-head .eyebrow{color:var(--accent-tx);margin-bottom:13px}
 .sec-head h2{font-size:clamp(22px,3.3vw,33px)}
 .sec-head p{margin-top:14px;color:var(--soft);font-size:15px}
 .btn{display:inline-block;padding:15px 25px;border-radius:var(--r);font:600 14.5px/1 'IBM Plex Sans KR',sans-serif;text-decoration:none;cursor:pointer;border:1px solid transparent;transition:.18s;text-align:center}
-.btn-p{background:var(--brass);color:#12232B}.btn-p:hover{filter:brightness(1.1)}
+.btn-p{background:var(--accent);color:#fff}.btn-p:hover{filter:brightness(.9)}
 .btn-g{border-color:rgba(255,255,255,.42);color:#fff}.btn-g:hover{background:rgba(255,255,255,.1);border-color:#fff}
 .btn-d{border-color:var(--ink);color:var(--ink)}.btn-d:hover{background:var(--ink);color:#fff}
 .cta2{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
@@ -39,7 +40,7 @@ section{padding:clamp(50px,7vw,88px) 0}
 header{position:sticky;top:0;z-index:70;background:var(--ink);border-bottom:1px solid rgba(255,255,255,.12)}
 .hd{display:flex;align-items:center;justify-content:space-between;height:60px}
 .logo{font-family:'Gowun Batang',serif;font-weight:700;font-size:16.5px;letter-spacing:.04em;text-decoration:none;color:#fff}
-.logo span{color:var(--brass)}
+.logo span{color:var(--accent-tx)}
 .hd nav{display:flex;gap:22px;font-size:13.5px}
 .hd nav a{color:#fff;text-decoration:none;opacity:.75}.hd nav a:hover{opacity:1}
 @media(max-width:860px){.hd nav{display:none}}
@@ -48,14 +49,14 @@ header{position:sticky;top:0;z-index:70;background:var(--ink);border-bottom:1px 
 .hero{background:var(--ink);color:#fff;padding:clamp(44px,6vw,76px) 0 clamp(36px,5vw,60px)}
 .hgrid{display:grid;grid-template-columns:1.5fr auto;gap:clamp(24px,4vw,56px);align-items:center}
 @media(max-width:780px){.hgrid{grid-template-columns:1fr}}
-.hero .eyebrow{color:var(--brass);margin-bottom:18px}
+.hero .eyebrow{color:var(--accent-tx);margin-bottom:18px}
 .hero h1{font-size:clamp(27px,4.8vw,46px);color:#fff;max-width:19ch}
 .hero p{margin-top:18px;max-width:48ch;font-size:15.5px;font-weight:300;color:rgba(255,255,255,.78)}
 .stats{display:flex;gap:clamp(18px,4vw,40px);margin-top:28px;padding-top:22px;border-top:1px solid rgba(255,255,255,.16);flex-wrap:wrap}
 .stats div{display:flex;flex-direction:column;gap:3px}
 .stats dt{font:400 10.5px/1 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)}
 .stats dd{font:500 21px/1 'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
-.stats dd em{font-style:normal;color:var(--brass)}
+.stats dd em{font-style:normal;color:var(--accent-tx)}
 
 /* 인증 마크 */
 .mark{width:clamp(150px,18vw,190px);height:clamp(150px,18vw,190px);flex:none;justify-self:center}
@@ -69,14 +70,14 @@ header{position:sticky;top:0;z-index:70;background:var(--ink);border-bottom:1px 
 .reqs h3{font-size:17px;margin-bottom:7px}
 .reqs .sub{font:500 13px/1 'IBM Plex Mono',monospace;color:var(--soft);margin-bottom:11px}
 .reqs p{font-size:13.5px;color:var(--soft)}
-.note{margin-top:20px;font-size:13px;color:var(--soft);border-left:2px solid var(--brass);padding-left:16px;line-height:1.75;max-width:62ch}
+.note{margin-top:20px;font-size:13px;color:var(--soft);border-left:2px solid var(--accent);padding-left:16px;line-height:1.75;max-width:62ch}
 
 /* 권한 */
 .rights{background:var(--ink);color:#fff}
 .rights .sec-head h2{color:#fff}.rights .sec-head p{color:rgba(255,255,255,.68)}
 .rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.16)}
 .rgrid div{background:var(--ink);padding:23px}
-.rgrid dt{font:400 10.5px/1 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin-bottom:10px}
+.rgrid dt{font:400 10.5px/1 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-tx);margin-bottom:10px}
 .rgrid dd{font-size:14px;color:rgba(255,255,255,.85)}
 
 /* 스튜디오 목록 */
@@ -89,7 +90,7 @@ header{position:sticky;top:0;z-index:70;background:var(--ink);border-bottom:1px 
 .count{font:400 13px/1 'IBM Plex Mono',monospace;color:var(--soft);margin:18px 0 16px}
 .slist{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
 .scard{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:14px;transition:.18s}
-.scard:hover{border-color:var(--ink-2);box-shadow:0 6px 22px -14px rgba(16,35,43,.45)}
+.scard:hover{border-color:var(--ink-2);box-shadow:0 6px 22px -14px rgba(50,56,62,.45)}
 .stop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 .sname{font-family:'Gowun Batang',serif;font-weight:700;font-size:18.5px;line-height:1.3}
 .sname small{display:block;font:400 12.5px/1.5 'IBM Plex Sans KR',sans-serif;color:var(--soft);margin-top:4px}
@@ -104,7 +105,7 @@ header{position:sticky;top:0;z-index:70;background:var(--ink);border-bottom:1px 
 /* 절차 */
 .steps{counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
 .steps article{background:var(--card);padding:26px 22px;counter-increment:s}
-.steps article::before{content:"0" counter(s);display:block;font:500 12px/1 'IBM Plex Mono',monospace;color:var(--brass);letter-spacing:.14em;margin-bottom:14px}
+.steps article::before{content:"0" counter(s);display:block;font:500 12px/1 'IBM Plex Mono',monospace;color:var(--accent-tx);letter-spacing:.14em;margin-bottom:14px}
 .steps h3{font-size:16.5px;margin-bottom:8px}
 .steps p{font-size:13.5px;color:var(--soft)}
 
@@ -148,14 +149,14 @@ footer nav a:hover{color:#fff}
     <svg class="mark" viewBox="0 0 200 200" role="img" aria-label="가루다 공식 스튜디오 인증 마크">
       <defs><path id="arcTop" d="M 28 100 A 72 72 0 0 1 172 100"/>
              <path id="arcBot" d="M 172 100 A 72 72 0 0 1 28 100"/></defs>
-      <circle cx="100" cy="100" r="94" fill="none" stroke="#C08A2E" stroke-width="1" opacity=".5"/>
-      <circle cx="100" cy="100" r="86" fill="none" stroke="#C08A2E" stroke-width="2"/>
-      <text font-size="11" fill="#C08A2E"><textPath href="#arcTop" startOffset="50%" text-anchor="middle">GARUDA METHOD</textPath></text>
-      <text font-size="10" fill="#C08A2E" opacity=".8"><textPath href="#arcBot" startOffset="50%" text-anchor="middle">OFFICIAL STUDIO</textPath></text>
+      <circle cx="100" cy="100" r="94" fill="none" stroke="#FF7AC2" stroke-width="1" opacity=".5"/>
+      <circle cx="100" cy="100" r="86" fill="none" stroke="#FF7AC2" stroke-width="2"/>
+      <text font-size="11" fill="#FF7AC2"><textPath href="#arcTop" startOffset="50%" text-anchor="middle">GARUDA METHOD</textPath></text>
+      <text font-size="10" fill="#FF7AC2" opacity=".8"><textPath href="#arcBot" startOffset="50%" text-anchor="middle">OFFICIAL STUDIO</textPath></text>
       <path d="M100 62 C 82 78, 66 88, 60 104 C 76 100, 88 104, 100 116 C 112 104, 124 100, 140 104 C 134 88, 118 78, 100 62 Z"
-            fill="none" stroke="#C08A2E" stroke-width="1.6" stroke-linejoin="round"/>
-      <line x1="100" y1="116" x2="100" y2="132" stroke="#C08A2E" stroke-width="1.6"/>
-      <text x="100" y="150" font-size="9" fill="#C08A2E" text-anchor="middle" opacity=".75">CERTIFIED</text>
+            fill="none" stroke="#FF7AC2" stroke-width="1.6" stroke-linejoin="round"/>
+      <line x1="100" y1="116" x2="100" y2="132" stroke="#FF7AC2" stroke-width="1.6"/>
+      <text x="100" y="150" font-size="9" fill="#FF7AC2" text-anchor="middle" opacity=".75">CERTIFIED</text>
     </svg>
   </div>
 </section>
