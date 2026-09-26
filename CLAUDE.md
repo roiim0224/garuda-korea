@@ -30,6 +30,7 @@
 | `/pilates/` | `pilates/index.html` | 필라테스 스튜디오 원장 | **SNS 광고 A 전용 랜딩.** 투자 회수 시뮬레이터 |
 | `/barre/` | `barre/index.html` | 바레 스튜디오 원장 | **SNS 광고 B 전용 랜딩.** 재등록률 시뮬레이터 + 원데이 워크숍 |
 | `/academy/` | `academy/index.html` | 공통 종착지 | 9개 코스 일정·신청·결제 대시보드 |
+| `/programs/` | `programs/index.html` | 공통 | 과정별 소개·커리큘럼·핵심가치·영상·현장 사진·카톡 상담 (`#과정id`로 바로 열림) |
 | `/studios/` | `studios/index.html` | 공통 | 공식 스튜디오 인증 안내 + 스튜디오 찾기 |
 
 **전환 경로:** 광고 → `/pilates/` 또는 `/barre/` → `/academy/` → 결제
@@ -69,6 +70,16 @@
 
 **주의:** `/`, `/pilates/`, `/barre/`는 아직 코스 데이터를 각자 파일에 하드코딩하고 있다.
 일정 변경 시 누락이 생기므로, 이 세 페이지도 `courses.js`를 읽도록 리팩터링할 것.
+
+### `assets/data/programs.js` — 교육과정 소개 단일 원본
+`/programs/`가 읽는다. 분류 → 과정 순서(`categories`)와 과정별 소개 내용(`programs`).
+원본은 `~/Desktop/Garuda-홈페이지/GARUDA-프로그램/`의 Pages 문서(과정별)와 Numbers(분류표).
+- 기간·시간·수강료·장비는 여기 쓰지 않는다. `ref`로 `courses.js`와 연결해 그 값을 표시한다.
+  확정 값이 없는 세부 과정(Reformer 1·2, Apparatus B, Series A, Advanced Barre)은 `ref:null`
+- `ready:false`인 과정은 "소개 준비중" + 카톡 상담만 표시
+- 현장 사진은 `/assets/img/programs/<id>/1~5.webp`, `photos`가 비면 사진 영역 숨김
+- `kakao`에 카카오톡 채널 채팅 URL을 넣으면 이 페이지의 상담 버튼 전부에 적용
+- 섹션 제목(커리큘럼·교육의 핵심가치)은 템플릿이 고정으로 붙인다. 문서의 제목 줄은 옮기지 않는다
 
 ### 확정된 실제 데이터 (변경 금지)
 
