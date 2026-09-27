@@ -187,14 +187,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .f label.lb{font-size:12px;font-weight:500;color:var(--soft);display:block;margin-bottom:5px}
 .f input{width:100%;padding:12px 13px;border:1px solid var(--line);background:#fff;border-radius:var(--r);font:400 14px/1.5 'IBM Plex Sans KR',sans-serif}
 .f input:focus{border-color:var(--ink);outline:none;box-shadow:0 0 0 3px rgba(50,56,62,.08)}
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.opts label{display:block;padding:13px;border:1px solid var(--line);background:#fff;border-radius:var(--r);cursor:pointer;font-size:13.5px;transition:.16s}
-.opts label:has(input:checked){border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
-.opts input{position:absolute;opacity:0;pointer-events:none}
-.opts b{display:block;font-weight:600}
-.opts small{color:var(--soft);font-size:11.5px}
-.pay{width:100%;margin-top:22px;padding:16px;background:var(--accent);color:#fff;border:0;border-radius:var(--r);font:600 15px/1 'IBM Plex Sans KR',sans-serif;cursor:pointer}
+.how{list-style:none;counter-reset:h;display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.how li{counter-increment:h;display:flex;gap:10px;font-size:13.5px;line-height:1.55}
+.how li::before{content:counter(h);flex:none;width:20px;height:20px;border-radius:50%;background:var(--ink);color:#fff;font:600 11px/20px 'IBM Plex Mono',monospace;text-align:center;margin-top:1px}
+.pay{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:18px;padding:16px;background:var(--accent);color:#fff;border:0;border-radius:var(--r);font:600 15px/1 'IBM Plex Sans KR',sans-serif;cursor:pointer;text-decoration:none}
 .pay:hover{filter:brightness(.9)}
+.pay svg{width:17px;height:17px}
+.copybox{margin-top:14px;display:none}
+.copybox.show{display:block}
+.copybox p{font-size:12.5px;color:var(--ok);font-weight:600;margin-bottom:6px}
+.copybox p.err{color:var(--warn)}
+.copybox textarea{width:100%;height:150px;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r);font:400 12.5px/1.6 'IBM Plex Sans KR',sans-serif;background:#fff;resize:vertical}
 .fine{font-size:11.5px;color:var(--soft);margin-top:12px;line-height:1.55}
 .done{text-align:center;padding:26px 6px}
 .done .ic{width:46px;height:46px;border-radius:50%;background:#F1F7F3;border:1px solid #B9CBC0;color:var(--ok);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:20px}
@@ -216,7 +219,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <section class="top">
   <div class="wrap">
     <p class="eyebrow">Schedule &amp; Enrolment</p>
-    <h1>개강 일정을 확인하고<br>바로 신청하세요</h1>
+    <h1>교육일정을 확인하고<br>바로 신청하세요</h1>
     <p>과정을 누르면 교육일·시간·장소가 펼쳐집니다. 교육 시작일 2~3주 전까지 신청하면 얼리버드 20% 할인가가 적용됩니다.</p>
     <dl class="stats">
       <div><dt>예정 기수</dt><dd><em id="k-open">0</em>개</dd></div>
@@ -273,7 +276,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="mt">
   <div class="modal">
     <div class="mtop">
-      <div><p class="eyebrow">Enrolment</p><h3 id="mt">수강 신청</h3></div>
+      <div><p class="eyebrow">Enrolment</p><h3 id="mt">카카오톡으로 수강 신청</h3></div>
       <button class="x" id="close" aria-label="닫기">&times;</button>
     </div>
     <div class="mbody" id="mbody"></div>
@@ -289,7 +292,6 @@ const PG=window.GARUDA_PROGRAMS, P=Object.fromEntries(PG.programs.map(p=>[p.id,p
 const X=window.GARUDA_SCHED, SD=X.D;
 const KAKAO=PG.kakao||'#';
 const COLOR={Mat:'var(--mat)',Apparatus:'var(--app)',Auxiliary:'var(--aux)'};
-const DEPOSIT=300000;
 const won=n=>n.toLocaleString('ko-KR')+'원';
 const man=n=>n%10000===0?(n/10000).toLocaleString('ko-KR')+'만원':won(n);
 const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -359,7 +361,7 @@ function rowHTML(x){
         ${c?`<div><dt>필요 장비</dt><dd>${esc(c.eq)}</dd></div>`:''}
         <div><dt>수료 후</dt><dd>인증시험 합격 시 자격증 발급 · PMA 학점 인정</dd></div>
       </dl></div>
-      <div class="dcta">${x.started?'':`<button class="apply2" data-i="${x.i}">신청하고 결제하기</button>`}
+      <div class="dcta">${x.started?'':`<button class="apply2" data-i="${x.i}">카톡으로 신청하기</button>`}
         <a class="kbtn line" href="${esc(KAKAO)}" target="_blank" rel="noopener">${ICON}카톡 문의</a></div>
     </div>
   </div></div>
@@ -402,44 +404,53 @@ document.querySelectorAll('.ctrl .grp').forEach(g=>g.addEventListener('click',e=
 /* 결제 모달 */
 const ov=document.getElementById('ov'),mb=document.getElementById('mbody');
 function openModal(i){
-  const x=S.find(s=>s.i===i),fee=x.pr.now;
+  const x=S.find(s=>s.i===i),fee=x.pr.now,y=X.day(x.dates[0]).getFullYear();
   mb.innerHTML=`
    <div class="sumbox"><dl>
      <div><dt>과정</dt><dd style="font-family:'IBM Plex Sans KR'">${esc(x.p.name)} · ${esc(x.cls)}</dd></div>
-     <div><dt>교육일</dt><dd>${X.day(x.dates[0]).getFullYear()}. ${X.rangeText(x.dates)}</dd></div>
+     <div><dt>교육일</dt><dd>${y}. ${X.rangeText(x.dates)}</dd></div>
      <div><dt>시간 · 장소</dt><dd style="font-family:'IBM Plex Sans KR'">${esc(x.time)} · ${esc(x.place)}</dd></div>
      ${x.pr.until?`<div><dt>정상가</dt><dd><s>${won(x.pr.regular)}</s></dd></div>`:''}
-     <div class="grand"><dt>수강료${x.pr.until?' (얼리버드)':''}</dt><dd>${fee?won(fee):'문의'}</dd></div>
+     <div class="grand"><dt>수강료${x.pr.until?` (얼리버드 ${mdw(x.pr.until)}까지)`:''}</dt><dd>${fee?won(fee):'문의'}</dd></div>
    </dl></div>
-   <h4>결제 방식</h4>
-   <div class="opts">
-     <label><input type="radio" name="pt" value="full" checked><b>전액 결제</b><small>${fee?won(fee):'-'}</small></label>
-     <label><input type="radio" name="pt" value="dep"><b>예약금 결제</b><small>${won(DEPOSIT)} · 잔액 개강일 납부</small></label>
-   </div>
-   <h4>신청자 정보</h4>
+   <h4>신청 방법</h4>
+   <ol class="how">
+     <li>아래에 성함과 연락처를 적어 주세요. (선택)</li>
+     <li>버튼을 누르면 신청 내용이 복사되고 카카오톡 상담창이 열립니다.</li>
+     <li>상담창에 <b>붙여넣기</b> 후 보내 주시면 담당자가 확인 후 결제 방법을 안내해 드립니다.</li>
+   </ol>
    <div class="f">
-     <div><label class="lb" for="f1">성함</label><input id="f1" required></div>
-     <div><label class="lb" for="f2">연락처</label><input id="f2" inputmode="tel" placeholder="010-0000-0000" required></div>
-     <div><label class="lb" for="f3">이메일</label><input id="f3" type="email" placeholder="name@example.com" required></div>
-     <div><label class="lb" for="f4">스튜디오명 (선택)</label><input id="f4"></div>
+     <div><label class="lb" for="f1">성함</label><input id="f1" autocomplete="name"></div>
+     <div><label class="lb" for="f2">연락처</label><input id="f2" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000"></div>
    </div>
-   <h4>결제 수단</h4>
-   <div class="opts">
-     <label><input type="radio" name="pm" value="card" checked><b>신용카드</b><small>일시불 / 할부</small></label>
-     <label><input type="radio" name="pm" value="kakao"><b>카카오페이</b><small>간편결제</small></label>
-     <label><input type="radio" name="pm" value="bank"><b>계좌이체</b><small>실시간 이체</small></label>
-     <label><input type="radio" name="pm" value="np"><b>무통장입금</b><small>가상계좌 발급</small></label>
-   </div>
-   <button class="pay" id="pay">결제 진행하기</button>
-   <p class="fine">개강 14일 전까지 전액 환불, 7일 전까지 50% 환불됩니다. 결제 시 이용약관 및 환불 규정에 동의하는 것으로 간주합니다.</p>`;
-  document.getElementById('pay').onclick=()=>{
-    const dep=document.querySelector('input[name="pt"]:checked').value==='dep';
-    mb.innerHTML=`<div class="done"><div class="ic">✓</div>
-      <h3>신청이 접수되었습니다</h3>
-      <p>${esc(x.p.name)} · ${X.rangeText(x.dates)}<br>${dep?'예약금 '+won(DEPOSIT):'수강료 '+(fee?won(fee):'')} 결제 단계로 이동합니다.<br><br>
-      <span style="font-size:12.5px">※ 실제 결제 연동(PG)이 필요한 화면입니다.</span></p></div>`;
-  };
+   <a class="pay" id="pay" href="${esc(KAKAO)}" target="_blank" rel="noopener">${ICON}신청 내용 복사하고 카톡 열기</a>
+   <div class="copybox" id="copybox"><p id="copymsg"></p><textarea id="copytext" readonly></textarea></div>
+   <p class="fine">이 화면에서는 결제가 진행되지 않습니다. 카카오톡으로 신청을 확인한 뒤 결제 방법을 안내해 드립니다.</p>`;
+  // 담당자가 바로 확인할 수 있도록 과정명·날짜를 한글로
+  const krDates=()=>{let m=-1;return x.dates.map(d=>{const t=X.day(d),s=(t.getMonth()!==m?`${t.getMonth()+1}월 `:'')+`${t.getDate()}일(${X.wd(d)})`;m=t.getMonth();return s}).join(', ')};
+  const krTime=x.time.replace(/^토 /,'토요일 ').replace(' · 일 ',', 일요일 ');
+  const text=()=>[
+    '[가루다 교육 신청]',
+    `과정: ${x.p.kr} (${x.p.name.replace(/\s*\(.*\)$/,'')})`,
+    `반: ${x.cls}`,
+    `교육일: ${y}년 ${krDates()} · 총 ${x.dates.length}일`,
+    `시간: ${krTime}`,
+    `장소: ${x.place}`,
+    `수강료: ${fee?won(fee):'문의'}${x.pr.until?` (얼리버드 할인가, 정상가 ${won(x.pr.regular)})`:''}`,
+    `성함: ${document.getElementById('f1').value.trim()}`,
+    `연락처: ${document.getElementById('f2').value.trim()}`
+  ].join('\n');
+  document.getElementById('pay').addEventListener('click',()=>{
+    const t=text(),box=document.getElementById('copybox'),msg=document.getElementById('copymsg'),ta=document.getElementById('copytext');
+    ta.value=t; box.classList.add('show');
+    const ok=()=>{msg.className='';msg.textContent='✓ 신청 내용이 복사되었습니다. 카카오톡 상담창에 붙여넣어 보내 주세요.'};
+    const fail=()=>{msg.className='err';msg.textContent='자동 복사가 되지 않았습니다. 아래 내용을 길게 눌러 복사한 뒤 카카오톡에 붙여넣어 주세요.';ta.select()};
+    // 링크 이동(새 탭)은 그대로 진행되고, 복사는 클릭 순간에 시작한다
+    if(navigator.clipboard&&window.isSecureContext) navigator.clipboard.writeText(t).then(ok,()=>{try{ta.select();document.execCommand('copy')?ok():fail()}catch(e){fail()}});
+    else{try{ta.select();document.execCommand('copy')?ok():fail()}catch(e){fail()}}
+  });
   ov.classList.add('show');document.body.style.overflow='hidden';
+  document.getElementById('f1').focus();
 }
 function close(){ov.classList.remove('show');document.body.style.overflow=''}
 document.getElementById('close').onclick=close;

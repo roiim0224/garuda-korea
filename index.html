@@ -16,7 +16,7 @@
   --mat:#5C6E67;--app:#4A6072;--aux:#8E4A72;
   --r:2px;--pad:clamp(18px,5vw,60px);
 }
-header,.hero,.up,footer{--accent-tx:var(--accent-lt)}
+header,.hero,.up,.founder,footer{--accent-tx:var(--accent-lt)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--paper);color:var(--text);font-family:'IBM Plex Sans KR',system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
@@ -55,6 +55,23 @@ header.solid{background:var(--ink);border-bottom:1px solid rgba(255,255,255,.12)
 .hero .eyebrow{color:var(--accent-tx);margin-bottom:18px}
 .hero h1{font-size:clamp(28px,5.6vw,52px);color:#fff;max-width:18ch}
 .hero .sub{margin-top:18px;max-width:44ch;font-size:clamp(14.5px,1.6vw,16.5px);font-weight:300;color:rgba(255,255,255,.8)}
+.hero .sub .flag{display:inline-block;width:1.6em;height:.8em;vertical-align:-.05em;margin:0 .15em;border-radius:1px;box-shadow:0 0 0 1px rgba(255,255,255,.25)}
+
+/* 창시자 인터뷰 */
+.founder{background:var(--ink);color:#fff}
+.fgrid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.4fr);gap:clamp(26px,4vw,56px);align-items:center}
+@media(max-width:860px){.fgrid{grid-template-columns:1fr}}
+.founder .eyebrow{color:var(--accent-tx);margin-bottom:13px}
+.founder h2{color:#fff;font-size:clamp(22px,3.3vw,33px)}
+.founder .lead{margin-top:14px;color:rgba(255,255,255,.72);font-size:15px;max-width:40ch}
+.chap{list-style:none;margin-top:24px;border-top:1px solid rgba(255,255,255,.16)}
+.chap button{all:unset;box-sizing:border-box;width:100%;display:flex;gap:14px;align-items:baseline;padding:13px 2px;border-bottom:1px solid rgba(255,255,255,.16);cursor:pointer;font-size:14.5px;color:rgba(255,255,255,.88)}
+.chap button:hover,.chap button:focus-visible{color:#fff}
+.chap button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chap .t{font:500 12.5px/1 'IBM Plex Mono',monospace;color:var(--accent-tx);min-width:38px}
+.vbox{position:relative;padding-top:56.25%;background:#000;border-radius:var(--r);overflow:hidden}
+.vbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.founder .cap{margin-top:10px;font-size:12px;color:rgba(255,255,255,.5)}
 
 /* what */
 .what{background:var(--card);border-bottom:1px solid var(--line)}
@@ -118,7 +135,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:38px 0 30px;font
 <header id="hdr"><div class="wrap hd">
   <a href="/" class="logo">GARUDA <span>ACADEMY</span> KOREA</a>
   <nav>
-    <a href="#what">가루다란</a><a href="#paths">도입 안내</a><a href="/programs/">교육과정 소개</a><a href="/academy/">자격과정</a><a href="#contact">문의</a>
+    <a href="#what">가루다란</a><a href="#founder">창시자 인터뷰</a><a href="#paths">도입 안내</a><a href="/programs/">교육과정 소개</a><a href="/academy/">자격과정</a><a href="#contact">문의</a>
   </nav>
 </div></header>
 
@@ -127,8 +144,8 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:38px 0 30px;font
   <div class="veil"></div>
   <div class="wrap">
     <p class="eyebrow">Official Academy · Korea &amp; Asia</p>
-    <h1>가루다 메소드<br>공식 아시아 아카데미</h1>
-    <p class="sub">영국 The Garuda Studio가 인증한 지도자 자격과정을 한국과 아시아 지역에서 운영합니다. 미국 PMA 보수교육 학점으로 인정됩니다.</p>
+    <h1>GARUDA Method<br>ASIA 공식 아카데미</h1>
+    <p class="sub">영국 <svg class="flag" viewBox="0 0 60 30" role="img" aria-label="영국 국기"><clipPath id="uk-s"><path d="M0,0v30h60v-30z"/></clipPath><clipPath id="uk-t"><path d="M30,15h30v15zv15h-30zh-30v-15zv-15h30z"/></clipPath><g clip-path="url(#uk-s)"><path d="M0,0v30h60v-30z" fill="#012169"/><path d="M0,0L60,30M60,0L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0L60,30M60,0L0,30" clip-path="url(#uk-t)" stroke="#C8102E" stroke-width="4"/><path d="M30,0v30M0,15h60" stroke="#fff" stroke-width="10"/><path d="M30,0v30M0,15h60" stroke="#C8102E" stroke-width="6"/></g></svg> The GARUDA Method가 인증한 지도자 자격과정을 한국과 아시아지역에서 운영합니다.</p>
     <div class="cta2">
       <a href="/academy/" class="btn btn-p">자격과정 일정 보기</a>
       <a href="#paths" class="btn btn-g">스튜디오 도입 안내</a>
@@ -141,15 +158,34 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:38px 0 30px;font
     <div class="sec-head rise">
       <p class="eyebrow">What is Garuda</p>
       <h2>필라테스가 끝나는 곳에서<br>가루다가 시작합니다</h2>
-      <p>무용가 출신 James D'Silva가 창시한 무브먼트 메소드입니다. 필라테스의 정확성, 요가의 호흡과 아사나, 무용의 흐름을 하나로 엮습니다.</p>
+      <p>현대무용가 출신의 James D'Silva가 창시한 메소드입니다. 필라테스의 정확성, 요가의 호흡과 아사나, 펠덴크라이스, 알렉산더테크닉 그리고 현대무용의 움직임을 하나로 귀결시켰습니다.</p>
     </div>
     <div class="wgrid">
       <article class="rise"><span class="n">Method</span><h3>흐름이 끊기지 않습니다</h3>
-        <p>동작을 하나씩 수행하는 대신 리듬과 전환으로 이어갑니다. 회원이 첫 수업에서 차이를 느낍니다.</p></article>
+        <p>동작을 하나씩 수행하는 대신 리듬과 동작의 유기적 연결로 이어갑니다. 회원이 첫 수업에서 차이를 느낍니다.</p></article>
       <article class="rise"><span class="n">Result</span><h3>근력과 유연성을 동시에</h3>
         <p>근력·유연성·협응력·지구력이 함께 향상되며, 심폐 운동 효과와 정신적 집중을 함께 다룹니다.</p></article>
       <article class="rise"><span class="n">Range</span><h3>매트부터 기구까지</h3>
         <p>매트·폼롤러·브릭·슬링·체어·바·리포머까지 9개 과정으로 구성되어 스튜디오 환경에 맞게 선택할 수 있습니다.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="founder" id="founder">
+  <div class="wrap fgrid">
+    <div class="rise">
+      <p class="eyebrow">Founder Interview</p>
+      <h2>창시자 James D'Silva가<br>직접 말하는 GARUDA(가루다)</h2>
+      <p class="lead">왜 가루다를 만들었는지, 가루다가 어떤 움직임인지 2분 43초 동안 이야기합니다. 한국어 자막이 포함되어 있습니다.</p>
+      <ul class="chap">
+        <li><button type="button" data-t="0"><span class="t">00:00</span>인사 · 한국 스튜디오 이야기</button></li>
+        <li><button type="button" data-t="99"><span class="t">01:39</span>가루다를 만든 이유는?</button></li>
+        <li><button type="button" data-t="138"><span class="t">02:18</span>가루다란?</button></li>
+      </ul>
+    </div>
+    <div class="rise">
+      <div class="vbox"><iframe id="founder-video" src="https://player.vimeo.com/video/1230613688?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" loading="lazy" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="GARUDA 창시자 인터뷰"></iframe></div>
+      <p class="cap">GARUDA 창시자 인터뷰 · 2:43</p>
     </div>
   </div>
 </section>
@@ -187,8 +223,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:38px 0 30px;font
 <section class="up">
   <div class="wrap">
     <div class="sec-head rise">
-      <p class="eyebrow">Upcoming</p>
-      <h2>개강 임박 과정</h2>
+      <h2>Upcoming GARUDA Course</h2>
     </div>
     <div class="ugrid rise" id="up-list"></div>
     <a href="/academy/" class="allbtn">전체 교육 일정 보기 →</a>
@@ -261,6 +296,17 @@ function upcomingCards(filter,n){
       <p class="meta"><span>${y}년 · ${x.dates.length}일 · ${x.place}</span>${pr.regular?`<span class="tag ${pr.until?'w':''}">${pr.until?`얼리버드 ${man(pr.now)}`:man(pr.now)}</span>`:''}</p></a>`}).join('');
 }
 document.getElementById('up-list').innerHTML=upcomingCards(()=>true,3);
+
+/* 창시자 인터뷰 챕터 (Vimeo Player API) */
+(function(){
+  const fr=document.getElementById('founder-video'); let player=null;
+  const js=document.createElement('script'); js.src='https://player.vimeo.com/api/player.js';
+  js.onload=()=>{player=new Vimeo.Player(fr)}; document.head.appendChild(js);
+  document.querySelectorAll('.chap [data-t]').forEach(b=>b.addEventListener('click',()=>{
+    if(!player) return;
+    player.setCurrentTime(+b.dataset.t).then(()=>player.play()).catch(()=>{});
+  }));
+})();
 
 const hdr=document.getElementById('hdr');
 addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>window.innerHeight*.7),{passive:true});
