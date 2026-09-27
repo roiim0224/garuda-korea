@@ -1,0 +1,51 @@
+{
+  "site": "https://garudakorea.com",
+  "siteName": "GARUDA Academy Korea",
+  "googleVerification": "",
+  "naverVerification": "",
+  "defaultImage": "/assets/img/og/default.jpg",
+  "pages": {
+    "/": {
+      "file": "index.html",
+      "title": "GARUDA Academy Korea — GARUDA Method ASIA 공식 아카데미 | 필라테스·바레 지도자 교육",
+      "description": "영국 The GARUDA Method가 인증한 필라테스·바레·기구 지도자 자격과정을 한국과 아시아에서 운영합니다. 과정별 기간·수강료·교육 일정을 모두 공개합니다.",
+      "priority": "1.0"
+    },
+    "/pilates/": {
+      "file": "pilates/index.html",
+      "title": "필라테스 지도자 자격증 과정 — 매트 한 장에서 시작하는 차별화 | GARUDA Academy Korea",
+      "description": "필라테스 스튜디오를 위한 가루다 지도자 자격증 과정. 3일 교육과 소도구만으로 새 프로그램을 열고, 도입 비용과 회수 시점을 직접 계산해 보세요.",
+      "image": "/assets/img/og/mat-foundation.jpg",
+      "priority": "0.9"
+    },
+    "/barre/": {
+      "file": "barre/index.html",
+      "title": "바레 강사 교육 — 보유한 바로 시작하는 가루다 바 | GARUDA Academy Korea",
+      "description": "바레 스튜디오를 위한 가루다 바 강사 교육. 바를 새로 들이지 않아도 됩니다. 6일 24시간 과정, 교육 일정과 수강료, 재등록률 계산기를 확인하세요.",
+      "image": "/assets/img/og/barre-foundation.jpg",
+      "priority": "0.9"
+    },
+    "/programs/": {
+      "file": "programs/index.html",
+      "title": "가루다 교육과정 소개 — 매트·바레·체어·브릭·슬링·리포머 | GARUDA Academy Korea",
+      "description": "가루다 메소드 지도자 교육과정 전체. 매트, 소도구(바레·체어·브릭·차크라·슬링), 기구(리포머·아파라투스) 과정별 커리큘럼·영상·현장 사진·교육 일정.",
+      "priority": "0.9",
+      "prerender": true
+    },
+    "/academy/": {
+      "file": "academy/index.html",
+      "title": "가루다 교육 일정·수강 신청 — 얼리버드 20% | GARUDA Academy Korea",
+      "description": "가루다 지도자 자격과정 교육 일정. 기수별 교육일·시간·장소·수강료와 얼리버드 20% 할인, GARUDA Gateway 체험과 James D'Silva 특별 워크숍 일정.",
+      "priority": "0.9",
+      "prerender": true
+    },
+    "/studios/": {
+      "file": "studios/index.html",
+      "title": "가루다 공식 스튜디오 — 인증 조건과 스튜디오 찾기 | GARUDA Academy Korea",
+      "description": "파운데이션 코스를 이수한 지도자가 있는 스튜디오는 가루다 공식 스튜디오로 인증되어 로고와 공식 수업 명칭을 사용할 수 있습니다. 2018년부터 인증을 시작했습니다.",
+      "priority": "0.6",
+      "robots": "noindex, follow",
+      "note": "스튜디오 목록이 예시 데이터라 검색 노출 제외. 실제 명단 게재 후 robots 줄 삭제"
+    }
+  }
+}

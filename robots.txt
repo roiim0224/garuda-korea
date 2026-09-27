@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /apply/
+Disallow: /apps-script/
+Disallow: /tools/
+
+Sitemap: https://garudakorea.com/sitemap.xml

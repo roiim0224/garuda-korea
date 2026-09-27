@@ -30,7 +30,9 @@
 | `/pilates/` | `pilates/index.html` | 필라테스 스튜디오 원장 | **SNS 광고 A 전용 랜딩.** 투자 회수 시뮬레이터 |
 | `/barre/` | `barre/index.html` | 바레 스튜디오 원장 | **SNS 광고 B 전용 랜딩.** 재등록률 시뮬레이터 + 원데이 워크숍 |
 | `/academy/` | `academy/index.html` | 공통 종착지 | 9개 코스 일정·신청·결제 대시보드 |
-| `/programs/` | `programs/index.html` | 공통 | 과정별 소개·커리큘럼·핵심가치·영상·현장 사진·카톡 상담 (`#과정id`로 바로 열림) |
+| `/programs/` | `programs/index.html` | 공통 | 전체 과정 개요 (분야별 카드) |
+| `/programs/<id>/` | 빌드가 생성 | 공통 | 과정별 소개·커리큘럼·핵심가치·영상·현장 사진·일정·신청. 예전 `/programs/#id` 는 자동 이동 |
+| `/apply/` | `apply/index.html` | 공통 | 교육 신청서 + 예약금 30만원 결제 (success/·fail/ 포함, 검색 제외) |
 | `/studios/` | `studios/index.html` | 공통 | 공식 스튜디오 인증 안내 + 스튜디오 찾기 |
 
 **전환 경로:** 광고 → `/pilates/` 또는 `/barre/` → `/academy/` → 결제
@@ -200,6 +202,31 @@ Mat Foundation / Garuda Barre / Garuda Apparatus 세 파운데이션 코스 중
 
 `<username>.github.io/<repo>/` 형태로 배포하면 모든 링크가 깨진다.
 그 방식이 필요하면 전부 상대 경로로 바꿀 것.
+
+## 신청·결제 (Google Apps Script + 토스페이먼츠)
+
+- 신청서 `/apply/` → `apps-script/Code.gs`(웹 앱) → 구글 시트 "신청" 탭. 한 과정 = 한 줄, 과정별 현황은 QUERY 로 자동 집계
+- 예약금: 과정당 30만원 (`config.js` `deposit`). 잔금 링크는 관리자가 시트 메뉴로 발송
+- **현재 결제 방식: 토스 결제 링크** (`config.js` `depositPayLink`, 30만원 상품). 신청서 한 장 = 과정 하나.
+  결제 결과가 자동으로 오지 않으므로 담당자가 토스 상점관리자 확인 후 시트 메뉴 '예약금 결제완료 처리'.
+  시트 연결 전(`applyEndpoint` 비어 있음)에는 신청 내용을 카카오톡으로 보내도록 안내
+- 연결 값은 `assets/data/config.js` — `applyEndpoint`(웹 앱 URL), `tossClientKey`(클라이언트 키).
+  **토스 시크릿 키는 Apps Script 스크립트 속성에만.** 비어 있으면 신청서는 카톡 안내로 대체되고 `/academy/` 신청 버튼도 카톡 창을 연다
+- 설치·운영 방법: `apps-script/SETUP.md`
+- `assets/js/track.js` 가 모든 페이지에서 첫 유입(UTM·랜딩)을 저장 → 신청서와 함께 시트에 기록
+
+## SEO 빌드 — 데이터를 바꾸면 반드시 실행
+
+```bash
+python3 -m http.server 8000   # 다른 창
+node tools/build.mjs
+```
+- `tools/seo.json`: 페이지별 제목·설명·공유 이미지, 구글/네이버 소유확인 코드
+- 생성물: `/programs/<id>/` 페이지, 각 페이지 `<head>` 의 `<!--seo:start … seo:end-->` 블록(canonical·OG·JSON-LD),
+  미리 그린 본문(과정 소개·교육 일정), `sitemap.xml`, `robots.txt`
+- **seo 블록과 `/programs/<id>/` 파일은 직접 고치지 말 것** — 다음 빌드에서 덮어씀. 과정 페이지는 `programs/index.html`(틀)을 고친다
+- 공유 이미지 `assets/img/og/<id>.jpg` (1200×630). 새 과정은 이미지가 없으면 기본 이미지 사용
+- 소개 준비중 과정과 `/studios/`(예시 데이터), `/apply/` 는 검색 제외(noindex)
 
 ## 로컬 확인
 

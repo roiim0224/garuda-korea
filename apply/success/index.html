@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>결제 완료 | GARUDA Academy Korea</title>
+<meta name="description" content="가루다 지도자 교육 신청서. 과정과 교육 시작일을 선택하고 과정당 예약금 30만원을 결제하면 1영업일 이내에 잔금 결제 링크를 보내드립니다.">
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#32383E;--ink-2:#3D444B;
+  --paper:#F4F5F5;--card:#FFFFFF;--line:#D6D6D6;--line-2:#E6E7E7;
+  --text:#222222;--soft:#62686D;--accent:#EC008C;--accent-tx:#C8007A;--accent-lt:#FF7AC2;
+  --mat:#5C6E67;--app:#4A6072;--aux:#8E4A72;--ok:#3C6B52;--warn:#B4552C;
+  --r:2px;--pad:clamp(16px,4vw,56px);
+}
+header,.top,footer{--accent-tx:var(--accent-lt)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--text);font-family:'IBM Plex Sans KR',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3{font-family:'Gowun Batang',serif;font-weight:700;line-height:1.3;letter-spacing:-.01em}
+.wrap{max-width:860px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.eyebrow{font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:.22em;text-transform:uppercase}
+.num{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button,input,select,textarea{font-family:inherit}
+
+header{position:sticky;top:0;z-index:60;background:var(--ink);border-bottom:1px solid rgba(255,255,255,.12)}
+.hd{display:flex;align-items:center;justify-content:space-between;height:60px;max-width:1140px}
+.logo{font-family:'Gowun Batang',serif;font-weight:700;font-size:16.5px;letter-spacing:.04em;text-decoration:none;color:#fff}
+.logo span{color:var(--accent-tx)}
+.hd nav{display:flex;gap:22px;font-size:13.5px}
+.hd nav a{color:#fff;text-decoration:none;opacity:.75}.hd nav a:hover{opacity:1}
+@media(max-width:700px){.hd nav{display:none}}
+
+.top{background:var(--ink);color:#fff;padding:clamp(30px,4.5vw,50px) 0 clamp(26px,3.5vw,36px)}
+.top .eyebrow{color:var(--accent-tx);margin-bottom:14px}
+.top h1{font-size:clamp(24px,4vw,36px);color:#fff}
+.top p{margin-top:12px;font-size:14.5px;font-weight:300;color:rgba(255,255,255,.78);max-width:56ch}
+.flow{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px;font-size:12.5px}
+.flow span{padding:7px 12px;border:1px solid rgba(255,255,255,.22);border-radius:999px;color:rgba(255,255,255,.8)}
+.flow b{font-family:'IBM Plex Mono',monospace;color:var(--accent-tx);margin-right:5px}
+
+main{padding:clamp(26px,4vw,44px) 0 90px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:clamp(20px,3.5vw,32px);margin-bottom:14px}
+.card h2{font-size:20px;display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+.card h2 .n{font:500 12px/1 'IBM Plex Mono',monospace;color:var(--accent-tx);letter-spacing:.12em}
+.card .desc{font-size:13.5px;color:var(--soft);margin-bottom:18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:600px){.grid2{grid-template-columns:1fr}}
+.fld label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.fld label em{font-style:normal;color:var(--accent-tx);margin-left:3px}
+.fld small{display:block;font-size:12px;color:var(--soft);margin-top:5px}
+.fld input,.fld select{width:100%;padding:12px 13px;border:1px solid var(--line);background:#fff;border-radius:var(--r);font-size:15px;color:var(--text)}
+.fld input:focus,.fld select:focus{border-color:var(--ink);outline:none;box-shadow:0 0 0 3px rgba(50,56,62,.1)}
+.fld.bad input,.fld.bad select{border-color:var(--warn)}
+.fld .err{display:none;color:var(--warn);font-size:12px;margin-top:5px}
+.fld.bad .err{display:block}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+.cat{margin-top:18px}
+.cat:first-of-type{margin-top:0}
+.cat h3{font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--c);margin-bottom:8px}
+.course{border:1px solid var(--line);border-radius:var(--r);margin-bottom:6px;background:#fff;transition:border-color .15s}
+.course.on{border-color:var(--c);box-shadow:inset 3px 0 0 var(--c)}
+.course>label{display:flex;gap:12px;align-items:center;padding:13px 14px;cursor:pointer}
+.course input[type=checkbox]{width:19px;height:19px;accent-color:var(--c);flex:none}
+.course .nm{flex:1;min-width:0}
+.course .nm b{display:block;font-size:15px}
+.course .nm small{color:var(--soft);font-size:12.5px}
+.course .fee{font:500 13px/1.3 'IBM Plex Mono',monospace;color:var(--soft);text-align:right;white-space:nowrap}
+.course .pick{display:none;padding:0 14px 14px 45px}
+.course.on .pick{display:block}
+.pick .fld label{font-size:12.5px}
+.pick .manual{margin-top:8px;display:none}
+.pick .manual.show{display:block}
+.pick .none{font-size:12.5px;color:var(--soft);margin-bottom:8px}
+
+.sum{border-top:1px solid var(--line-2);margin-top:6px}
+.sum .li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line-2);font-size:14px}
+.sum .li span:last-child{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.sum .li small{display:block;color:var(--soft);font-size:12px}
+.sum .tot{font-weight:700;font-size:16px;border-bottom:0}
+.sum .tot span:last-child{color:var(--accent-tx)}
+.notice{margin-top:14px;padding:14px 16px;background:#FDF0F7;border:1px solid #F3C4DF;border-radius:var(--r);font-size:13.5px;line-height:1.7}
+.notice b{color:var(--accent-tx)}
+.agree{margin-top:16px;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+.agree label{display:flex;gap:10px;align-items:flex-start;padding:13px 14px;font-size:14px;cursor:pointer}
+.agree input{width:18px;height:18px;margin-top:2px;accent-color:var(--ink);flex:none}
+.agree details{border-top:1px solid var(--line-2);padding:10px 14px;font-size:12.5px;color:var(--soft)}
+.agree summary{cursor:pointer;font-weight:600;color:var(--text)}
+.agree dl{margin-top:8px;display:grid;grid-template-columns:80px 1fr;gap:4px 10px}
+
+.submit{width:100%;margin-top:18px;padding:18px;background:var(--accent);color:#fff;border:0;border-radius:var(--r);font:700 16px/1 'IBM Plex Sans KR',sans-serif;cursor:pointer}
+.submit:hover{filter:brightness(.92)}
+.submit[disabled]{opacity:.55;cursor:wait}
+.formerr{display:none;margin-top:12px;color:var(--warn);font-size:13.5px;font-weight:600}
+.formerr.show{display:block}
+
+#payStep{display:none}
+#payStep.show{display:block}
+.paid-head{display:flex;gap:10px;align-items:center;padding:12px 14px;background:#EFF6F1;border:1px solid #B9CBC0;border-radius:var(--r);font-size:13.5px;margin-bottom:14px;color:var(--ok);font-weight:600}
+#payment-method,#agreement{margin:0 -8px}
+
+.off{background:var(--card);border:1px dashed var(--line);border-radius:var(--r);padding:22px;margin-bottom:14px;font-size:14px}
+.off b{display:block;font-family:'Gowun Batang',serif;font-size:18px;margin-bottom:6px}
+.kbtn{display:inline-flex;align-items:center;gap:7px;margin-top:14px;padding:13px 18px;background:var(--accent);color:#fff;border-radius:var(--r);font-weight:600;font-size:14px;text-decoration:none}
+
+footer{background:var(--ink);color:rgba(255,255,255,.45);padding:26px 0;font-size:12.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{color:inherit;text-decoration:none}
+</style>
+<style>
+.res{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:clamp(24px,4vw,40px);text-align:center}
+.res .ic{width:56px;height:56px;border-radius:50%;margin:0 auto 16px;display:grid;place-items:center;font-size:24px}
+.res .ic.ok{background:#EFF6F1;border:1px solid #B9CBC0;color:var(--ok)}
+.res .ic.no{background:#FBEDEA;border:1px solid #E0C0AE;color:var(--warn)}
+.res .ic.wait{background:var(--paper);border:1px solid var(--line);color:var(--soft)}
+.res h1{font-size:clamp(22px,3.4vw,28px)}
+.res p{margin-top:10px;color:var(--soft);font-size:14.5px}
+.res dl{margin:22px auto 0;max-width:460px;text-align:left;border-top:1px solid var(--line-2)}
+.res dl div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line-2);font-size:14px}
+.res dt{color:var(--soft)}
+.res dd{font-family:'IBM Plex Mono',monospace;text-align:right}
+.next{margin-top:22px;padding:16px;background:#FDF0F7;border:1px solid #F3C4DF;border-radius:var(--r);font-size:14px;line-height:1.7}
+.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.btns a{padding:13px 18px;border-radius:var(--r);font-weight:600;font-size:14px;text-decoration:none;border:1px solid var(--ink)}
+.btns a.p{background:var(--accent);border-color:var(--accent);color:#fff}
+</style>
+</head>
+<body>
+<header><div class="wrap hd">
+  <a href="/" class="logo">GARUDA <span>ACADEMY</span> KOREA</a>
+  <nav><a href="/programs/">교육과정 소개</a><a href="/academy/">교육 일정</a><a href="https://pf.kakao.com/_xexjbUT/chat" target="_blank" rel="noopener">카톡 문의</a></nav>
+</div></header>
+<main><div class="wrap"><div class="res" id="res"><div class="ic wait">…</div><h1>결제를 확인하고 있습니다</h1><p>창을 닫지 말고 잠시만 기다려 주세요.</p></div></div></main>
+<script src="/assets/data/config.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const won=n=>Number(n).toLocaleString('ko-KR')+'원';
+const KAKAO='https://pf.kakao.com/_xexjbUT/chat';
+const q=new URLSearchParams(location.search);
+let order={}; try{order=JSON.parse(sessionStorage.getItem('garuda_order')||'{}')}catch(_){}
+async function post(d){const r=await fetch(window.GARUDA_CONFIG.applyEndpoint,{method:'POST',body:JSON.stringify(d)});return r.json()}
+(async()=>{
+  const paymentKey=q.get('paymentKey'),orderId=q.get('orderId'),amount=q.get('amount');
+  const fail=(msg)=>{$('res').innerHTML=`<div class="ic no">!</div><h1>결제를 확인하지 못했습니다</h1><p>${esc(msg)}</p>
+    <p>결제가 되었는데 이 화면이 보이면 신청번호 <b class="num">${esc(orderId||'')}</b>와 함께 카카오톡으로 알려 주세요. 바로 확인해 드립니다.</p>
+    <div class="btns"><a class="p" href="${KAKAO}" target="_blank" rel="noopener">카카오톡 문의</a><a href="/apply/">신청서로 돌아가기</a></div>`};
+  if(!paymentKey||!orderId||!amount) return fail('결제 정보가 없습니다.');
+  try{
+    const r=await post({action:'confirm',paymentKey,orderId,amount:Number(amount)});
+    if(!r.ok) return fail(r.error||'결제 승인에 실패했습니다.');
+    sessionStorage.removeItem('garuda_order');
+    $('res').innerHTML=`<div class="ic ok">✓</div><h1>교육 신청과 예약금 결제가 완료되었습니다</h1>
+      <p>${order.name?esc(order.name)+'님, ':''}신청해 주셔서 감사합니다. 확인 메일을 보내드렸습니다.</p>
+      <dl><div><dt>신청번호</dt><dd>${esc(orderId)}</dd></div><div><dt>예약금</dt><dd>${won(amount)}</dd></div>
+      ${(order.items||[]).map(x=>`<div><dt>신청 과정</dt><dd style="font-family:inherit">${esc(x)}</dd></div>`).join('')}</dl>
+      <div class="next">${esc(window.GARUDA_CONFIG.balanceNotice)}</div>
+      <div class="btns"><a href="/programs/">교육과정 둘러보기</a><a class="p" href="${KAKAO}" target="_blank" rel="noopener">카카오톡 문의</a></div>`;
+  }catch(e){ fail('네트워크 오류로 결제 확인이 지연되고 있습니다.'); }
+})();
+</script>
+</body>
+</html>

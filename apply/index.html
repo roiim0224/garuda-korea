@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>교육 신청 · 예약금 결제 | GARUDA Academy Korea</title>
+<meta name="description" content="가루다 지도자 교육 신청서. 과정과 교육 시작일을 선택하고 과정당 예약금 30만원을 결제하면 1영업일 이내에 잔금 결제 링크를 보내드립니다.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://garudakorea.com/apply/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#32383E;--ink-2:#3D444B;
+  --paper:#F4F5F5;--card:#FFFFFF;--line:#D6D6D6;--line-2:#E6E7E7;
+  --text:#222222;--soft:#62686D;--accent:#EC008C;--accent-tx:#C8007A;--accent-lt:#FF7AC2;
+  --mat:#5C6E67;--app:#4A6072;--aux:#8E4A72;--ok:#3C6B52;--warn:#B4552C;
+  --r:2px;--pad:clamp(16px,4vw,56px);
+}
+header,.top,footer{--accent-tx:var(--accent-lt)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--text);font-family:'IBM Plex Sans KR',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3{font-family:'Gowun Batang',serif;font-weight:700;line-height:1.3;letter-spacing:-.01em}
+.wrap{max-width:860px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.eyebrow{font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:.22em;text-transform:uppercase}
+.num{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button,input,select,textarea{font-family:inherit}
+
+header{position:sticky;top:0;z-index:60;background:var(--ink);border-bottom:1px solid rgba(255,255,255,.12)}
+.hd{display:flex;align-items:center;justify-content:space-between;height:60px;max-width:1140px}
+.logo{font-family:'Gowun Batang',serif;font-weight:700;font-size:16.5px;letter-spacing:.04em;text-decoration:none;color:#fff}
+.logo span{color:var(--accent-tx)}
+.hd nav{display:flex;gap:22px;font-size:13.5px}
+.hd nav a{color:#fff;text-decoration:none;opacity:.75}.hd nav a:hover{opacity:1}
+@media(max-width:700px){.hd nav{display:none}}
+
+.top{background:var(--ink);color:#fff;padding:clamp(30px,4.5vw,50px) 0 clamp(26px,3.5vw,36px)}
+.top .eyebrow{color:var(--accent-tx);margin-bottom:14px}
+.top h1{font-size:clamp(24px,4vw,36px);color:#fff}
+.top p{margin-top:12px;font-size:14.5px;font-weight:300;color:rgba(255,255,255,.78);max-width:56ch}
+.flow{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px;font-size:12.5px}
+.flow span{padding:7px 12px;border:1px solid rgba(255,255,255,.22);border-radius:999px;color:rgba(255,255,255,.8)}
+.flow b{font-family:'IBM Plex Mono',monospace;color:var(--accent-tx);margin-right:5px}
+
+main{padding:clamp(26px,4vw,44px) 0 90px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:clamp(20px,3.5vw,32px);margin-bottom:14px}
+.card h2{font-size:20px;display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+.card h2 .n{font:500 12px/1 'IBM Plex Mono',monospace;color:var(--accent-tx);letter-spacing:.12em}
+.card .desc{font-size:13.5px;color:var(--soft);margin-bottom:18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:600px){.grid2{grid-template-columns:1fr}}
+.fld label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.fld label em{font-style:normal;color:var(--accent-tx);margin-left:3px}
+.fld small{display:block;font-size:12px;color:var(--soft);margin-top:5px}
+.fld input,.fld select{width:100%;padding:12px 13px;border:1px solid var(--line);background:#fff;border-radius:var(--r);font-size:15px;color:var(--text)}
+.fld input:focus,.fld select:focus{border-color:var(--ink);outline:none;box-shadow:0 0 0 3px rgba(50,56,62,.1)}
+.fld.bad input,.fld.bad select{border-color:var(--warn)}
+.fld .err{display:none;color:var(--warn);font-size:12px;margin-top:5px}
+.fld.bad .err{display:block}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+.cat{margin-top:18px}
+.cat:first-of-type{margin-top:0}
+.cat h3{font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--c);margin-bottom:8px}
+.course{border:1px solid var(--line);border-radius:var(--r);margin-bottom:6px;background:#fff;transition:border-color .15s}
+.course.on{border-color:var(--c);box-shadow:inset 3px 0 0 var(--c)}
+.course>label{display:flex;gap:12px;align-items:center;padding:13px 14px;cursor:pointer}
+.course input[type=checkbox]{width:19px;height:19px;accent-color:var(--c);flex:none}
+.course .nm{flex:1;min-width:0}
+.course .nm b{display:block;font-size:15px}
+.course .nm small{color:var(--soft);font-size:12.5px}
+.course .fee{font:500 13px/1.3 'IBM Plex Mono',monospace;color:var(--soft);text-align:right;white-space:nowrap}
+.course .pick{display:none;padding:0 14px 14px 45px}
+.course.on .pick{display:block}
+.pick .fld label{font-size:12.5px}
+.pick .manual{margin-top:8px;display:none}
+.pick .manual.show{display:block}
+.pick .none{font-size:12.5px;color:var(--soft);margin-bottom:8px}
+
+.sum{border-top:1px solid var(--line-2);margin-top:6px}
+.sum .li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line-2);font-size:14px}
+.sum .li span:last-child{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.sum .li small{display:block;color:var(--soft);font-size:12px}
+.sum .tot{font-weight:700;font-size:16px;border-bottom:0}
+.sum .tot span:last-child{color:var(--accent-tx)}
+.notice{margin-top:14px;padding:14px 16px;background:#FDF0F7;border:1px solid #F3C4DF;border-radius:var(--r);font-size:13.5px;line-height:1.7}
+.notice b{color:var(--accent-tx)}
+.agree{margin-top:16px;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+.agree label{display:flex;gap:10px;align-items:flex-start;padding:13px 14px;font-size:14px;cursor:pointer}
+.agree input{width:18px;height:18px;margin-top:2px;accent-color:var(--ink);flex:none}
+.agree details{border-top:1px solid var(--line-2);padding:10px 14px;font-size:12.5px;color:var(--soft)}
+.agree summary{cursor:pointer;font-weight:600;color:var(--text)}
+.agree dl{margin-top:8px;display:grid;grid-template-columns:80px 1fr;gap:4px 10px}
+
+.submit{width:100%;margin-top:18px;padding:18px;background:var(--accent);color:#fff;border:0;border-radius:var(--r);font:700 16px/1 'IBM Plex Sans KR',sans-serif;cursor:pointer}
+.submit:hover{filter:brightness(.92)}
+.submit[disabled]{opacity:.55;cursor:wait}
+.formerr{display:none;margin-top:12px;color:var(--warn);font-size:13.5px;font-weight:600}
+.formerr.show{display:block}
+
+.lstep{border:1px solid var(--line);border-radius:var(--r);padding:18px;margin-bottom:10px;background:#fff}
+.lstep h3{font-family:'IBM Plex Sans KR',sans-serif;font-size:15.5px;display:flex;gap:9px;align-items:center;margin-bottom:6px}
+.lstep h3 b{flex:none;width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font:600 12px/22px 'IBM Plex Mono',monospace;text-align:center}
+.lstep p{font-size:13.5px;color:var(--soft)}
+.lstep .go{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;padding:15px;border-radius:var(--r);font-weight:700;font-size:15px;text-decoration:none;color:#fff;background:var(--accent)}
+.lstep .go.k{background:var(--ink)}
+.lstep .go:hover{filter:brightness(.92)}
+.copybox{margin-top:10px;display:none}.copybox.show{display:block}
+.copybox p{font-size:12.5px;font-weight:600;margin-bottom:6px;color:var(--ok)}.copybox p.err{color:var(--warn)}
+.copybox textarea{width:100%;height:170px;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r);font:400 12.5px/1.6 'IBM Plex Sans KR',sans-serif;resize:vertical}
+#payStep{display:none}
+#payStep.show{display:block}
+.paid-head{display:flex;gap:10px;align-items:center;padding:12px 14px;background:#EFF6F1;border:1px solid #B9CBC0;border-radius:var(--r);font-size:13.5px;margin-bottom:14px;color:var(--ok);font-weight:600}
+#payment-method,#agreement{margin:0 -8px}
+
+.off{background:var(--card);border:1px dashed var(--line);border-radius:var(--r);padding:22px;margin-bottom:14px;font-size:14px}
+.off b{display:block;font-family:'Gowun Batang',serif;font-size:18px;margin-bottom:6px}
+.kbtn{display:inline-flex;align-items:center;gap:7px;margin-top:14px;padding:13px 18px;background:var(--accent);color:#fff;border-radius:var(--r);font-weight:600;font-size:14px;text-decoration:none}
+
+footer{background:var(--ink);color:rgba(255,255,255,.45);padding:26px 0;font-size:12.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{color:inherit;text-decoration:none}
+</style>
+</head>
+<body>
+
+<header><div class="wrap hd">
+  <a href="/" class="logo">GARUDA <span>ACADEMY</span> KOREA</a>
+  <nav><a href="/programs/">교육과정 소개</a><a href="/academy/">교육 일정</a><a href="https://pf.kakao.com/_xexjbUT/chat" target="_blank" rel="noopener">카톡 문의</a></nav>
+</div></header>
+
+<section class="top"><div class="wrap">
+  <p class="eyebrow">Application</p>
+  <h1>교육 신청서</h1>
+  <p>신청서 작성과 함께 과정당 예약금 <b class="num">30만원</b>을 결제합니다. 예약금 결제가 확인되면 1영업일 이내에 잔금 결제 링크를 보내드립니다.</p>
+  <div class="flow"><span><b>1</b>신청서 작성</span><span><b>2</b>예약금 30만원 결제</span><span><b>3</b>1영업일 내 잔금 링크 발송</span><span><b>4</b>잔금 결제 · 등록 완료</span></div>
+</div></section>
+
+<main><div class="wrap">
+
+  <div class="off" id="offline" hidden>
+    <b>온라인 신청을 준비하고 있습니다</b>
+    지금은 카카오톡으로 신청을 받고 있습니다. 원하시는 과정과 시작일을 남겨 주시면 결제 방법을 안내해 드립니다.
+    <br><a class="kbtn" href="https://pf.kakao.com/_xexjbUT/chat" target="_blank" rel="noopener">카카오톡으로 신청하기</a>
+  </div>
+
+  <form id="form" novalidate>
+    <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+    <section class="card">
+      <h2><span class="n">01</span>신청자 정보</h2>
+      <p class="desc">자격증은 영문 이름으로 발급됩니다. 여권 또는 원하시는 표기와 같게 적어 주세요.</p>
+      <div class="grid2">
+        <div class="fld"><label for="nameKo">이름 (한글)<em>*</em></label><input id="nameKo" name="nameKo" autocomplete="name" required maxlength="30"><p class="err">이름을 적어 주세요.</p></div>
+        <div class="fld"><label for="nameEn">영문 이름<em>*</em></label><input id="nameEn" name="nameEn" autocomplete="off" required maxlength="60" placeholder="HONG GILDONG" style="text-transform:uppercase"><small>자격증 발급 시 이 표기를 사용합니다.</small><p class="err">영문으로 적어 주세요. (예: HONG GILDONG)</p></div>
+        <div class="fld"><label for="phone">연락처<em>*</em></label><input id="phone" name="phone" inputmode="tel" autocomplete="tel" required placeholder="010-0000-0000"><p class="err">휴대폰 번호를 확인해 주세요.</p></div>
+        <div class="fld"><label for="email">이메일<em>*</em></label><input id="email" name="email" type="email" autocomplete="email" required placeholder="name@example.com"><small>결제 확인과 잔금 링크를 이 주소로 보내드립니다.</small><p class="err">이메일 주소를 확인해 주세요.</p></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2><span class="n">02</span>교육 과정 · 시작일 선택</h2>
+      <p class="desc">신청할 과정을 체크하고 교육 시작일을 골라 주세요. 여러 과정을 함께 신청할 수 있습니다.</p>
+      <div id="courses"></div>
+      <p class="formerr" id="courseErr">교육 과정을 하나 이상 선택하고 시작일을 정해 주세요.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="n">03</span>예약금 결제 안내</h2>
+      <div class="sum" id="sum"></div>
+      <p class="notice">신청서와 함께 <b>과정당 예약금 30만원</b>을 결제합니다.<br><span id="balNotice"></span></p>
+      <div class="agree">
+        <label><input type="checkbox" id="agree" required><span><b>[필수]</b> 개인정보 수집·이용에 동의합니다.</span></label>
+        <details><summary>내용 보기</summary>
+          <dl>
+            <dt>수집 항목</dt><dd>이름(한글·영문), 연락처, 이메일, 신청 과정·시작일, 결제 내역</dd>
+            <dt>이용 목적</dt><dd>교육 신청 확인, 예약금·잔금 결제 안내, 교육 운영 연락, 자격증 발급</dd>
+            <dt>보유 기간</dt><dd>자격 유지 관리 기간 종료 시까지. 관계 법령에 따라 보존이 필요한 결제 기록은 해당 기간 동안 보관합니다.</dd>
+          </dl>
+          동의를 거부할 수 있으며, 거부 시 교육 신청이 제한됩니다.
+        </details>
+      </div>
+      <button class="submit" id="submit" type="submit">신청하고 예약금 결제하기</button>
+      <p class="formerr" id="formErr"></p>
+    </section>
+  </form>
+
+  <section class="card" id="payStep">
+    <h2><span class="n">04</span>예약금 결제</h2>
+    <div class="paid-head">✓ 신청서가 접수되었습니다 · 신청번호 <span class="num" id="orderIdTxt"></span></div>
+    <div id="payment-method"></div>
+    <div id="agreement"></div>
+    <button class="submit" id="payBtn" type="button">예약금 결제하기</button>
+    <p class="formerr" id="payErr"></p>
+  </section>
+
+</div></main>
+
+<footer><div class="wrap">
+  <span><a href="/">홈</a> · <a href="/programs/">교육과정 소개</a> · <a href="/academy/">교육 일정</a></span>
+  <span>The Garuda Method는 D'Silva Ltd.의 등록상표입니다.</span>
+</div></footer>
+
+<script src="/assets/js/track.js"></script>
+<script src="/assets/data/config.js"></script>
+<script src="/assets/data/courses.js"></script>
+<script src="/assets/data/programs.js"></script>
+<script src="/assets/data/schedule.js"></script>
+<script>
+(function(){
+const CFG=window.GARUDA_CONFIG, X=window.GARUDA_SCHED;
+const PG=window.GARUDA_PROGRAMS, P=Object.fromEntries(PG.programs.map(p=>[p.id,p]));
+const CF=Object.fromEntries(window.GARUDA_COURSES.map(c=>[c.id,c]));
+const COLOR={Mat:'var(--mat)',Apparatus:'var(--app)',Auxiliary:'var(--aux)'};
+const DEP=CFG.deposit||300000;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const won=n=>Number(n).toLocaleString('ko-KR')+'원';
+const man=n=>n%10000===0?(n/10000).toLocaleString('ko-KR')+'만원':won(n);
+const T0=(()=>{const t=new Date();t.setHours(0,0,0,0);return t})();
+$('balNotice').textContent=CFG.balanceNotice;
+
+/* 연결 설정이 없으면 온라인 신청을 막고 카톡 안내 */
+if(!CFG.applyEndpoint&&!CFG.depositPayLink){ $('offline').hidden=false; $('form').hidden=true; return; }
+/* 결제 링크 방식: 링크 한 번 = 예약금 30만원 → 신청서 한 장에 과정 하나 */
+const ONE=!!CFG.depositPayLink;
+if(ONE) document.querySelector('#courses').previousElementSibling.textContent='신청할 과정 하나를 고르고 교육 시작일을 선택해 주세요. 다른 과정도 신청하려면 신청서를 한 번 더 작성해 주세요.';
+
+/* ── 과정 목록: 교육 일정(schedule.js)에서 시작일을 자동으로 가져온다 ── */
+const SES=X.upcoming(X.D.sessions).filter(x=>X.day(x.dates[0])>T0);   // 이미 시작한 기수는 제외
+const LIST=PG.categories.map(cat=>({cat,items:cat.courses.map(id=>P[id]).filter(p=>p&&(p.ready||p.ref)&&(p.ref||SES.some(s=>s.prog===p.id)||p.ready))}));
+const sessOf=id=>SES.filter(s=>s.prog===id);
+const feeOf=(p,s)=>{const c=CF[p.ref]; if(s) return X.price(s,c&&c.c).now; return c?c.c:0};
+const q=new URLSearchParams(location.search), preC=q.get('c'), preS=q.get('s');
+
+$('courses').innerHTML=LIST.filter(g=>g.items.length).map(g=>`<div class="cat" style="--c:${COLOR[g.cat.key]}"><h3>${esc(g.cat.key)} · ${esc(g.cat.kr)}</h3>${g.items.map(p=>{
+  const ss=sessOf(p.id), c=CF[p.ref];
+  return `<div class="course" data-id="${p.id}">
+    <label><input type="checkbox" value="${p.id}"><span class="nm"><b>${esc(p.name)}</b><small>${esc(p.kr)}${c?` · ${c.d}일 ${c.h}시간`:''}</small></span><span class="fee">${c?man(c.c):'별도 안내'}</span></label>
+    <div class="pick"><div class="fld">
+      <label for="s-${p.id}">교육 시작일</label>
+      ${ss.length?'':`<p class="none">예정된 기수가 없습니다. 희망 시작일을 적어 주시면 일정이 정해지는 대로 안내해 드립니다.</p>`}
+      <select id="s-${p.id}" ${ss.length?'':'hidden'}>
+        <option value="">시작일을 선택해 주세요</option>
+        ${ss.map((s,k)=>{const pr=X.price(s,c&&c.c),d=X.day(s.dates[0]);
+          return `<option value="${k}">${d.getFullYear()}.${d.getMonth()+1}.${d.getDate()}(${X.wd(s.dates[0])}) 시작 · ${esc(s.cls)} · ${esc(s.place)}${pr.regular?` · ${man(pr.now)}${pr.until?' (얼리버드)':''}`:''}</option>`}).join('')}
+        <option value="manual">목록에 없음 · 직접 입력</option>
+      </select>
+      <div class="manual ${ss.length?'':'show'}"><input type="date" id="m-${p.id}" min="${X.iso(T0)}" aria-label="희망 교육 시작일"></div>
+      <p class="err">시작일을 정해 주세요.</p>
+    </div></div></div>`}).join('')}</div>`).join('');
+
+function selected(){
+  return [...document.querySelectorAll('.course.on')].map(el=>{
+    const p=P[el.dataset.id], sel=$('s-'+p.id), ss=sessOf(p.id);
+    const useManual=!ss.length||sel.value==='manual';
+    const s=useManual?null:ss[+sel.value];
+    const start=useManual?$('m-'+p.id).value:(s?s.dates[0]:'');
+    return {el,p,s,start,manual:useManual,fee:feeOf(p,s)};
+  });
+}
+function drawSum(){
+  const it=selected();
+  $('sum').innerHTML=it.length?it.map(x=>`<div class="li"><span>${esc(x.p.name)}<small>${x.start?`시작일 ${x.start}${x.s?` · ${esc(x.s.cls)} · ${esc(x.s.place)}`:' (희망일)'}`:'시작일 미선택'}${x.fee?` · 수강료 ${man(x.fee)} 중 잔금 ${man(x.fee-DEP)}`:''}</small></span><span>${won(DEP)}</span></div>`).join('')
+    +`<div class="li tot"><span>지금 결제할 예약금</span><span>${won(DEP*it.length)}</span></div>`
+    :`<div class="li"><span style="color:var(--soft)">과정을 선택하면 예약금이 계산됩니다.</span><span></span></div>`;
+  $('submit').textContent=it.length?`신청하고 예약금 ${man(DEP*it.length)} 결제하기`:'신청하고 예약금 결제하기';
+}
+document.querySelectorAll('.course').forEach(el=>{
+  const cb=el.querySelector('input[type=checkbox]'),sel=el.querySelector('select'),man_=el.querySelector('.manual');
+  cb.addEventListener('change',()=>{
+    if(ONE&&cb.checked) document.querySelectorAll('.course.on').forEach(o=>{if(o!==el){o.classList.remove('on');o.querySelector('input[type=checkbox]').checked=false}});
+    el.classList.toggle('on',cb.checked);drawSum()});
+  sel.addEventListener('change',()=>{man_.classList.toggle('show',sel.value==='manual');el.querySelector('.fld').classList.remove('bad');drawSum()});
+  el.querySelector('input[type=date]').addEventListener('change',()=>{el.querySelector('.fld').classList.remove('bad');drawSum()});
+});
+/* 일정 페이지에서 넘어온 경우 과정·시작일 미리 선택 */
+if(preC&&document.querySelector(`.course[data-id="${preC}"]`)){
+  const el=document.querySelector(`.course[data-id="${preC}"]`),cb=el.querySelector('input'),sel=el.querySelector('select');
+  cb.checked=true;el.classList.add('on');
+  const k=sessOf(preC).findIndex(s=>s.dates[0]===preS); if(k>=0) sel.value=String(k);
+}
+drawSum();
+
+/* ── 검증 ── */
+const rules={
+  nameKo:v=>v.trim().length>=2,
+  nameEn:v=>/^[A-Za-z][A-Za-z .'-]{1,58}$/.test(v.trim()),
+  phone:v=>/^01[016789]\d{7,8}$/.test(v.replace(/\D/g,'')),
+  email:v=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.trim())
+};
+Object.keys(rules).forEach(k=>$(k).addEventListener('input',()=>$(k).closest('.fld').classList.remove('bad')));
+function validate(){
+  let ok=true,first=null;
+  for(const [k,f] of Object.entries(rules)){const bad=!f($(k).value);$(k).closest('.fld').classList.toggle('bad',bad);if(bad){ok=false;first=first||$(k)}}
+  const it=selected(); $('courseErr').classList.toggle('show',!it.length); if(!it.length){ok=false;first=first||$('courses')}
+  it.forEach(x=>{const bad=!x.start;x.el.querySelector('.pick .fld').classList.toggle('bad',bad);if(bad){ok=false;first=first||x.el}});
+  if(!$('agree').checked){ok=false;$('formErr').textContent='개인정보 수집·이용에 동의해 주세요.';$('formErr').classList.add('show');first=first||$('agree')}
+  if(first){first.scrollIntoView({behavior:'smooth',block:'center'});if(first.focus)first.focus({preventScroll:true})}
+  return ok;
+}
+
+/* ── 제출 → 시트 저장 → 토스 결제위젯 ── */
+async function post(data){
+  // Apps Script 웹 앱은 text/plain 으로 보내야 사전요청(CORS) 없이 응답을 읽을 수 있다
+  const r=await fetch(CFG.applyEndpoint,{method:'POST',body:JSON.stringify(data)});
+  return r.json();
+}
+$('form').addEventListener('submit',async e=>{
+  e.preventDefault(); $('formErr').classList.remove('show');
+  if(!validate()) return;
+  const btn=$('submit'); btn.disabled=true; btn.textContent='접수 중…';
+  let src={}; try{src=JSON.parse(localStorage.getItem('garuda_src')||'{}')}catch(_){}
+  const it=selected();
+  const payload={action:'apply',website:$('form').website.value,
+    nameKo:$('nameKo').value.trim(),nameEn:$('nameEn').value.trim().toUpperCase(),
+    phone:$('phone').value.trim(),email:$('email').value.trim(),src,
+    items:it.map(x=>({progId:x.p.id,progName:x.p.name,start:x.start,manual:x.manual,fee:x.fee||'',
+      session:x.s?`${x.s.cls} · ${x.s.place} · ${x.s.time}`:''}))};
+  try{
+    const res=CFG.applyEndpoint?await post(payload):{ok:true,orderId:'',amount:DEP*payload.items.length,local:true};
+    if(!res.ok) throw new Error(res.error||'접수에 실패했습니다.');
+    sessionStorage.setItem('garuda_order',JSON.stringify({orderId:res.orderId,amount:res.amount,name:payload.nameKo,items:payload.items.map(i=>i.progName+' · '+i.start)}));
+    await startPayment(res,payload);
+  }catch(err){
+    $('formErr').textContent=(err.message||'접수에 실패했습니다.')+' 계속 안 되면 카카오톡으로 문의해 주세요.';
+    $('formErr').classList.add('show'); btn.disabled=false; drawSum();
+  }
+});
+
+/* ── 토스 결제 링크 방식 ── */
+function linkPayment(res,payload){
+  $('form').hidden=true; $('payStep').classList.add('show'); window.scrollTo({top:0,behavior:'smooth'});
+  $('agreement').hidden=true; $('payBtn').hidden=true;
+  const head=document.querySelector('.paid-head');
+  // 시트에 저장되지 않은 경우(연결 전)에는 '접수되었습니다'를 보여 주지 않는다
+  if(res.local) head.style.display='none'; else $('orderIdTxt').textContent=res.orderId;
+  document.querySelector('#payStep h2').innerHTML='<span class="n">04</span>신청 마무리';
+  const x=payload.items[0], p=P[x.progId];
+  const text=['[가루다 교육 신청서]',
+    `과정: ${p.kr} (${p.name.replace(/\s*\(.*\)$/,'')})`,
+    `교육 시작일: ${x.start}${x.manual?' (희망일)':''}`,
+    x.session?`반·장소·시간: ${x.session}`:'',
+    x.fee?`수강료: ${won(x.fee)} (예약금 ${won(DEP)} + 잔금 ${won(x.fee-DEP)})`:'',
+    `이름: ${payload.nameKo}`,`영문 이름: ${payload.nameEn}`,`연락처: ${payload.phone}`,`이메일: ${payload.email}`,
+    res.orderId?`신청번호: ${res.orderId}`:''].filter(Boolean).join('\n');
+  let n=0;
+  $('payment-method').innerHTML=
+    (res.local?`<div class="lstep"><h3><b>${++n}</b>신청서를 카카오톡으로 보내 주세요</h3>
+      <p>버튼을 누르면 신청 내용이 복사되고 상담창이 열립니다. 붙여넣기 후 보내 주세요.</p>
+      <a class="go k" id="kakaoGo" href="${esc(PG.kakao)}" target="_blank" rel="noopener">신청 내용 복사하고 카톡 열기</a>
+      <div class="copybox" id="copybox"><p id="copymsg"></p><textarea id="copytext" readonly></textarea></div></div>`:'')+
+    `<div class="lstep"><h3><b>${++n}</b>예약금 ${won(DEP)} 결제</h3>
+      <p>토스페이먼츠 결제창에서 <b>신청서와 같은 이름·연락처</b>로 결제해 주세요. ${esc(CFG.balanceNotice)}</p>
+      <a class="go" href="${esc(CFG.depositPayLink)}" target="_blank" rel="noopener">예약금 ${won(DEP)} 결제하기</a></div>`;
+  const k=$('kakaoGo');
+  if(k) k.addEventListener('click',()=>{
+    const box=$('copybox'),msg=$('copymsg'),ta=$('copytext'); ta.value=text; box.classList.add('show');
+    const ok=()=>{msg.className='';msg.textContent='✓ 신청 내용이 복사되었습니다. 카카오톡에 붙여넣어 보내 주세요.'};
+    const fail=()=>{msg.className='err';msg.textContent='자동 복사가 되지 않았습니다. 아래 내용을 길게 눌러 복사해 주세요.';ta.select()};
+    if(navigator.clipboard&&window.isSecureContext) navigator.clipboard.writeText(text).then(ok,()=>{try{ta.select();document.execCommand('copy')?ok():fail()}catch(e){fail()}});
+    else{try{ta.select();document.execCommand('copy')?ok():fail()}catch(e){fail()}}
+  });
+}
+
+function loadToss(){return new Promise((ok,no)=>{if(window.TossPayments)return ok();const s=document.createElement('script');s.src='https://js.tosspayments.com/v2/standard';s.onload=ok;s.onerror=()=>no(new Error('결제 모듈을 불러오지 못했습니다.'));document.head.appendChild(s)})}
+async function startPayment(res,payload){
+  if(CFG.depositPayLink) return linkPayment(res,payload);
+  $('form').hidden=true; $('payStep').classList.add('show'); $('orderIdTxt').textContent=res.orderId;
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(!CFG.tossClientKey){
+    $('payment-method').innerHTML='<p style="font-size:14px">온라인 결제를 준비하고 있습니다. 신청서는 정상 접수되었으며, 예약금 결제 방법을 문자·이메일로 안내해 드립니다.</p>';
+    $('payBtn').hidden=true; return;
+  }
+  await loadToss();
+  const toss=TossPayments(CFG.tossClientKey);
+  const widgets=toss.widgets({customerKey:TossPayments.ANONYMOUS});
+  await widgets.setAmount({currency:'KRW',value:res.amount});
+  await Promise.all([
+    widgets.renderPaymentMethods({selector:'#payment-method',variantKey:'DEFAULT'}),
+    widgets.renderAgreement({selector:'#agreement',variantKey:'AGREEMENT'})
+  ]);
+  $('payBtn').textContent=`예약금 ${won(res.amount)} 결제하기`;
+  $('payBtn').onclick=async()=>{
+    $('payErr').classList.remove('show');
+    try{
+      await widgets.requestPayment({
+        orderId:res.orderId, orderName:res.orderName,
+        successUrl:location.origin+'/apply/success/', failUrl:location.origin+'/apply/fail/',
+        customerName:payload.nameKo, customerEmail:payload.email,
+        customerMobilePhone:payload.phone.replace(/\D/g,'')
+      });
+    }catch(err){ $('payErr').textContent=err.message||'결제를 진행하지 못했습니다.'; $('payErr').classList.add('show'); }
+  };
+}
+})();
+</script>
+</body>
+</html>
