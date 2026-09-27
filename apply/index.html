@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/assets/js/analytics.js"></script>
 <title>교육 신청 · 예약금 결제 | GARUDA Academy Korea</title>
 <meta name="description" content="가루다 지도자 교육 신청서. 과정과 교육 시작일을 선택하고 과정당 예약금 30만원을 결제하면 1영업일 이내에 잔금 결제 링크를 보내드립니다.">
 <meta name="robots" content="noindex">
@@ -337,6 +338,7 @@ $('form').addEventListener('submit',async e=>{
   try{
     const res=CFG.applyEndpoint?await post(payload):{ok:true,orderId:'',amount:DEP*payload.items.length,local:true};
     if(!res.ok) throw new Error(res.error||'접수에 실패했습니다.');
+    gaEvent('generate_lead',{currency:'KRW',value:res.amount,course:payload.items.map(i=>i.progName).join(', '),start_date:payload.items.map(i=>i.start).join(', ')});
     sessionStorage.setItem('garuda_order',JSON.stringify({orderId:res.orderId,amount:res.amount,name:payload.nameKo,items:payload.items.map(i=>i.progName+' · '+i.start)}));
     await startPayment(res,payload);
   }catch(err){
@@ -369,7 +371,8 @@ function linkPayment(res,payload){
       <div class="copybox" id="copybox"><p id="copymsg"></p><textarea id="copytext" readonly></textarea></div></div>`:'')+
     `<div class="lstep"><h3><b>${++n}</b>예약금 ${won(DEP)} 결제</h3>
       <p>토스페이먼츠 결제창에서 <b>신청서와 같은 이름·연락처</b>로 결제해 주세요. ${esc(CFG.balanceNotice)}</p>
-      <a class="go" href="${esc(CFG.depositPayLink)}" target="_blank" rel="noopener">예약금 ${won(DEP)} 결제하기</a></div>`;
+      <a class="go" id="payLinkGo" href="${esc(CFG.depositPayLink)}" target="_blank" rel="noopener">예약금 ${won(DEP)} 결제하기</a></div>`;
+  $('payLinkGo').addEventListener('click',()=>gaEvent('begin_checkout',{currency:'KRW',value:DEP,course:p.name,start_date:x.start}));
   const k=$('kakaoGo');
   if(k) k.addEventListener('click',()=>{
     const box=$('copybox'),msg=$('copymsg'),ta=$('copytext'); ta.value=text; box.classList.add('show');

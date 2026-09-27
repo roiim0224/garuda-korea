@@ -3,6 +3,7 @@
 <html lang="ko"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/assets/js/analytics.js"></script>
 <title>Brick (Ghara) 지도자 과정 | 가루다 아카데미</title>
 <meta name="description" content="그라하 · 브릭 지도자 과정. 3일 12시간·수강료 120만원. 커리큘럼·교육 일정·현장 사진과 영상을 확인하세요.">
 <!--seo:start (tools/build.mjs 가 생성 — 직접 고치지 말 것)-->
@@ -502,7 +503,7 @@ function afterRender(scroll){
 // 영상: 버튼을 눌렀을 때 iframe으로 교체
 $d.addEventListener('click',e=>{
   const v=e.target.closest('[data-yt]');
-  if(v){const id=v.dataset.yt;v.outerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0" title="과정 영상" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;return}
+  if(v){const id=v.dataset.yt;gaEvent('video_play',{course:(P[pathId]||{}).name||'',video_id:id});v.outerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0" title="과정 영상" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;return}
   const j=e.target.closest('[data-jump]');
   if(j){e.preventDefault();document.getElementById('b-'+j.dataset.jump).scrollIntoView({behavior:'smooth'})}
 });

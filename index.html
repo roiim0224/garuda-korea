@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/assets/js/analytics.js"></script>
 <title>가루다 아카데미 코리아 | 필라테스·바레 지도자 교육</title>
 <meta name="description" content="영국 GARUDA Method 공식 아시아 아카데미. 필라테스·바레·기구 지도자 과정의 기간·수강료·일정을 모두 공개합니다.">
 <!--seo:start (tools/build.mjs 가 생성 — 직접 고치지 말 것)-->
@@ -319,6 +320,7 @@ document.getElementById('up-list').innerHTML=upcomingCards(()=>true,3);
   const js=document.createElement('script'); js.src='https://player.vimeo.com/api/player.js';
   js.onload=()=>{player=new Vimeo.Player(fr)}; document.head.appendChild(js);
   document.querySelectorAll('.chap [data-t]').forEach(b=>b.addEventListener('click',()=>{
+    gaEvent('founder_video_chapter',{chapter:b.textContent.trim()});
     if(!player) return;
     player.setCurrentTime(+b.dataset.t).then(()=>player.play()).catch(()=>{});
   }));

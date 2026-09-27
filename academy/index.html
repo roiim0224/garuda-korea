@@ -3,6 +3,7 @@
 <html lang="ko"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/assets/js/analytics.js"></script>
 <title>가루다 교육 일정·수강 신청 | 얼리버드 20%</title>
 <meta name="description" content="가루다 지도자 과정 교육 일정. 기수별 날짜·시간·장소·수강료와 얼리버드 20% 할인, 특별 워크숍 일정을 확인하세요.">
 <!--seo:start (tools/build.mjs 가 생성 — 직접 고치지 말 것)-->
@@ -818,7 +819,7 @@ const ov=document.getElementById('ov'),mb=document.getElementById('mbody');
 function openModal(i){
   const x=S.find(s=>s.i===i),fee=x.pr.now,y=X.day(x.dates[0]).getFullYear();
   // 온라인 신청서가 연결되어 있으면 신청서로 (과정·시작일 미리 선택)
-  if(window.GARUDA_CONFIG&&(GARUDA_CONFIG.applyEndpoint||GARUDA_CONFIG.depositPayLink)){location.href=`/apply/?c=${encodeURIComponent(x.prog)}&s=${x.dates[0]}`;return}
+  if(window.GARUDA_CONFIG&&(GARUDA_CONFIG.applyEndpoint||GARUDA_CONFIG.depositPayLink)){gaEvent('apply_click',{course:x.p.name,start_date:x.dates[0],page_path:location.pathname});location.href=`/apply/?c=${encodeURIComponent(x.prog)}&s=${x.dates[0]}`;return}
   mb.innerHTML=`
    <div class="sumbox"><dl>
      <div><dt>과정</dt><dd style="font-family:'IBM Plex Sans KR'">${esc(x.p.name)} · ${esc(x.cls)}</dd></div>
