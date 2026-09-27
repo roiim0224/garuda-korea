@@ -322,7 +322,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     <h2>우리 스튜디오에 맞는 과정,<br>같이 정해드립니다</h2>
     <p>공간과 보유 장비, 강사 구성을 알려주시면 도입 가능한 과정과 예상 일정을 안내해 드립니다.</p>
     <div class="hcta">
-      <a href="#" class="btn btn-p">카카오톡으로 상담하기</a>
+      <a href="https://pf.kakao.com/_xexjbUT/chat" class="btn btn-p" target="_blank" rel="noopener">카카오톡으로 상담하기</a>
       <a href="/academy/" class="btn btn-g">교육 일정 전체 보기</a>
     </div>
   </div>
@@ -333,18 +333,29 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <span>The Garuda Method는 D'Silva Ltd.의 등록상표입니다.</span>
 </div></footer>
 
+<script src="/assets/data/courses.js"></script>
+<script src="/assets/data/programs.js"></script>
+<script src="/assets/data/schedule.js"></script>
 <script>
-const C=[
- {id:'aux-c',en:'Chakra (Foam Roller)',kr:'차크라 · 폼롤러',d:3,c:1200000,cat:'var(--aux)',s:'8월 25일 – 27일',seat:7,tot:16},
- {id:'aux-t',en:'Tara (Sling)',kr:'타라 · 슬링',d:3,c:1200000,cat:'var(--aux)',s:'9월 15일 – 17일',seat:4,tot:10},
- {id:'aux-g',en:'Graha (Brick)',kr:'그라하 · 브릭',d:3,c:1200000,cat:'var(--aux)',s:'10월 27일 – 29일',seat:13,tot:16},
- {id:'aux-d',en:'Dhara (Chair)',kr:'다라 · 체어',d:4,c:1500000,cat:'var(--aux)',s:'9월 8일 – 11일',seat:1,tot:12},
- {id:'mat-f',en:'Mat Foundation',kr:'매트 파운데이션',d:6,c:2300000,cat:'var(--mat)',s:'9월 14일 – 19일',seat:5,tot:12},
- {id:'mat-ss',en:'Seated & Standing Matwork',kr:'좌식·입식 매트워크',d:6,c:2300000,cat:'var(--mat)',s:'10월 5일 – 10일',seat:2,tot:12},
- {id:'aux-b',en:'Garuda Barre',kr:'가루다 바',d:6,c:2500000,cat:'var(--aux)',s:'9월 28일 – 10월 3일',seat:9,tot:14},
- {id:'app-g',en:'Garuda Apparatus',kr:'가루다 아파라투스',d:6,c:2500000,cat:'var(--app)',s:'9월 21일 – 26일',seat:3,tot:8},
- {id:'app-r',en:'Garuda Reformer',kr:'가루다 리포머',d:6,c:2500000,cat:'var(--app)',s:'10월 19일 – 24일',seat:6,tot:8}
-];
+/* 다가오는 기수 — schedule.js */
+function upcomingCards(filter,n){
+  const X=window.GARUDA_SCHED, P=Object.fromEntries(window.GARUDA_PROGRAMS.programs.map(p=>[p.id,p]));
+  const CF=Object.fromEntries(window.GARUDA_COURSES.map(c=>[c.id,c]));
+  const COL={Mat:'var(--mat)',Apparatus:'var(--app)',Auxiliary:'var(--aux)'};
+  const man=v=>(v/10000).toLocaleString('ko-KR')+'만원';
+  const mdw=d=>`${d.getMonth()+1}.${d.getDate()}`;
+  const T0=new Date();T0.setHours(0,0,0,0);
+  const seen=new Set();
+  return X.upcoming(X.D.sessions).filter(x=>X.day(x.dates[0])>T0&&filter(x)&&!seen.has(x.prog)&&seen.add(x.prog)).slice(0,n).map(x=>{
+    const p=P[x.prog],c=CF[p.ref],pr=X.price(x,c&&c.c),y=X.day(x.dates[0]).getFullYear();
+    return `<a href="/academy/" style="--c:${COL[p.cat]}">
+      <h3>${p.name}</h3><p class="kr">${p.kr} · ${x.cls}</p>
+      <p class="dt">${X.rangeText(x.dates)}</p>
+      <p class="meta"><span>${y}년 · ${x.dates.length}일 · ${x.place}</span>${pr.regular?`<span class="tag ${pr.until?'w':''}">${pr.until?`얼리버드 ${man(pr.now)}`:man(pr.now)}</span>`:''}</p></a>`}).join('');
+}
+const ORDER=['aux-c','aux-t','aux-g','aux-d','mat-f','mat-ss','aux-b','app-g','app-r'];
+const CF=Object.fromEntries(window.GARUDA_COURSES.map(c=>[c.id,c]));
+const C=ORDER.map(id=>CF[id]);
 const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
 const man=n=>{const v=n/10000;return (v>=100?Math.round(v).toLocaleString('ko-KR'):v%1?v.toFixed(0):v)+'만원'};
 
@@ -352,14 +363,8 @@ const man=n=>{const v=n/10000;return (v>=100?Math.round(v).toLocaleString('ko-KR
 document.getElementById('i-course').innerHTML=C.map(c=>
  `<option value="${c.id}">${c.en} · ${c.d}일 · ${man(c.c)}</option>`).join('');
 
-/* 개강 임박 3개 */
-document.getElementById('up-list').innerHTML=C.slice().sort((a,b)=>a.seat-b.seat).slice(0,3).map(c=>{
-  const st=c.seat<=3?['마감임박','w']:['모집중','o'];
-  return `<a href="/academy/" style="--c:${c.cat}">
-    <h3>${c.en}</h3><p class="kr">${c.kr}</p>
-    <p class="dt">${c.s}</p>
-    <p class="meta"><span>${c.d}일 · ${man(c.c)}</span><span class="tag ${st[1]}">${st[0]} · 잔여 ${c.seat}석</span></p></a>`}).join('');
-
+/* 개강 임박 3개 (바레 과정은 /barre/ 에서 안내) */
+document.getElementById('up-list').innerHTML=upcomingCards(x=>!x.prog.startsWith('barre'),3);
 /* 시뮬레이터 */
 const $=id=>document.getElementById(id);
 function calc(){

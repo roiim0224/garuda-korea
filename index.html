@@ -215,7 +215,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:38px 0 30px;font
     <h2>어떤 과정이 맞을지<br>같이 정해드립니다</h2>
     <p>스튜디오 공간과 보유 장비, 강사 구성을 알려주시면 도입 가능한 과정을 안내해 드립니다.</p>
     <div class="cta2">
-      <a href="#" class="btn btn-p">카카오톡으로 문의</a>
+      <a href="https://pf.kakao.com/_xexjbUT/chat" class="btn btn-p" target="_blank" rel="noopener">카카오톡으로 문의</a>
       <a href="/academy/" class="btn btn-d">자격과정 일정 보기</a>
     </div>
   </div>
@@ -231,7 +231,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:38px 0 30px;font
       <div><h4>Garuda</h4>
         <a href="#what">가루다 메소드</a><a href="https://www.thegaruda.net/" rel="noopener">영국 본사 사이트</a><a href="/studios/#dir">스튜디오 찾기</a></div>
       <div><h4>Follow</h4>
-        <a href="#">Instagram</a><a href="#">YouTube</a><a href="#">카카오톡 채널</a></div>
+        <a href="#">Instagram</a><a href="#">YouTube</a><a href="https://pf.kakao.com/_xexjbUT" target="_blank" rel="noopener">카카오톡 채널</a></div>
     </div>
     <div class="fbot">
       <span>GARUDA Academy Korea &amp; Asia</span>
@@ -240,18 +240,27 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:38px 0 30px;font
   </div>
 </footer>
 
+<script src="/assets/data/courses.js"></script>
+<script src="/assets/data/programs.js"></script>
+<script src="/assets/data/schedule.js"></script>
 <script>
-const UP=[
- {en:'Chakra (Foam Roller)',kr:'차크라 · 폼롤러',d:'8월 25일 – 27일',n:'3일 · 120만원',s:7},
- {en:'Dhara (Chair)',kr:'다라 · 체어',d:'9월 8일 – 11일',n:'4일 · 150만원',s:1},
- {en:'Mat Foundation',kr:'매트 파운데이션',d:'9월 14일 – 19일',n:'6일 · 230만원',s:5}
-];
-document.getElementById('up-list').innerHTML=UP.map(c=>`
- <a href="/academy/">
-   <h3>${c.en}</h3><p class="kr">${c.kr}</p>
-   <p class="dt">${c.d}</p>
-   <p class="meta"><span>${c.n}</span><span class="tag ${c.s<=3?'w':''}">잔여 ${c.s}석</span></p>
- </a>`).join('');
+/* 다가오는 기수 — schedule.js */
+function upcomingCards(filter,n){
+  const X=window.GARUDA_SCHED, P=Object.fromEntries(window.GARUDA_PROGRAMS.programs.map(p=>[p.id,p]));
+  const CF=Object.fromEntries(window.GARUDA_COURSES.map(c=>[c.id,c]));
+  const COL={Mat:'var(--mat)',Apparatus:'var(--app)',Auxiliary:'var(--aux)'};
+  const man=v=>(v/10000).toLocaleString('ko-KR')+'만원';
+  const mdw=d=>`${d.getMonth()+1}.${d.getDate()}`;
+  const T0=new Date();T0.setHours(0,0,0,0);
+  const seen=new Set();
+  return X.upcoming(X.D.sessions).filter(x=>X.day(x.dates[0])>T0&&filter(x)&&!seen.has(x.prog)&&seen.add(x.prog)).slice(0,n).map(x=>{
+    const p=P[x.prog],c=CF[p.ref],pr=X.price(x,c&&c.c),y=X.day(x.dates[0]).getFullYear();
+    return `<a href="/academy/" style="--c:${COL[p.cat]}">
+      <h3>${p.name}</h3><p class="kr">${p.kr} · ${x.cls}</p>
+      <p class="dt">${X.rangeText(x.dates)}</p>
+      <p class="meta"><span>${y}년 · ${x.dates.length}일 · ${x.place}</span>${pr.regular?`<span class="tag ${pr.until?'w':''}">${pr.until?`얼리버드 ${man(pr.now)}`:man(pr.now)}</span>`:''}</p></a>`}).join('');
+}
+document.getElementById('up-list').innerHTML=upcomingCards(()=>true,3);
 
 const hdr=document.getElementById('hdr');
 addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>window.innerHeight*.7),{passive:true});

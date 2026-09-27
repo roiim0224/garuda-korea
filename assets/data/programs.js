@@ -21,12 +21,11 @@
    ============================================================ */
 
 window.GARUDA_PROGRAMS = {
-  "kakao": "",
+  "kakao": "https://pf.kakao.com/_xexjbUT/chat",
   "categories": [
     {
       "key": "Mat",
       "kr": "매트",
-      "desc": "매트 한 장으로 시작하는 가루다의 기초",
       "courses": [
         "mat-foundation",
         "mat-seated-standing"
@@ -35,7 +34,6 @@ window.GARUDA_PROGRAMS = {
     {
       "key": "Auxiliary",
       "kr": "소도구",
-      "desc": "바·의자·브릭·폼롤러·슬링으로 넓히는 수업",
       "courses": [
         "barre-foundation",
         "barre-advanced",
@@ -48,10 +46,8 @@ window.GARUDA_PROGRAMS = {
     {
       "key": "Apparatus",
       "kr": "기구",
-      "desc": "리포머와 가루다 전용 기구 과정",
       "courses": [
-        "reformer-1",
-        "reformer-2",
+        "reformer",
         "apparatus-a",
         "apparatus-b",
         "apparatus-series-a"
@@ -160,8 +156,38 @@ window.GARUDA_PROGRAMS = {
         }
       ],
       "closing": "GARUDA Mat 교육은 각 분야 전문가에게 기존의 한계를 뛰어넘는 새로운 통찰력과 스킬을 제공하며, 궁극적으로 고객들에게 더 높은 가치와 만족도를 선사할 것입니다.",
-      "video": "Y9_MLrP5lfs",
-      "photos": []
+      "video": "zhOhNy32vpI",
+      "reel": false,
+      "photos": [
+        {
+          "src": "/assets/img/programs/mat-foundation/1.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/mat-foundation/2.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/mat-foundation/3.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/mat-foundation/4.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/mat-foundation/5.webp",
+          "w": 1600,
+          "h": 1067
+        }
+      ],
+      "days": null,
+      "hours": null,
+      "pre": ""
     },
     {
       "id": "mat-seated-standing",
@@ -169,15 +195,52 @@ window.GARUDA_PROGRAMS = {
       "name": "Seated & Standing",
       "kr": "좌식·입식 매트워크",
       "ref": "mat-ss",
-      "ready": false,
+      "ready": true,
       "lead": "",
-      "intro": [],
+      "intro": [
+        "이 과정은 Seated & Standing 커리큘럼을 하나의 집중 프로그램으로 통합한 과정으로, 근력, 안정성, 균형, 관절 가동성 향상에 중점을 둡니다.",
+        "동작들은 신체의 근막 라인(fascial lines) 을 따라 깊이 있게 작용하며, 몸을 회복시키고 활력을 되찾도록 돕습니다. 동시에 사지는 기능성 트레이닝을 통해 지속적으로 도전받으며, 복잡한 움직임 속에서 코어가 신체 프레임을 안정적으로 지지하도록 요구됩니다.",
+        "### Garuda Seated & Standing Advanced",
+        "Foundation 과정과 Seated & Standing 1 과정을 수료한 강사라면 누구나 이 교육법을 익히기 위해 얼마나 많은 노력과 헌신이 필요한지 잘 알고 있을 것입니다.",
+        "이 과정은 이전 과정의 내용을 바탕으로 한 단계 더 발전하여, 새로운 동작과 개념을 통해 참가자에게 새로운 도전을 제공합니다. 익숙한 방식에 머무르지 않고 지속적으로 “틀 밖에서(outside the box)” 사고하고 움직이도록 하면서, 움직임의 기능성과 우아함을 함께 발전시키는 것을 목표로 합니다.",
+        "우리는 스스로 사고할 수 있는 지적인 강사(intelligent teachers) 를 양성하는 것을 목표로 하며, 여러분의 성장을 위해 헌신하는 것을 자랑스럽게 생각합니다."
+      ],
       "notes": [],
       "curr": [],
       "values": [],
       "closing": "",
-      "video": "",
-      "photos": []
+      "video": "zhOhNy32vpI",
+      "reel": false,
+      "photos": [
+        {
+          "src": "/assets/img/programs/mat-seated-standing/1.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/mat-seated-standing/2.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/mat-seated-standing/3.webp",
+          "w": 1067,
+          "h": 1600
+        },
+        {
+          "src": "/assets/img/programs/mat-seated-standing/4.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/mat-seated-standing/5.webp",
+          "w": 1600,
+          "h": 1067
+        }
+      ],
+      "days": null,
+      "hours": null,
+      "pre": ""
     },
     {
       "id": "barre-foundation",
@@ -282,7 +345,37 @@ window.GARUDA_PROGRAMS = {
       ],
       "closing": "",
       "video": "xfijSmT7q4E",
-      "photos": []
+      "reel": false,
+      "photos": [
+        {
+          "src": "/assets/img/programs/barre-foundation/1.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/barre-foundation/2.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/barre-foundation/3.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/barre-foundation/4.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/barre-foundation/5.webp",
+          "w": 1600,
+          "h": 1067
+        }
+      ],
+      "days": null,
+      "hours": null,
+      "pre": ""
     },
     {
       "id": "barre-advanced",
@@ -290,15 +383,100 @@ window.GARUDA_PROGRAMS = {
       "name": "Advanced Barre",
       "kr": "가루다 바 어드밴스드",
       "ref": null,
-      "ready": false,
+      "ready": true,
       "lead": "",
-      "intro": [],
+      "intro": [
+        "이 교육과정은 Foundation Barre 코스를 이수한 분을 대상으로 진행됩니다.",
+        "Foundation Barre 과정에서 학습한 각 파트별 동작들에서 좀더 다양한 움직임이 추가되어 완벽한 Movement Flow 가 형성됩니다. 이 과정에서 참가자들은 더 세심한 티칭 스킬과 움직임 기술을 숙지하게 되며 좀더 깊이 있는 GARUDA Method를 이해하게 됩니다.",
+        "템포의 변화 즉, 안단테, 아다지오 등에 리듬과 함께 진행되는 Squat Series, Leg Dog Series Bllet combo 등은 우리의 움직임을 한단계 진화시킵니다.",
+        "Port de bras, Pile 의 현대적 발레동작과 요가 Asana 의 결합은 GARUDA 만의 독창적인 Barre Movement 가 완성됩니다."
+      ],
       "notes": [],
-      "curr": [],
-      "values": [],
+      "curr": [
+        {
+          "t": "Warm Up",
+          "i": []
+        },
+        {
+          "t": "Squat and lunges",
+          "i": []
+        },
+        {
+          "t": "Squat into the yoga combo",
+          "i": []
+        },
+        {
+          "t": "Legged Downward Dog",
+          "i": []
+        },
+        {
+          "t": "One Hand on Barr",
+          "i": []
+        },
+        {
+          "t": "Resistance Bands",
+          "i": []
+        }
+      ],
+      "values": [
+        {
+          "role": "필라테스 강사 관점",
+          "quote": "필라테스의 정교함을 더 긴 움직임의 흐름으로 확장하다",
+          "body": [
+            "Advanced Barre는 파운데이션 과정에서 익힌 동작을 바탕으로 움직임을 더 길게 연결하고, 각 동작의 구성과 전환을 세밀하게 발전시키는 교육입니다.",
+            "흐름이 길어지고 강도가 높아져도 신체 정렬과 움직임의 정확도를 유지하는 데 집중합니다. 지도자는 회원의 수준에 맞춰 동작의 난이도와 강도를 조절하며, 익숙한 바 동작을 더욱 풍부한 수업 콘텐츠로 발전시킬 수 있습니다."
+          ]
+        },
+        {
+          "role": "물리치료사 관점",
+          "quote": "움직임의 정확도를 바탕으로 더 높은 운동 과제에 도전하다",
+          "body": [
+            "Advanced Barre는 파운데이션에서 익힌 기본 동작을 더 긴 흐름과 세분화된 과제로 확장하는 교육입니다.",
+            "동작이 이어지고 운동 강도가 높아지는 동안에도 정렬, 균형, 협응을 유지하는 능력을 살펴보고 훈련할 수 있습니다. 물리치료사는 대상자의 수행 수준과 통증 반응에 따라 동작의 범위, 속도, 지속 시간, 강도를 조절해 운동 복귀 이후의 컨디셔닝에 활용할 수 있습니다."
+          ]
+        },
+        {
+          "role": "발레 강사 관점",
+          "quote": "바에서 시작한 움직임을 더 긴 흐름과 정교한 표현으로 완성하다",
+          "body": [
+            "Advanced Barre는 파운데이션의 기본 바 동작을 더 긴 움직임의 흐름으로 연결하고, 동작의 방향과 전환, 리듬을 세밀하게 다듬는 교육입니다.",
+            "길어진 흐름 속에서도 자세의 정확도와 움직임의 질을 유지하며, 높아진 난이도에 맞춰 근력과 지구력을 함께 훈련합니다. 발레 지도자는 이를 통해 바 수업의 구성을 다양화하고, 학생들이 안정적인 움직임 위에서 음악성과 표현력을 발전시키도록 지도할 수 있습니다."
+          ]
+        }
+      ],
       "closing": "",
       "video": "",
-      "photos": []
+      "reel": true,
+      "photos": [
+        {
+          "src": "/assets/img/programs/barre-advanced/1.webp",
+          "w": 1200,
+          "h": 1600
+        },
+        {
+          "src": "/assets/img/programs/barre-advanced/2.webp",
+          "w": 1200,
+          "h": 1600
+        },
+        {
+          "src": "/assets/img/programs/barre-advanced/3.webp",
+          "w": 1200,
+          "h": 1600
+        },
+        {
+          "src": "/assets/img/programs/barre-advanced/4.webp",
+          "w": 360,
+          "h": 480
+        },
+        {
+          "src": "/assets/img/programs/barre-advanced/5.webp",
+          "w": 1200,
+          "h": 1600
+        }
+      ],
+      "days": 6,
+      "hours": 24,
+      "pre": "Barre Foundation 과정 이수자 대상"
     },
     {
       "id": "chair-dhara",
@@ -473,7 +651,37 @@ window.GARUDA_PROGRAMS = {
       ],
       "closing": "",
       "video": "-fOMIVKqqiM",
-      "photos": []
+      "reel": false,
+      "photos": [
+        {
+          "src": "/assets/img/programs/chair-dhara/1.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/chair-dhara/2.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/chair-dhara/3.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/chair-dhara/4.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/chair-dhara/5.webp",
+          "w": 1600,
+          "h": 1067
+        }
+      ],
+      "days": null,
+      "hours": null,
+      "pre": ""
     },
     {
       "id": "brick-ghara",
@@ -628,8 +836,38 @@ window.GARUDA_PROGRAMS = {
         }
       ],
       "closing": "",
-      "video": "",
-      "photos": []
+      "video": "g3SV9huFL_Y",
+      "reel": false,
+      "photos": [
+        {
+          "src": "/assets/img/programs/brick-ghara/1.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/brick-ghara/2.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/brick-ghara/3.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/brick-ghara/4.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/brick-ghara/5.webp",
+          "w": 1600,
+          "h": 1067
+        }
+      ],
+      "days": null,
+      "hours": null,
+      "pre": ""
     },
     {
       "id": "chakra",
@@ -637,63 +875,596 @@ window.GARUDA_PROGRAMS = {
       "name": "Chakra",
       "kr": "차크라 · 폼롤러",
       "ref": "aux-c",
-      "ready": false,
-      "lead": "",
-      "intro": [],
+      "ready": true,
+      "lead": "Garuda Chakra",
+      "intro": [
+        "차크라(Chakra) 저희가 새롭게 제작한 Foam roller 은 몸을 열고 늘리며 강화하는 운동 프로그램을 연결하는 핵심 개념입니다. ‘에너지 wheel’이라 불리는 이 도구는 신체적 힘과 정신적 집중을 동시에 자극하며, 참가자가 스스로를 도전하도록 돕습니다.",
+        "창시자 James 선생님은 Garuda 운동법을 바탕으로, 참가자의 수준에 맞춰 동작을 쉽게 또는 고급 난이도로 수행할 수 있도록 체계적으로 설계했습니다. 차크라는 단순한 도구가 아니라, 신체적, 정신적, 영적 균형을 깨우는 ‘발견의 wheel’입니다.",
+        "이 수업을 통해 근육과 근막스트레치는 물론, 전신의 릴렉싱까지 도달할 수 있는 폼놀러 사용의 확장영역으로 지도자의 영역은 확대됩니다."
+      ],
       "notes": [],
-      "curr": [],
-      "values": [],
+      "curr": [
+        {
+          "t": "Opening our the Rib Cage and Secondary Respiratory Muscles",
+          "i": [
+            "Breathing",
+            "Rocking Hips",
+            "Scapula circles",
+            "Reaching up and dropping arms",
+            "Elbow circles"
+          ]
+        },
+        {
+          "t": "Tilting and Yawning Series",
+          "i": [
+            "Consecutive pelvic tilts",
+            "Knee opens",
+            "Arm circling and sliding leg long"
+          ]
+        },
+        {
+          "t": "Simple Balance",
+          "i": [
+            "Single leg balance series"
+          ]
+        },
+        {
+          "t": "Abdominal Series",
+          "i": [
+            "9가지 형태의 전체 복부 시리즈"
+          ]
+        },
+        {
+          "t": "Arm Series",
+          "i": [
+            "8가지의 시리즈"
+          ]
+        },
+        {
+          "t": "Psoas Stretch Series",
+          "i": []
+        },
+        {
+          "t": "Horizontal Series",
+          "i": [
+            "On Atlas - Axis Series",
+            "On Bra Line Series",
+            "On Sacrum Series",
+            "On Hip Series"
+          ]
+        },
+        {
+          "t": "Sitting on Roller Series",
+          "i": [
+            "9가지의 시리즈"
+          ]
+        },
+        {
+          "t": "Perpendicular on your Front",
+          "i": [
+            "6가지의 시리즈"
+          ]
+        },
+        {
+          "t": "Upper Back Extension Series and Mermaids",
+          "i": [
+            "9가지의 시리즈"
+          ]
+        },
+        {
+          "t": "Splits Series",
+          "i": []
+        },
+        {
+          "t": "Sitting with Roller Behind Series",
+          "i": []
+        }
+      ],
+      "values": [
+        {
+          "role": "필라테스 강사 관점",
+          "quote": "",
+          "body": [
+            "차크라(Chakra) 폼롤러는 필라테스 원리에 기반한 운동 프로그램과 연결되는 핵심 도구입니다. ‘에너지 휠’로 불리는 이 도구는 근력 강화, 코어 안정성, 유연성 향상과 정신적 집중을 동시에 자극하며, 참가자가 자신의 몸을 효과적으로 컨트롤하도록 돕습니다.",
+            "제임스 선생님이 체계적으로 설계한 Garuda 운동법을 활용하면, 수련자의 수준에 맞춰 동작을 쉽게 또는 고급 난이도로 지도할 수 있습니다. 이를 통해 필라테스 지도자의 수업 영역과 지도 능력이 크게 확장됩니다."
+          ]
+        },
+        {
+          "role": "요가 강사 관점",
+          "quote": "",
+          "body": [
+            "차크라(Chakra) 폼롤러는 요가의 스트레칭과 호흡, 아사나 수행을 보완하는 혁신적인 도구입니다. 에너지 휠로 불리는 폼롤러는 참가자의 균형감각과 신체 인식을 높이는 동시에, 정신적 집중과 내면적 안정까지 도모합니다.",
+            "Garuda 운동법을 기반으로 제임스 선생님이 설계한 프로그램은 요가 동작의 난이도에 맞춰 조절 가능하며, 지도자는 참가자에게 깊이 있는 근육 이완과 전신 릴렉싱 경험을 제공할 수 있습니다."
+          ]
+        },
+        {
+          "role": "물리치료사(재활/운동치료) 관점",
+          "quote": "",
+          "body": [
+            "차크라(Chakra) 폼롤러는 근막과 근육을 스트레칭하고, 신체 균형과 안정성을 회복하는 데 최적화된 도구입니다. ‘에너지 휠’로서 환자의 신체적 힘과 정신적 집중을 동시에 자극하며, 재활 운동의 기능적 효율을 높입니다.",
+            "Garuda 운동법을 적용하면, 환자의 수준과 상태에 맞춰 운동 난이도를 조절할 수 있어 맞춤형 재활 프로그램 설계가 가능합니다. 이를 통해 물리치료사의 치료 영역과 기능 회복 프로그램이 한층 확장됩니다."
+          ]
+        }
+      ],
       "closing": "",
-      "video": "",
-      "photos": []
+      "video": "1p7dJXtilxk",
+      "reel": false,
+      "photos": [
+        {
+          "src": "/assets/img/programs/chakra/1.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/chakra/2.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/chakra/3.webp",
+          "w": 1600,
+          "h": 1066
+        },
+        {
+          "src": "/assets/img/programs/chakra/4.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/chakra/5.webp",
+          "w": 1600,
+          "h": 1067
+        }
+      ],
+      "days": null,
+      "hours": null,
+      "pre": ""
     },
     {
       "id": "sling",
       "cat": "Auxiliary",
-      "name": "Sling",
+      "name": "Sling (Tara)",
       "kr": "타라 · 슬링",
       "ref": "aux-t",
-      "ready": false,
-      "lead": "",
-      "intro": [],
+      "ready": true,
+      "lead": "Garuda Sling(Tara)",
+      "intro": [
+        "Tara는 가루다의 가장 빛나는 별입니다.",
+        "이 프로그램은 단순한 근력 강화 훈련을 넘어, 몸의 안정성과 균형을 길러주며 참가자에게 새로운 도전을 선사합니다.",
+        "GARUDA Apparatus에 속해있는 한 장르로서 타라는 다채로운 방식으로 변형·응용할 수 있어 무궁무진한 가능성을 지니고 있습니다.",
+        "Tara-Sling Belt는 우리를 지지하고 끌어주며, 주변 공간과의 교감을 통해 관절에 무리가 가지 않도록 움직임에 범위를 최상으로 이끌어냅니다. 이를 통해 우리는 자신이 가진 불안정성을 인식하고, 고유수용 감각과 신경가소성을 확장하여 더 강하고 자유로운 몸으로 나아가게 됩니다.",
+        "Tara (Sling)는 단순한 도구가 아닌, 혁신적이고 도전적인 경험을 선물하는 동반자입니다.",
+        "그래서 타라는 우리의 가장 빛나는 별이라 불립니다"
+      ],
       "notes": [],
-      "curr": [],
-      "values": [],
+      "curr": [
+        {
+          "t": "Belt around waist",
+          "i": [
+            "Arch and Curl Series",
+            "Side Bend",
+            "Hip Circles"
+          ]
+        },
+        {
+          "t": "Small Marching",
+          "i": [
+            "Marching float leg",
+            "Sprint Run"
+          ]
+        },
+        {
+          "t": "Hands on Stool or Box & Knee on the Floor",
+          "i": [
+            "Child’s pose, plank, forward extension",
+            "Elbow plank Series",
+            "Hip Circle"
+          ]
+        },
+        {
+          "t": "Cat Prep with Twist",
+          "i": [
+            "Downward dog, Plank"
+          ]
+        },
+        {
+          "t": "Downward Dog Sereis",
+          "i": [
+            "Moving into upward",
+            "Small Push ups",
+            "Undulation",
+            "Hip Circles",
+            "Kneeling One Foot",
+            "Bend Knee and Elbow Series"
+          ]
+        },
+        {
+          "t": "Leg Forward and Curl Stretch",
+          "i": [
+            "Forward and Back",
+            "Tai-Chi Stretch"
+          ]
+        },
+        {
+          "t": "Porte De Bras",
+          "i": [
+            "Single Arm Both Directions",
+            "Double Arms Both Directions",
+            "Kneeling Stretch"
+          ]
+        },
+        {
+          "t": "Pigeon on Mat",
+          "i": [
+            "Plain",
+            "Sideways moving through leg"
+          ]
+        },
+        {
+          "t": "Leg Circle",
+          "i": []
+        },
+        {
+          "t": "Dolphin presses with hands on mat Series",
+          "i": []
+        },
+        {
+          "t": "Belt Series - sitting on Box",
+          "i": [
+            "Lay Back"
+          ]
+        },
+        {
+          "t": "Hand Behind head Series",
+          "i": []
+        },
+        {
+          "t": "Lying sideways - Side Mermaids",
+          "i": [
+            "Side mermaid and twist"
+          ]
+        },
+        {
+          "t": "Belt under sit bones",
+          "i": [
+            "Rocking side to side",
+            "Pelvic tilt",
+            "Circle and Reverse",
+            "Wave Sereis",
+            "Around Back Line Series",
+            "Semi circle Porte de corp"
+          ]
+        },
+        {
+          "t": "Belt on side and Rib",
+          "i": [
+            "Rib Isolation",
+            "Small side way"
+          ]
+        },
+        {
+          "t": "Knelling down sideways",
+          "i": [
+            "side stretch with twist series"
+          ]
+        },
+        {
+          "t": "Squatting Series",
+          "i": [
+            "Sit deep",
+            "Small circles feet",
+            "Small waves",
+            "Rise on balls of feet, grand plie combo"
+          ]
+        },
+        {
+          "t": "Kneeling Down Series",
+          "i": []
+        },
+        {
+          "t": "Sitting down on mat series",
+          "i": []
+        },
+        {
+          "t": "Arch and Wheel Series",
+          "i": [
+            "Squat curve",
+            "Squat into single arm wheel"
+          ]
+        },
+        {
+          "t": "Sitting down on mat, Butterly pose",
+          "i": []
+        }
+      ],
+      "values": [
+        {
+          "role": "필라테스 강사 관점",
+          "quote": "",
+          "body": [
+            "타라는 필라테스 수업의 새로운 가능성을 여는 혁신적인 도구입니다.",
+            "단순히 근육을 강화하는 것에서 나아가, 관절의 부담을 줄이고 움직임의 흐름을 확장하며 수련자에게 깊은 공간감을 경험하게 합니다.",
+            "타라는 기존 리포머나 기구 수업에 신선한 도전을 더해, 강사에게는 더 다채로운 티칭 포인트를, 회원에게는 새로운 성취감을 선물합니다.",
+            "필라테스 수업을 한 단계 업그레이드하고 싶다면, 타라가 그 해답입니다."
+          ]
+        },
+        {
+          "role": "물리치료사 관점",
+          "quote": "",
+          "body": [
+            "타라는 재활과 기능 회복을 위한 최적의 파트너입니다.",
+            "신체를 안정적으로 지지하면서도 필요한 방향으로 당겨주어, 환자가 안전하게 움직일 수 있는 환경을 제공합니다.",
+            "이를 통해 근육의 불균형을 교정하고, 관절의 부담을 최소화하며, 환자 스스로 자신의 불안정성을 인식하고 개선할 수 있도록 돕습니다.",
+            "타라는 단순한 운동 기구가 아닌, 치료와 회복을 함께하는 혁신적 보조 도구입니다."
+          ]
+        },
+        {
+          "role": "무용 강사 관점",
+          "quote": "",
+          "body": [
+            "타라는 무용수들에게 새로운 표현의 언어를 열어주는 창조적 도구입니다.",
+            "몸을 끌어주고 지지해주며, 더 길고 유연한 라인을 그려낼 수 있도록 이끌어줍니다.",
+            "무용수는 타라를 통해 관절에 무리를 주지 않고도 더욱 자유롭고 도전적인 움직임을 탐구할 수 있습니다.",
+            "무대 위에서의 자신감을 키우고, 몸의 한계를 넘어서는 경험을 가능하게 하는 타라,",
+            "그 자체로 예술적 영감을 불러일으키는 가장 빛나는 별입니다."
+          ]
+        }
+      ],
       "closing": "",
-      "video": "",
-      "photos": []
+      "video": "D3cWYuxknHM",
+      "reel": false,
+      "photos": [
+        {
+          "src": "/assets/img/programs/sling/1.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/sling/2.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/sling/3.webp",
+          "w": 360,
+          "h": 480
+        },
+        {
+          "src": "/assets/img/programs/sling/4.webp",
+          "w": 1200,
+          "h": 1600
+        },
+        {
+          "src": "/assets/img/programs/sling/5.webp",
+          "w": 360,
+          "h": 480
+        }
+      ],
+      "days": null,
+      "hours": null,
+      "pre": ""
     },
     {
-      "id": "reformer-1",
+      "id": "reformer",
       "cat": "Apparatus",
-      "name": "Reformer 1",
-      "kr": "리포머 1",
-      "ref": null,
-      "ready": false,
+      "name": "Reformer",
+      "kr": "가루다 리포머",
+      "ref": "app-r",
+      "ready": true,
       "lead": "",
-      "intro": [],
+      "intro": [
+        "가루다는 리포머를 단순한 기구가 아닌 ‘움직임을 표현하는 도구’로 바라봅니다.",
+        "이 과정은 근력, 지구력, 유연성, 협응력을 고루 자극하며 깊이 있는 수련을 가능하게 합니다.",
+        "필라테스의 기본 원칙을 지키면서도, 가루다는 폭넓은 동작 레퍼토리를 통해 새로운 가능성을 제시합니다. 그 안에서 참가자는 자신감과 우아함을 발견하게 되지요.",
+        "또한, 리포머를 현대적인 방식으로 재해석함으로써 전문가들에게는 더욱 도전적이고 영감을 주는 훈련 경험을 제공합니다."
+      ],
       "notes": [],
-      "curr": [],
-      "values": [],
+      "curr": [
+        {
+          "t": "Seated on Reformer",
+          "i": [
+            "Feet Pushing and Pulling Series",
+            "Arch and Curl Pelvic",
+            "Arch and Curl Upper Back",
+            "Rocking side to side",
+            "Side Bend & Curl"
+          ]
+        },
+        {
+          "t": "Cat Series",
+          "i": [
+            "Plain Roll Down",
+            "Shoulder shrugs & circle",
+            "Arch and Curl",
+            "Waves & Reverse",
+            "Arabesque",
+            "Knee circle & reverse knee circles",
+            "Leg combo",
+            "Single Arm",
+            "Twisted Cat",
+            "Split Variation 1. & 2.",
+            "Split into Arch"
+          ]
+        },
+        {
+          "t": "Plank Variations",
+          "i": [
+            "Crow Series",
+            "Forward Bend Variation for Handstand"
+          ]
+        },
+        {
+          "t": "Kneeling Warm ups",
+          "i": [
+            "Spirals & Chest Openings",
+            "Wolfing"
+          ]
+        },
+        {
+          "t": "Kneeling Series",
+          "i": [
+            "Arch and Curl Series",
+            "Bend and straighten elbows",
+            "Shoulder Circles and Reverse",
+            "Cat - Arch and Curl",
+            "Waves & Reverse",
+            "Combo in 6 counts",
+            "Twist"
+          ]
+        },
+        {
+          "t": "Facing Sideways",
+          "i": [
+            "Open & Close Carriage",
+            "Side Bend to Both Sides",
+            "Twist to both sides whole series",
+            "Undulation series",
+            "Emmanuelle series",
+            "Side Mermaid",
+            "Kneeling side split series"
+          ]
+        },
+        {
+          "t": "Lunge",
+          "i": [
+            "Warm up for feet 1, & 2",
+            "Leg kicks and Knee floats",
+            "Front Lunges",
+            "Hinge Lunge",
+            "Waves and Reverse",
+            "Twist",
+            "Kneeling Back kick series",
+            "Side Lunge series"
+          ]
+        },
+        {
+          "t": "Downward Dog Series",
+          "i": [
+            "Downward Dog whole Series",
+            "Runners Downward Dog",
+            "Stability Variations",
+            "Hand to opposite ankle",
+            "Downward Dog Combo",
+            "Preparation for Handstands"
+          ]
+        },
+        {
+          "t": "Footwork Series",
+          "i": [
+            "Parallel feet series",
+            "Dolphin Feet & Prancing",
+            "Pelvic tilt series",
+            "Second Postion series",
+            "Single Leg Series whole Foot work",
+            "Developpe - Enveloppe Series",
+            "Ronde de Jambe en feet"
+          ]
+        },
+        {
+          "t": "Scooter Series",
+          "i": [
+            "Psoas Stretch Series",
+            "Knee off Lunge Series",
+            "with shoulder Rest"
+          ]
+        },
+        {
+          "t": "Single Foot in Strap",
+          "i": [
+            "Hamstring Pull",
+            "Scissors & Cycling",
+            "Leg circles",
+            "Roll ups",
+            "Corkscrew"
+          ]
+        },
+        {
+          "t": "Standing on one leg with Rotational disk",
+          "i": [
+            "fouette",
+            "6 count sereis",
+            "Facing back of Reformer Series",
+            "Push Reverse fouetté",
+            "Lunge with disc"
+          ]
+        },
+        {
+          "t": "Arm Series",
+          "i": [
+            "Twist Series",
+            "Canoeing",
+            "One Hand Swimming Combo",
+            "Rowing with 2 Straps"
+          ]
+        },
+        {
+          "t": "Mermaid Series",
+          "i": [
+            "Mermaid Side, twist, 6 change hands series",
+            "Full mermaid combo",
+            "Circular mermaid with counter stretches"
+          ]
+        }
+      ],
+      "values": [
+        {
+          "role": "필라테스 강사 관점",
+          "quote": "리포머, 새로운 가능성을 만나다",
+          "body": [
+            "가루다 리포머는 전통적인 필라테스 원리를 지키면서도, 훨씬 더 넓은 동작의 가능성을 열어줍니다. 풍부한 레퍼토리를 통해 회원들에게 지루하지 않은 수업 경험을 제공하며, 강사 자신도 새로운 지도 스킬을 확장할 수 있습니다.",
+            "“당신의 필라테스 수업을 한 단계 업그레이드하세요.”"
+          ]
+        },
+        {
+          "role": "물리치료사 관점",
+          "quote": "재활과 운동치료, 그 사이를 연결하다",
+          "body": [
+            "가루다 리포머 수업은 근력·지구력·유연성·협응력을 균형 있게 발달시켜 환자의 기능 회복을 돕습니다. 특히 근막 라인을 따라 움직임을 유도하기 때문에 신체 전체의 패턴 교정에 탁월하며, 재활 이후의 운동 지속성까지 보장합니다.",
+            "“환자에게 더 안전하고, 더 효과적인 회복 솔루션을 제공하세요.”"
+          ]
+        },
+        {
+          "role": "무용 강사 관점",
+          "quote": "움직임의 우아함을 기구로 완성하다",
+          "body": [
+            "이 교육은 단순한 근력 훈련이 아닌 ‘움직임의 예술’을 가능하게 합니다. 리듬과 플로우를 강조하며, 무용수의 신체를 더 길고 유연하게 만들어줍니다. 기구를 통해 보다 입체적이고 다이내믹한 움직임을 연습할 수 있어 공연 무대 위 자신감과 표현력을 극대화합니다.",
+            "“무용수의 몸과 움직임을 예술의 차원으로 끌어올리세요.”"
+          ]
+        }
+      ],
       "closing": "",
-      "video": "",
-      "photos": []
-    },
-    {
-      "id": "reformer-2",
-      "cat": "Apparatus",
-      "name": "Reformer 2",
-      "kr": "리포머 2",
-      "ref": null,
-      "ready": false,
-      "lead": "",
-      "intro": [],
-      "notes": [],
-      "curr": [],
-      "values": [],
-      "closing": "",
-      "video": "",
-      "photos": []
+      "video": "lF696cVPMII",
+      "reel": false,
+      "photos": [
+        {
+          "src": "/assets/img/programs/reformer/1.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/reformer/2.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/reformer/3.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/reformer/4.webp",
+          "w": 1600,
+          "h": 1067
+        },
+        {
+          "src": "/assets/img/programs/reformer/5.webp",
+          "w": 1600,
+          "h": 1067
+        }
+      ],
+      "days": null,
+      "hours": null,
+      "pre": ""
     },
     {
       "id": "apparatus-a",
@@ -777,7 +1548,11 @@ window.GARUDA_PROGRAMS = {
       ],
       "closing": "",
       "video": "INpvWhUYad8",
-      "photos": []
+      "reel": false,
+      "photos": [],
+      "days": null,
+      "hours": null,
+      "pre": ""
     },
     {
       "id": "apparatus-b",
@@ -793,7 +1568,11 @@ window.GARUDA_PROGRAMS = {
       "values": [],
       "closing": "",
       "video": "",
-      "photos": []
+      "reel": false,
+      "photos": [],
+      "days": null,
+      "hours": null,
+      "pre": ""
     },
     {
       "id": "apparatus-series-a",
@@ -809,7 +1588,11 @@ window.GARUDA_PROGRAMS = {
       "values": [],
       "closing": "",
       "video": "",
-      "photos": []
+      "reel": false,
+      "photos": [],
+      "days": null,
+      "hours": null,
+      "pre": ""
     }
   ]
 };

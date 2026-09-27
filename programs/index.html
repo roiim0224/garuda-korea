@@ -130,12 +130,51 @@ header{position:sticky;top:0;z-index:70;background:var(--ink);border-bottom:1px 
 .val .b b{display:block;color:var(--text);font-weight:600;font-size:13.5px}
 .closing{margin-top:22px;max-width:70ch;padding-left:16px;border-left:2px solid var(--c);font-size:15px;color:#383E43}
 
+/* 이 과정의 개강 일정 */
+.ses{margin-top:22px;border:1px solid var(--line);border-radius:var(--r);background:var(--card)}
+.ses h3{font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--c);padding:16px 18px 0}
+.ses ul{list-style:none}
+.ses li{display:grid;grid-template-columns:1.5fr 1.3fr 1fr;gap:6px 18px;align-items:center;padding:13px 18px;border-bottom:1px solid var(--line-2);font-size:13.5px}
+.ses li:last-child{border-bottom:0}
+.ses .d{font:500 14px/1.45 'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+.ses small{display:block;color:var(--soft);font-size:12px;font-family:'IBM Plex Sans KR',sans-serif;font-weight:400}
+.ses .pr{text-align:right;font:600 15px/1.3 'IBM Plex Mono',monospace}
+.ses .pr s{display:block;font-weight:400;font-size:12px;color:var(--soft)}
+.ses .pr small{color:var(--accent-tx);font-weight:600}
+.ses .all{display:block;padding:12px 18px;font-size:13px;font-weight:600;color:var(--accent-tx);text-decoration:none;border-top:1px solid var(--line-2)}
+.ses .none{padding:14px 18px;font-size:13.5px;color:var(--soft)}
+@media(max-width:640px){.ses li{grid-template-columns:1fr auto}.ses li>span:nth-child(2){grid-column:1;grid-row:2}.ses .pr{grid-row:1/3;grid-column:2}}
+.pre{display:inline-block;margin-top:10px;font-size:12.5px;font-weight:600;color:var(--c);border:1px solid currentColor;border-radius:999px;padding:5px 11px}
+.intro h4{font-family:'Gowun Batang',serif;font-size:18px;margin:26px 0 10px}
+.soon{padding:22px;border:1px dashed var(--line);border-radius:var(--r);background:var(--card);color:var(--soft);font-size:14px;max-width:640px}
+
+/* 영상 대신 현장 사진을 영상처럼 넘겨 보여주기 */
+.reel{position:relative;aspect-ratio:16/9;background:#111;border-radius:var(--r);overflow:hidden;max-width:880px}
+.reel figure{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
+.reel figure.on{opacity:1}
+.reel .bg{position:absolute;inset:-30px;width:calc(100% + 60px);height:calc(100% + 60px);object-fit:cover;filter:blur(24px) brightness(.55)}
+.reel .fg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.reel figure.on .fg{animation:kb 6s ease-out forwards}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.07)}}
+.reel .bar{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:10px;padding:12px 14px;background:linear-gradient(transparent,rgba(0,0,0,.55))}
+.reel .bar button{width:34px;height:34px;border-radius:50%;border:0;background:rgba(255,255,255,.9);cursor:pointer;display:grid;place-items:center;flex:none}
+.reel .bar svg{width:14px;height:14px;fill:var(--ink)}
+.reel .prog{flex:1;display:flex;gap:4px}
+.reel .prog i{flex:1;height:3px;background:rgba(255,255,255,.35);border-radius:2px;overflow:hidden}
+.reel .prog i b{display:block;height:100%;width:0;background:#fff}
+.reel .prog i.done b{width:100%}
+.reel .prog i.cur b{animation:fill 6s linear forwards}
+.reel.paused .prog i.cur b,.reel.paused figure.on .fg{animation-play-state:paused}
+@keyframes fill{to{width:100%}}
+.reel .cap{position:absolute;left:14px;top:12px;font:600 10.5px/1 'IBM Plex Mono',monospace;letter-spacing:.16em;color:rgba(255,255,255,.8)}
+@media(prefers-reduced-motion:reduce){.reel figure.on .fg{animation:none}.reel .prog i.cur b{animation:none;width:100%}}
+
 /* 교육 현장 사진 (좌우 슬라이드) */
 .gal{position:relative}
 .slides{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .slides::-webkit-scrollbar{display:none}
-.slides figure{flex:0 0 min(78%,560px);scroll-snap-align:start;aspect-ratio:4/3;background:var(--line-2);border-radius:var(--r);overflow:hidden}
-.slides img{width:100%;height:100%;object-fit:cover;display:block}
+.slides figure{flex:none;scroll-snap-align:start;height:clamp(240px,48vw,440px);max-width:88%;background:var(--line-2);border-radius:var(--r);overflow:hidden}
+.slides img{height:100%;width:auto;max-width:100%;object-fit:cover;display:block}
 .galnav{display:flex;align-items:center;gap:10px;margin-top:14px}
 .galnav button{width:40px;height:40px;border:1px solid var(--line);background:var(--card);border-radius:50%;cursor:pointer;display:grid;place-items:center;color:var(--text)}
 .galnav button:hover{border-color:var(--ink)}
@@ -198,7 +237,7 @@ footer nav a:hover{color:#fff}
     <dl class="stats">
       <div><dt>분야</dt><dd id="st-cat">3</dd></div>
       <div><dt>과정</dt><dd id="st-all">0</dd></div>
-      <div><dt>선행 조건</dt><dd>없음</dd></div>
+      <div><dt>예정 기수</dt><dd id="st-ses">0</dd></div>
     </dl>
   </div>
 </section>
@@ -231,6 +270,7 @@ footer nav a:hover{color:#fff}
 
 <script src="/assets/data/courses.js"></script>
 <script src="/assets/data/programs.js"></script>
+<script src="/assets/data/schedule.js"></script>
 <script>
 (function(){
 const D=window.GARUDA_PROGRAMS, C=window.GARUDA_COURSES||[];
@@ -269,14 +309,33 @@ function centerChip(){
 }
 if(document.fonts) document.fonts.ready.then(centerChip);
 
+const X=window.GARUDA_SCHED;
+const T0=(()=>{const t=new Date();t.setHours(0,0,0,0);return t})();
+const SES=X?X.upcoming(X.D.sessions):[];
+document.getElementById('st-ses').textContent=SES.length;
+const mdw=d=>`${d.getMonth()+1}.${d.getDate()}(${'일월화수목금토'[d.getDay()]})`;
+
 function factsHTML(p){
-  const f=FACT[p.ref]; if(!f) return '';
+  const f=FACT[p.ref];
+  const d=f?f.d:p.days, h=f?f.h:p.hours;
+  if(!d&&!f) return '';
   return `<dl class="facts">
-    <div><dt>기간</dt><dd>${f.d}일</dd></div>
-    <div><dt>총 교육시간</dt><dd>${f.h}시간</dd></div>
-    <div><dt>수강료</dt><dd>${won(f.c)}</dd></div>
-    <div class="eq"><dt>필요 장비</dt><dd>${esc(f.eq)}</dd></div>
+    <div><dt>기간</dt><dd>${d}일</dd></div>
+    <div><dt>총 교육시간</dt><dd>${h}시간</dd></div>
+    <div><dt>수강료</dt><dd>${f?won(f.c):'확정 후 공개'}</dd></div>
+    ${f?`<div class="eq"><dt>필요 장비</dt><dd>${esc(f.eq)}</dd></div>`:''}
   </dl>`;
+}
+// 이 과정의 다가오는 기수 (schedule.js)
+function sesHTML(p){
+  const list=SES.filter(x=>x.prog===p.id), f=FACT[p.ref];
+  if(!list.length) return `<div class="ses"><h3>개강 일정</h3><p class="none">예정된 기수가 없습니다. 다음 일정은 카카오톡으로 먼저 안내해 드립니다.</p></div>`;
+  return `<div class="ses"><h3>개강 일정 · ${list.length}개 기수</h3><ul>${list.map(x=>{
+    const pr=X.price(x,f&&f.c), y=X.day(x.dates[0]).getFullYear();
+    return `<li><span class="d">${X.rangeText(x.dates)}<small>${y}년 · ${x.dates.length}일 · ${esc(x.cls)}</small></span>
+      <span>${esc(x.time)}<small>${esc(x.place)}</small></span>
+      <span class="pr">${pr.regular?(pr.until?`<s>${won(pr.regular)}</s>${won(pr.now)}<small>얼리버드 ${mdw(pr.until)}까지</small>`:won(pr.now)):'문의'}</span></li>`}).join('')}</ul>
+    <a class="all" href="/academy/">전체 일정 · 신청하기 →</a></div>`;
 }
 function valBody(s){
   const m=s.match(/^([^:：]{2,22})[:：]\s*(.+)$/);
@@ -294,14 +353,23 @@ function pnHTML(id){
   const a=ready[i-1],b=ready[i+1];
   return `<nav class="pn" aria-label="다른 과정">${a?`<a href="#${a}"><small>이전 과정</small>${esc(P[a].name)}</a>`:''}${b?`<a class="next" href="#${b}"><small>다음 과정</small>${esc(P[b].name)}</a>`:''}</nav>`;
 }
+const photoSrc=x=>typeof x==='string'?x:x.src;
+function reelHTML(p){
+  return `<div class="reel" aria-label="${esc(p.name)} 교육 현장 사진 슬라이드">
+    <span class="cap">GARUDA ${esc(p.name.toUpperCase())}</span>
+    ${p.photos.map((x,i)=>`<figure class="${i?'':'on'}"><img class="bg" src="${esc(photoSrc(x))}" alt="" ${i?'loading="lazy"':''}><img class="fg" src="${esc(photoSrc(x))}" alt="${esc(p.name)} 교육 현장 ${i+1}" ${i?'loading="lazy"':''}></figure>`).join('')}
+    <div class="bar"><button type="button" class="pp" aria-label="일시정지"><svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg></button>
+    <span class="prog">${p.photos.map((_,i)=>`<i data-k="${i}"><b></b></i>`).join('')}</span></div></div>`;
+}
 
 function render(id,{scroll}={}){
+  stopReel();
   const p=P[id]; curCat=p.cat;
   drawCats(); drawCourses(id);
   $d.style.setProperty('--c',COLOR[p.cat]);
   const f=FACT[p.ref];
   let h=`<div class="dhead"><div><p class="eyebrow">${esc(p.cat)} · ${esc(CAT[p.cat].kr)}</p>
-    <h2>${esc(p.name)}</h2><p class="kr">${esc(p.kr)}</p></div>${factsHTML(p)}</div>`;
+    <h2>${esc(p.name)}</h2><p class="kr">${esc(p.kr)}</p>${p.pre?`<span class="pre">${esc(p.pre)}</span>`:''}</div>${factsHTML(p)}</div>`;
 
   if(!p.ready){
     h+=`<div class="wait-box"><h3>과정 소개를 준비하고 있습니다</h3>
@@ -310,36 +378,64 @@ function render(id,{scroll}={}){
     $d.innerHTML=h; afterRender(scroll); return;
   }
 
+  const photos=p.photos||[], reel=p.reel&&photos.length;
   const parts=[];
-  if(p.video) parts.push(['v','영상']);
-  parts.push(['i','과정 소개'],['c','커리큘럼'],['k','교육의 핵심가치']);
-  if(p.photos&&p.photos.length) parts.push(['g','교육 현장']);
-  h+=`<nav class="jump" aria-label="이 과정 안에서 이동">${parts.map(([k,t])=>`<a href="#${id}/${k}" data-jump="${k}">${t}</a>`).join('')}${f?`<a class="sched" href="/academy/">개강 일정 확인 →</a>`:''}</nav>`;
+  if(p.video||reel) parts.push(['v',p.video?'영상':'현장 영상']);
+  parts.push(['i','과정 소개'],['c','커리큘럼']);
+  if(p.values.length) parts.push(['k','교육의 핵심가치']);
+  if(photos.length&&!reel) parts.push(['g','교육 현장']);
+  h+=`<nav class="jump" aria-label="이 과정 안에서 이동">${parts.map(([k,t])=>`<a href="#${id}/${k}" data-jump="${k}">${t}</a>`).join('')}</nav>`;
+  h+=sesHTML(p);
 
   let n=0; const B=(k,t,body)=>`<section class="block" id="b-${k}"><div class="bh"><span class="n">${pad(++n)}</span><h3>${t}</h3></div>${body}</section>`;
   if(p.video) h+=B('v','영상',`<div class="video"><button type="button" data-yt="${esc(p.video)}" aria-label="${esc(p.name)} 영상 재생">
       <img src="https://i.ytimg.com/vi/${esc(p.video)}/hqdefault.jpg" alt="" loading="lazy">
       <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></button></div>`);
-  h+=B('i','과정 소개',`<div class="intro">${p.lead?`<p class="lead">${esc(p.lead)}</p>`:''}${p.intro.map(t=>`<p>${esc(t)}</p>`).join('')}</div>`);
+  else if(reel) h+=B('v','현장 영상',reelHTML(p));
+  h+=B('i','과정 소개',`<div class="intro">${p.lead?`<p class="lead">${esc(p.lead)}</p>`:''}${p.intro.map(t=>t.startsWith('### ')?`<h4>${esc(t.slice(4))}</h4>`:`<p>${esc(t)}</p>`).join('')}</div>`);
   const descMode=p.curr.every(g=>g.i.length<=1)&&p.curr.some(g=>g.i.length===1);
-  h+=B('c','커리큘럼',`${p.notes.length?`<div class="notes">${p.notes.map(t=>`<span>${esc(t)}</span>`).join('')}</div>`:''}
-    <div class="curr${descMode?' desc':''}">${p.curr.map((g,i)=>`<article><span class="gn">${pad(i+1)}</span><h4>${esc(g.t)}</h4>${g.i.length?`<ul>${g.i.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}</article>`).join('')}</div>`);
-  h+=B('k','교육의 핵심가치',`<div class="vals">${p.values.map(v=>`<article class="val"><p class="role">${esc(v.role)}</p>${v.quote?`<p class="q">“${esc(v.quote)}”</p>`:''}<div class="b">${v.body.map(valBody).join('')}</div></article>`).join('')}</div>
+  h+=B('c','커리큘럼',p.curr.length?`${p.notes.length?`<div class="notes">${p.notes.map(t=>`<span>${esc(t)}</span>`).join('')}</div>`:''}
+    <div class="curr${descMode?' desc':''}">${p.curr.map((g,i)=>`<article><span class="gn">${pad(i+1)}</span><h4>${esc(g.t)}</h4>${g.i.length?`<ul>${g.i.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}</article>`).join('')}</div>`
+    :`<p class="soon">세부 커리큘럼을 정리하고 있습니다. 궁금한 점은 카카오톡으로 먼저 안내해 드립니다.</p>`);
+  if(p.values.length) h+=B('k','교육의 핵심가치',`<div class="vals">${p.values.map(v=>`<article class="val"><p class="role">${esc(v.role)}</p>${v.quote?`<p class="q">“${esc(v.quote)}”</p>`:''}<div class="b">${v.body.map(valBody).join('')}</div></article>`).join('')}</div>
     ${p.closing?`<p class="closing">${esc(p.closing)}</p>`:''}`);
-  if(p.photos&&p.photos.length) h+=B('g','교육 현장',`<div class="gal"><div class="slides" tabindex="0" aria-label="교육 현장 사진">${p.photos.map((s,i)=>`<figure><img src="${esc(s)}" alt="${esc(p.name)} 교육 현장 ${i+1}" loading="lazy"></figure>`).join('')}</div>
-    <div class="galnav"><button type="button" data-g="-1" aria-label="이전 사진"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2"/></svg></button><button type="button" data-g="1" aria-label="다음 사진"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2"/></svg></button><span class="cnt num">1 / ${p.photos.length}</span></div></div>`);
+  if(photos.length&&!reel) h+=B('g','교육 현장',`<div class="gal"><div class="slides" tabindex="0" aria-label="교육 현장 사진">${photos.map((x,i)=>`<figure><img src="${esc(photoSrc(x))}"${x.w?` width="${x.w}" height="${x.h}"`:''} alt="${esc(p.name)} 교육 현장 ${i+1}" loading="lazy"></figure>`).join('')}</div>
+    <div class="galnav"><button type="button" data-g="-1" aria-label="이전 사진"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2"/></svg></button><button type="button" data-g="1" aria-label="다음 사진"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2"/></svg></button><span class="cnt num">1 / ${photos.length}</span></div></div>`);
   h+=askHTML(p)+pnHTML(id);
   $d.innerHTML=h; afterRender(scroll);
 }
 
+/* 현장 영상(사진 슬라이드): 화면에 보일 때만 6초마다 넘어간다 */
+let reelT=null, reelIO=null;
+function stopReel(){clearTimeout(reelT);reelT=null;if(reelIO){reelIO.disconnect();reelIO=null}}
+function startReel(el){
+  const figs=[...el.querySelectorAll('figure')], bars=[...el.querySelectorAll('.prog i')], pp=el.querySelector('.pp');
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let k=0, playing=!still, visible=false;
+  const show=i=>{k=(i+figs.length)%figs.length;
+    figs.forEach((f,j)=>f.classList.toggle('on',j===k));
+    bars.forEach((b,j)=>{b.classList.toggle('done',j<k);b.classList.remove('cur')});
+    void bars[k].offsetWidth; bars[k].classList.add('cur'); schedule()};
+  const schedule=()=>{clearTimeout(reelT); if(playing&&visible) reelT=setTimeout(()=>show(k+1),6000)};
+  const setPlay=v=>{playing=v;el.classList.toggle('paused',!v);
+    pp.setAttribute('aria-label',v?'일시정지':'재생');
+    pp.innerHTML=v?'<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>':'<svg viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></svg>';
+    if(v) show(k); else clearTimeout(reelT)};
+  pp.onclick=()=>setPlay(!playing);
+  bars.forEach((b,j)=>b.onclick=()=>show(j));
+  reelIO=new IntersectionObserver(([e])=>{visible=e.isIntersecting; if(visible&&playing) show(k); else clearTimeout(reelT)},{threshold:.4});
+  reelIO.observe(el); setPlay(playing); if(!playing) show(0);
+}
+
 function afterRender(scroll){
+  const r=$d.querySelector('.reel'); if(r) startReel(r);
   const s=$d.querySelector('.slides');
   if(s){
-    const cnt=$d.querySelector('.cnt'),btns=$d.querySelectorAll('[data-g]'),total=s.children.length;
-    const idx=()=>Math.round(s.scrollLeft/(s.children[0].offsetWidth+10));
-    const upd=()=>{const i=Math.min(idx(),total-1);cnt.textContent=`${i+1} / ${total}`;btns[0].disabled=s.scrollLeft<4;btns[1].disabled=s.scrollLeft+s.clientWidth>=s.scrollWidth-4};
+    const cnt=$d.querySelector('.cnt'),btns=$d.querySelectorAll('[data-g]'),figs=[...s.children],total=figs.length;
+    const idx=()=>{let best=0,dmin=1e9;figs.forEach((f,i)=>{const d=Math.abs(f.offsetLeft-s.offsetLeft-s.scrollLeft);if(d<dmin){dmin=d;best=i}});return best};
+    const upd=()=>{cnt.textContent=`${idx()+1} / ${total}`;btns[0].disabled=s.scrollLeft<4;btns[1].disabled=s.scrollLeft+s.clientWidth>=s.scrollWidth-4};
     s.addEventListener('scroll',upd,{passive:true});upd();
-    btns.forEach(b=>b.onclick=()=>s.scrollBy({left:(+b.dataset.g)*(s.children[0].offsetWidth+10),behavior:'smooth'}));
+    btns.forEach(b=>b.onclick=()=>{const t=figs[Math.max(0,Math.min(total-1,idx()+(+b.dataset.g)))];s.scrollTo({left:t.offsetLeft-s.offsetLeft,behavior:'smooth'})});
   }
   if(scroll){
     const y=document.querySelector('.picker').getBoundingClientRect().height+60;

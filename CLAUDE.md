@@ -59,36 +59,38 @@
 
 ## 데이터 위치
 
-### `assets/data/courses.js` — 코스 정보 단일 원본
-9개 과정의 이름·기간·시간·수강료·필요장비·커리큘럼·기수 일정.
-`/academy/`가 이 파일을 읽어 렌더링한다.
+세 파일이 역할을 나눠 갖는다. 모든 페이지가 이 파일들을 읽으며, HTML에 날짜·가격을 직접 쓰지 않는다.
 
-```js
-{id, cat, en, kr, d(일수), h(시간), c(수강료), eq(필요장비),
- who(수강대상), curr[[제목,설명]...], s[[시작일,종료일,정원,잔여석]...]}
-```
+### `assets/data/courses.js` — 과정 기본 정보
+과정별 확정 값만: `{id, cat, en, kr, d(일수), h(시간), c(수강료), eq(필요장비), who(수강대상)}`.
+기간·수강료가 표시되는 모든 곳(소개·일정·시뮬레이터)이 이 값을 쓴다.
 
-**주의:** `/`, `/pilates/`, `/barre/`는 아직 코스 데이터를 각자 파일에 하드코딩하고 있다.
-일정 변경 시 누락이 생기므로, 이 세 페이지도 `courses.js`를 읽도록 리팩터링할 것.
+### `assets/data/schedule.js` — 교육 일정
+원본은 `~/Desktop/Garuda-홈페이지/GARUDA-프로그램/GARUDA-교육일정.numbers`.
+- `sessions` — 정규 과정 기수. 실제 교육일 전부(`dates`), 반 구분, 시간, 장소, 기수 가격(`price`, 비면 과정 수강료)
+- `early` — 교육 시작일 N주 전까지 20% 얼리버드. 날짜가 지나면 **자동으로 정상가** 표시
+- `events` — Gateway 체험·James D'Silva 워크숍 같은 특별 프로그램. `tiers`는 기간별 가격
+- 지난 일정은 자동으로 숨는다. 정원·잔여석 데이터는 없다(표시하지 않음)
+- 읽는 곳: `/academy/` 전체, `/programs/` 과정별 일정, 홈·`/pilates/` 개강 임박, `/barre/` 체험 수업
 
-### `assets/data/programs.js` — 교육과정 소개 단일 원본
+### `assets/data/programs.js` — 교육과정 소개
 `/programs/`가 읽는다. 분류 → 과정 순서(`categories`)와 과정별 소개 내용(`programs`).
-원본은 `~/Desktop/Garuda-홈페이지/GARUDA-프로그램/`의 Pages 문서(과정별)와 Numbers(분류표).
-- 기간·시간·수강료·장비는 여기 쓰지 않는다. `ref`로 `courses.js`와 연결해 그 값을 표시한다.
-  확정 값이 없는 세부 과정(Reformer 1·2, Apparatus B, Series A, Advanced Barre)은 `ref:null`
-- `ready:false`인 과정은 "소개 준비중" + 카톡 상담만 표시
-- 현장 사진은 `/assets/img/programs/<id>/1~5.webp`, `photos`가 비면 사진 영역 숨김
-- `kakao`에 카카오톡 채널 채팅 URL을 넣으면 이 페이지의 상담 버튼 전부에 적용
-- 섹션 제목(커리큘럼·교육의 핵심가치)은 템플릿이 고정으로 붙인다. 문서의 제목 줄은 옮기지 않는다
+원본은 같은 폴더의 Pages 문서(과정별)와 사진 폴더(과정별 5장).
+- 기간·수강료는 여기 쓰지 않는다. `ref`로 `courses.js`와 연결. 확정 값이 없는 과정은 `ref:null`
+  (`days`·`hours`만 적으면 수강료는 "확정 후 공개"로 표시)
+- `ready:false`인 과정은 "소개 준비중" + 카톡 상담만 표시. `curr`·`values`가 비면 그 섹션만 준비중
+- 사진은 `/assets/img/programs/<id>/1~5.webp` (긴 변 1600px). `reel:true`면 유튜브 대신 사진을 영상처럼 넘김
+- 섹션 제목(커리큘럼·교육의 핵심가치)은 템플릿이 붙인다. 문서의 제목 줄("Barre Foundation Curriculum" 등)은 옮기지 않는다
+- Pages 문서는 앱 없이 파싱한다(zip 안 `Index/Document.iwa` = snappy 압축 protobuf)
 
 ### 확정된 실제 데이터 (변경 금지)
 
-9개 과정 — 선행조건 없음, 전 과정 미국 PMA 보수교육 학점 인정,
+9개 과정 — 선행조건 없음(Advanced 과정 제외), 전 과정 미국 PMA 보수교육 학점 인정,
 인증시험 합격 시 자격증 발급, 발급 후 2년 이내 리뷰 과정 1회로 자격 유지.
 
 | 분류 | 과정 | 일수 | 시간 | 수강료 | 장비 |
 |---|---|---|---|---|---|
-| Mat | Mat Foundation | 6 | 24 | 230만 | 매트(정품 구매 가능) |
+| Mat | Mat Foundation | 6 | 24 | 250만 | 매트(정품 구매 가능) |
 | Mat | Seated & Standing Matwork | 6 | 24 | 230만 | 매트(정품 구매 가능) |
 | Apparatus | Garuda Apparatus | 6 | 24 | 250만 | Garuda Apparatus(정품 구매 가능) |
 | Apparatus | Garuda Reformer | 6 | 24 | 250만 | 리포머(구매 현황 미확인) |
@@ -97,6 +99,8 @@
 | Auxiliary | Chakra (Foam Roller) | 3 | 12 | 120만 | 폼롤러(정품 구매 가능) |
 | Auxiliary | Graha (Brick) | 3 | 12 | 120만 | 요가 블록(별도 준비) |
 | Auxiliary | Tara (Sling) | 3 | 12 | 120만 | 슬링 벨트(정품 구매 가능) |
+
+Mat Foundation 수강료는 2026-09-27 교육일정표 기준으로 230만 → 250만으로 변경.
 
 **공식 스튜디오 인증** — 2018년 시작.
 Mat Foundation / Garuda Barre / Garuda Apparatus 세 파운데이션 코스 중
@@ -110,11 +114,8 @@ Mat Foundation / Garuda Barre / Garuda Apparatus 세 파운데이션 코스 중
 
 아래는 전부 임의로 만든 값이다. 실제 운영 정보가 아니다.
 
-- **커리큘럼**(`courses.js`의 `curr`) — 9개 과정 DAY별 제목·설명 전부 예시
-- **기수 일정·정원·잔여석**(`courses.js`의 `s`) — 전부 예시
 - **공식 스튜디오 목록**(`studios/index.html`의 `const S`) — "스튜디오 예시 1~8", 원장 "김○○" 전부 가짜
   실제 명단 게재 전 각 스튜디오에서 **개인정보 게재 동의**를 받을 것
-- **원데이 워크숍**(`barre/index.html`) — 가격 5만원, 일정 3건, 수강료 차감 정책
 - **예약금 30만원**, **환불 규정**(개강 14일 전 전액 / 7일 전 50%)
 - **시뮬레이터 기본값** — 회당 수강료, 반 인원, 회원 수, 이탈률 등
 - **공식 스튜디오 혜택** — 제도가 실제로 운영되기 전에는 페이지에 약속하지 말 것

@@ -168,7 +168,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 <header id="hdr"><div class="wrap hd">
   <a href="/" class="logo">GARUDA <span>ACADEMY</span> KOREA</a>
-  <nav><a href="#offer">가루다 바</a><a href="#sim">재등록률 계산</a><a href="#ws">원데이 워크숍</a><a href="#next">다음 단계</a></nav>
+  <nav><a href="#offer">가루다 바</a><a href="#sim">재등록률 계산</a><a href="#ws">체험 수업</a><a href="#next">다음 단계</a></nav>
 </div></header>
 
 <section class="hero">
@@ -284,24 +284,19 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     <div class="wsgrid">
       <div class="wsbox rise">
         <div class="h">
-          <p class="eyebrow">Workshop</p>
-          <h3>가루다 바 원데이 워크숍</h3>
-          <p>3시간 · 실습 중심 · 정원 12명</p>
+          <p class="eyebrow">Gateway</p>
+          <h3 id="ws-title">GARUDA Gateway 체험 수업</h3>
+          <p id="ws-sub">정규 과정 전에 가루다 움직임을 직접 경험하는 시간</p>
         </div>
         <div class="b" id="ws-list"></div>
         <div class="f">
-          <a href="#" class="btn">워크숍 신청하기 · 50,000원</a>
-          <p class="credit"><strong>수강료 전액 차감</strong> — 워크숍 참가 후 6개월 이내 가루다 바 자격과정을 등록하시면 참가비 50,000원이 교육비에서 차감됩니다.</p>
+          <a href="https://pf.kakao.com/_xexjbUT/chat" class="btn" id="ws-btn" target="_blank" rel="noopener">카카오톡으로 신청하기</a>
+          <p class="credit" id="ws-note"></p>
         </div>
       </div>
       <div class="rise">
-        <h3 style="font-size:18px;margin-bottom:16px">워크숍에서 다루는 것</h3>
-        <ol class="curr">
-          <li><span class="dn">00:00</span><span><span class="dt">가루다의 호흡과 리듬</span><span class="dd">기존 바 워크와 무엇이 다른지 몸으로 확인</span></span></li>
-          <li><span class="dn">00:45</span><span><span class="dt">바를 활용한 흐름 시퀀스</span><span class="dd">실제 수업에 바로 쓸 수 있는 한 세트</span></span></li>
-          <li><span class="dn">01:45</span><span><span class="dt">회원 레벨별 조절</span><span class="dd">초보자와 숙련자를 한 반에서 다루는 법</span></span></li>
-          <li><span class="dn">02:30</span><span><span class="dt">도입 상담</span><span class="dd">스튜디오 공간·강사 구성에 맞는 과정 안내</span></span></li>
-        </ol>
+        <h3 style="font-size:18px;margin-bottom:16px">체험 수업 구성</h3>
+        <ol class="curr" id="ws-slots"></ol>
       </div>
     </div>
   </div>
@@ -319,7 +314,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         <p>보유한 바로 즉시 개설. 가루다의 흐름을 몸으로 익히는 단계입니다.</p></article>
       <article><span class="n">STEP 02</span><h3>차크라 · 그라하</h3><p class="price">각 3일 · 120만원</p>
         <p>폼롤러와 브릭. 짧은 과정으로 매트 수업 레퍼토리를 늘립니다.</p></article>
-      <article><span class="n">STEP 03</span><h3>매트 파운데이션</h3><p class="price">6일 · 230만원</p>
+      <article><span class="n">STEP 03</span><h3>매트 파운데이션</h3><p class="price">6일 · 250만원</p>
         <p>플로우 수업의 토대. 강사가 스스로 시퀀스를 설계하게 됩니다.</p></article>
     </div>
   </div>
@@ -347,7 +342,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     <h2>우리 스튜디오에 맞는지<br>먼저 확인하세요</h2>
     <p>공간, 보유한 바, 강사 구성을 알려주시면 도입 가능한 과정과 예상 일정을 안내해 드립니다.</p>
     <div class="cta2">
-      <a href="#ws" class="btn btn-p">원데이 워크숍 신청</a>
+      <a href="#ws" class="btn btn-p">체험 수업 신청</a>
       <a href="/academy/" class="btn btn-d">자격과정 일정 보기</a>
     </div>
   </div>
@@ -358,12 +353,28 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <span>The Garuda Method는 D'Silva Ltd.의 등록상표입니다.</span>
 </div></footer>
 
+<script src="/assets/data/courses.js"></script>
+<script src="/assets/data/programs.js"></script>
+<script src="/assets/data/schedule.js"></script>
 <script>
-const WS=[['9월 3일 (수)','오후 2시 – 5시',3],['9월 24일 (수)','오후 2시 – 5시',9],['10월 15일 (수)','오전 10시 – 1시',12]];
-document.getElementById('ws-list').innerHTML=WS.map(([d,t,s])=>{
-  const k=s<=3?['마감임박','w']:['모집중','o'];
-  return `<div class="wsdate"><span><span class="d">${d}</span><br><span class="c">${t}</span></span>
-    <span class="s ${k[1]}">${k[0]} · 잔여 ${s}석</span></div>`}).join('');
+/* 체험 수업 — schedule.js 의 특별 프로그램 중 바레 수업이 포함된 가장 가까운 일정 */
+(function(){
+  const X=window.GARUDA_SCHED;
+  const ev=X.upcoming(X.D.events).find(e=>e.slots.some(s=>s[2]==='barre-foundation'));
+  const list=document.getElementById('ws-list'),slots=document.getElementById('ws-slots');
+  if(!ev){
+    list.innerHTML='<div class="wsdate"><span><span class="d">다음 체험 일정 준비중</span><br><span class="c">카카오톡으로 신청하시면 일정이 잡히는 대로 먼저 안내해 드립니다.</span></span></div>';
+    slots.closest('.rise').hidden=true; return;
+  }
+  const d=X.day(ev.dates[0]);
+  document.getElementById('ws-title').textContent=ev.title+' 체험 수업';
+  document.getElementById('ws-sub').textContent=`${ev.sub} · ${ev.place}${ev.cap?` · 정원 ${ev.cap}명`:''}`;
+  list.innerHTML=`<div class="wsdate"><span><span class="d">${d.getMonth()+1}월 ${d.getDate()}일 (${X.wd(ev.dates[0])})</span><br><span class="c">${ev.slots[0][0]} 시작 · ${ev.slots.length}개 수업 · ${ev.place}</span></span>
+    <span class="s w">${ev.cap?`${ev.cap}명 한정`:'모집중'}</span></div>`;
+  document.getElementById('ws-btn').textContent=`카카오톡으로 신청하기 · ${ev.price.toLocaleString('ko-KR')}원`;
+  document.getElementById('ws-note').textContent=(ev.desc||[]).slice(-1)[0]||'';
+  slots.innerHTML=ev.slots.map(([t,name])=>`<li><span class="dn">${t}</span><span><span class="dt">${name}</span><span class="dd">50분 수업</span></span></li>`).join('');
+})();
 
 const TUITION=2500000;
 const $=id=>document.getElementById(id);
