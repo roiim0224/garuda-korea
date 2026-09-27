@@ -72,6 +72,20 @@ function descOf(p) {
   const facts = f ? ` ${f.d}일 ${f.h}시간 · 수강료 ${(f.c / 10000)}만원.` : '';
   return clip((p.ready ? body : `${p.name} 지도자 과정 소개를 준비하고 있습니다.`), 130 - facts.length) + facts;
 }
+function metaOf(p) {
+  const f = C[p.ref], d = f ? f.d : p.days, h = f ? f.h : p.hours;
+  const title = `${p.name} 지도자 과정 | 가루다 아카데미`;
+  const facts = d ? `${d}일 ${h}시간${f ? `·수강료 ${f.c / 10000}만원` : ''}. ` : '';
+  const description = p.ready
+    ? `${p.kr} 지도자 과정. ${facts}커리큘럼·교육 일정·현장 사진과 영상을 확인하세요.`
+    : `${p.kr} 지도자 과정 소개를 준비하고 있습니다. 교육 일정과 상담은 카카오톡으로 문의하세요.`;
+  return { title, description };
+}
+const LIM = SEO.limits || { title: 40, description: 80 };
+function checkLen(url, title, description) {
+  if (title.length > LIM.title) console.warn(`  ⚠ ${url} 제목 ${title.length}자 (권장 ${LIM.title}자 이내)`);
+  if (description.length > LIM.description) console.warn(`  ⚠ ${url} 설명 ${description.length}자 (권장 ${LIM.description}자 이내)`);
+}
 function ogImage(p) { const f = `assets/img/og/${p.id}.jpg`; return fs.existsSync(path.join(ROOT, f)) ? '/' + f : SEO.defaultImage; }
 
 /* ── <head> SEO 블록 ── */
@@ -126,6 +140,7 @@ for (const [url, pg] of Object.entries(SEO.pages)) {
     { '@type': 'ItemList', itemListElement: PG.programs.filter(p => p.ready).map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE}/programs/${p.id}/`, name: p.name })) }];
   if (url === '/academy/') graph = [ORG, crumbs([['홈', '/'], ['교육 일정', '/academy/']]),
     ...PG.programs.filter(p => SES.some(s => s.prog === p.id)).map(courseLD), ...X.upcoming(X.D.events).map(eventLD)];
+  checkLen(url, pg.title, pg.description);
   const block = seoBlock({ url, title: pg.title, description: pg.description, image: pg.image, robots: pg.robots, graph });
   let html = applyHead(read(pg.file), { title: pg.title, description: pg.description, block });
   write(pg.file, html);
@@ -137,8 +152,7 @@ for (const [url, pg] of Object.entries(SEO.pages)) {
 /* ── 2) 과정별 페이지 /programs/<id>/ ── */
 for (const p of PG.programs) {
   const url = `/programs/${p.id}/`, f = C[p.ref];
-  const title = `${p.name} 지도자 과정 (${p.kr})${f ? ` — ${f.d}일 ${f.h}시간` : ''} | ${SEO.siteName}`;
-  const description = descOf(p);
+  const { title, description } = metaOf(p); checkLen(url, title, description);
   const graph = [ORG, crumbs([['홈', '/'], ['교육과정 소개', '/programs/'], [p.name, url]]), courseLD(p)];
   const block = seoBlock({ url, title, description, image: ogImage(p), robots: p.ready ? '' : 'noindex, follow', graph });
   const html = applyHead(TPL, { title, description, block });
