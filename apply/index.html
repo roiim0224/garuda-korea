@@ -88,7 +88,7 @@ main{padding:clamp(26px,4vw,44px) 0 90px}
 .sum .tot span:last-child{color:var(--accent-tx)}
 .notice{margin-top:14px;padding:14px 16px;background:#FDF0F7;border:1px solid #F3C4DF;border-radius:var(--r);font-size:13.5px;line-height:1.7}
 .notice b{color:var(--accent-tx)}
-.agree{margin-top:16px;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+.agree{margin-top:10px;border:1px solid var(--line);border-radius:var(--r);background:#fff}
 .agree label{display:flex;gap:10px;align-items:flex-start;padding:13px 14px;font-size:14px;cursor:pointer}
 .agree input{width:18px;height:18px;margin-top:2px;accent-color:var(--ink);flex:none}
 .agree details{border-top:1px solid var(--line-2);padding:10px 14px;font-size:12.5px;color:var(--soft)}
@@ -183,6 +183,19 @@ footer a{color:inherit;text-decoration:none}
           동의를 거부할 수 있으며, 거부 시 교육 신청이 제한됩니다.
         </details>
       </div>
+      <div class="agree">
+        <label><input type="checkbox" id="agreeRefund" required><span><b>[필수]</b> 취소·환불 규정을 확인했습니다.</span></label>
+        <details><summary>규정 보기</summary>
+          <dl>
+            <dt>14일 전까지</dt><dd>전액 환불</dd>
+            <dt>13~7일 전</dt><dd>수강료의 10% 위약금 공제</dd>
+            <dt>6~3일 전</dt><dd>수강료의 30% 위약금 공제</dd>
+            <dt>2일 전~전날</dt><dd>수강료의 50% 위약금 공제</dd>
+            <dt>당일 이후</dt><dd>환불 불가</dd>
+          </dl>
+          교육 시작일 기준이며, 위약금은 수강료 전체를 기준으로 계산합니다. <a href="/refund/" target="_blank">전체 규정 보기</a>
+        </details>
+      </div>
       <button class="submit" id="submit" type="submit">신청하고 예약금 결제하기</button>
       <p class="formerr" id="formErr"></p>
     </section>
@@ -202,7 +215,8 @@ footer a{color:inherit;text-decoration:none}
 <footer><div class="wrap">
   <span><a href="/">홈</a> · <a href="/programs/">교육과정 소개</a> · <a href="/academy/">교육 일정</a></span>
   <span>The Garuda Method는 D'Silva Ltd.의 등록상표입니다.</span>
-</div></footer>
+</div><div class="bizinfo" style="max-width:1140px;margin:18px auto 0;padding:14px clamp(16px,4vw,60px) 0;border-top:1px solid rgba(255,255,255,.1);font-size:12px;line-height:1.8;color:rgba(255,255,255,.5)"><b style="color:rgba(255,255,255,.72);font-weight:600">주식회사 바디녹스인터내셔널</b> · 사업자등록번호 884-81-01065 · 서울시 용산구 한강대로 366, 남산트윈시티 B동 105호<br><a href="/refund/" style="color:rgba(255,255,255,.72);text-decoration:underline">취소·환불 규정</a> · <a href="https://pf.kakao.com/_xexjbUT/chat" target="_blank" rel="noopener" style="color:inherit">카카오톡 채널 문의</a></div>
+</footer>
 
 <script src="/assets/js/track.js"></script>
 <script src="/assets/data/config.js"></script>
@@ -298,7 +312,7 @@ function validate(){
   for(const [k,f] of Object.entries(rules)){const bad=!f($(k).value);$(k).closest('.fld').classList.toggle('bad',bad);if(bad){ok=false;first=first||$(k)}}
   const it=selected(); $('courseErr').classList.toggle('show',!it.length); if(!it.length){ok=false;first=first||$('courses')}
   it.forEach(x=>{const bad=!x.start;x.el.querySelector('.pick .fld').classList.toggle('bad',bad);if(bad){ok=false;first=first||x.el}});
-  if(!$('agree').checked){ok=false;$('formErr').textContent='개인정보 수집·이용에 동의해 주세요.';$('formErr').classList.add('show');first=first||$('agree')}
+  if(!$('agree').checked||!$('agreeRefund').checked){ok=false;$('formErr').textContent=!$('agree').checked?'개인정보 수집·이용에 동의해 주세요.':'취소·환불 규정을 확인하고 체크해 주세요.';$('formErr').classList.add('show');first=first||(!$('agree').checked?$('agree'):$('agreeRefund'))}
   if(first){first.scrollIntoView({behavior:'smooth',block:'center'});if(first.focus)first.focus({preventScroll:true})}
   return ok;
 }

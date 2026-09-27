@@ -2,7 +2,7 @@
   "site": "https://garudakorea.com",
   "siteName": "GARUDA Academy Korea",
   "googleVerification": "",
-  "naverVerification": "",
+  "naverVerification": "e34ed49f71f3f764f6b1e776197d0b84c9c1a802",
   "defaultImage": "/assets/img/og/default.jpg",
   "pages": {
     "/": {
@@ -46,6 +46,12 @@
       "priority": "0.6",
       "robots": "noindex, follow",
       "note": "스튜디오 목록이 예시 데이터라 검색 노출 제외. 실제 명단 게재 후 robots 줄 삭제"
+    },
+    "/refund/": {
+      "file": "refund/index.html",
+      "title": "취소·환불 규정 | GARUDA Academy Korea",
+      "description": "가루다 지도자 교육 취소·환불 규정. 교육 시작 14일 전까지 전액 환불, 이후 기간별 위약금(10%·30%·50%) 기준과 예약금·잔금 안내.",
+      "priority": "0.3"
     }
   }
 }
