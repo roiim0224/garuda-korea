@@ -61,7 +61,7 @@ function eventLD(e) {
   return { '@type': 'Event', name: `${e.title} — ${e.sub}`, startDate: e.dates[0], endDate: e.dates[e.dates.length - 1],
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode', eventStatus: 'https://schema.org/EventScheduled',
     location: place(e.place), organizer: { '@id': SITE + '/#org' }, description: (e.desc || e.slots.map(s => s[1])).join(' '),
-    offers: { '@type': 'Offer', price: now, priceCurrency: 'KRW', availability: 'https://schema.org/InStock', url: e.apply ? `${SITE}/apply/?e=${e.id}` : `${SITE}/academy/#events` } };
+    offers: { '@type': 'Offer', price: now, priceCurrency: 'KRW', availability: 'https://schema.org/InStock', url: e.page ? SITE + e.page : e.apply ? `${SITE}/apply/?e=${e.id}` : `${SITE}/academy/#events` } };
 }
 const crumbs = list => ({ '@type': 'BreadcrumbList', itemListElement: list.map(([name, url], i) => ({ '@type': 'ListItem', position: i + 1, name, item: SITE + url })) });
 const ld = graph => `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>`;
@@ -140,6 +140,7 @@ for (const [url, pg] of Object.entries(SEO.pages)) {
     { '@type': 'ItemList', itemListElement: PG.programs.filter(p => p.ready).map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE}/programs/${p.id}/`, name: p.name })) }];
   if (url === '/academy/') graph = [ORG, crumbs([['홈', '/'], ['교육 일정', '/academy/']]),
     ...PG.programs.filter(p => SES.some(s => s.prog === p.id)).map(courseLD), ...X.upcoming(X.D.events).map(eventLD)];
+  if (pg.event) { const ev = X.D.events.find(e => e.id === pg.event); if (ev) graph = [ORG, crumbs([['홈', '/'], ['교육 일정', '/academy/'], [ev.title, url]]), eventLD(ev)]; }
   checkLen(url, pg.title, pg.description);
   const block = seoBlock({ url, title: pg.title, description: pg.description, image: pg.image, robots: pg.robots, graph });
   let html = applyHead(read(pg.file), { title: pg.title, description: pg.description, block });
