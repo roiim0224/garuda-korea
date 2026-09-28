@@ -65,10 +65,11 @@ function apply(b) {
   const src = b.src || {};
   const rows = items.map(it => {
     const fee = Number(it.fee) || '';
+    const pay = Number(it.pay) > 0 ? Number(it.pay) : deposit;   // 특별 프로그램은 참가비 전액, 정규 과정은 예약금
     return [
       orderId, now, clean(b.nameKo), clean(b.nameEn).toUpperCase(), clean(b.phone), clean(b.email),
       clean(it.progName), clean(it.progId), "'" + clean(it.start), clean(it.session || ''),   // 시작일은 텍스트로 저장해야 집계(QUERY)에서 빠지지 않는다
-      fee, deposit, fee ? fee - deposit : '',
+      fee, pay, fee ? fee - pay : '',
       STATUS.WAIT, '', '', '',
       '', BAL.NONE, '', '',
       clean(src.utm_source), clean(src.utm_medium), clean(src.utm_campaign), clean(src.landing), clean(src.ref),
@@ -86,10 +87,11 @@ function apply(b) {
   notifyAdmin(`[가루다] 새 교육 신청 · ${clean(b.nameKo)} · ${items.length}개 과정`,
     `신청번호: ${orderId}\n이름: ${clean(b.nameKo)} (${clean(b.nameEn).toUpperCase()})\n연락처: ${clean(b.phone)}\n이메일: ${clean(b.email)}\n\n` +
     items.map(it => `· ${it.progName} / 시작일 ${it.start}${it.manual ? ' (직접 입력)' : ''}${it.session ? ' / ' + it.session : ''}`).join('\n') +
-    `\n\n예약금 ${won(deposit * items.length)} — 결제 전 상태입니다.` +
+    `\n\n결제 금액 ${won(rows.reduce((s, r) => s + Number(r[COL['예약금'] - 1] || 0), 0))} — 결제 전 상태입니다.` +
     `\n토스 결제 링크로 결제하는 경우: 토스페이먼츠 상점관리자에서 같은 이름·연락처의 결제를 확인한 뒤,\n시트에서 이 행을 선택하고 [가루다 관리 → 선택한 행 예약금 결제완료 처리]를 눌러 주세요.`);
 
-  return { ok: true, orderId, amount: deposit * items.length, orderName: orderName(items) };
+  const total = rows.reduce((s, r) => s + Number(r[COL['예약금'] - 1] || 0), 0);
+  return { ok: true, orderId, amount: total, orderName: orderName(items) };
 }
 
 /* ───────────────────────── 토스페이먼츠 결제 승인 ───────────────────────── */
@@ -196,7 +198,9 @@ function markDepositPaid() {
     if (g('이메일')) MailApp.sendEmail({
       to: g('이메일'), name: 'GARUDA Academy Korea',
       subject: '[GARUDA] 교육 신청 및 예약금 결제가 확인되었습니다',
-      body: `${g('이름(한글)')}님, 가루다 교육 예약금 결제가 확인되었습니다.\n\n과정: ${g('과정')}\n교육 시작일: ${sh.getRange(i, COL['교육시작일']).getDisplayValue()}\n예약금: ${won(g('예약금'))}\n\n1영업일 이내에 잔금 결제 링크를 문자와 이메일로 보내드립니다.\n문의: 카카오톡 채널 "바디녹스필라테스&가루다"`
+      body: `${g('이름(한글)')}님, 가루다 교육 결제가 확인되었습니다.\n\n과정: ${g('과정')}\n교육 시작일: ${sh.getRange(i, COL['교육시작일']).getDisplayValue()}\n결제 금액: ${won(g('예약금'))}\n\n` +
+        (Number(g('잔금')) > 0 ? '1영업일 이내에 잔금 결제 링크를 문자와 이메일로 보내드립니다.' : '참가가 확정되었습니다. 교육 전 준비 사항을 따로 안내해 드립니다.') +
+        `\n문의: 카카오톡 채널 "바디녹스필라테스&가루다"`
     });
     n++;
   });

@@ -61,7 +61,7 @@ function eventLD(e) {
   return { '@type': 'Event', name: `${e.title} — ${e.sub}`, startDate: e.dates[0], endDate: e.dates[e.dates.length - 1],
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode', eventStatus: 'https://schema.org/EventScheduled',
     location: place(e.place), organizer: { '@id': SITE + '/#org' }, description: (e.desc || e.slots.map(s => s[1])).join(' '),
-    offers: { '@type': 'Offer', price: now, priceCurrency: 'KRW', availability: 'https://schema.org/InStock', url: `${SITE}/academy/#events` } };
+    offers: { '@type': 'Offer', price: now, priceCurrency: 'KRW', availability: 'https://schema.org/InStock', url: e.apply ? `${SITE}/apply/?e=${e.id}` : `${SITE}/academy/#events` } };
 }
 const crumbs = list => ({ '@type': 'BreadcrumbList', itemListElement: list.map(([name, url], i) => ({ '@type': 'ListItem', position: i + 1, name, item: SITE + url })) });
 const ld = graph => `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>`;

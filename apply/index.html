@@ -242,6 +242,28 @@ $('balNotice').textContent=CFG.balanceNotice;
 if(!CFG.applyEndpoint&&!CFG.depositPayLink){ $('offline').hidden=false; $('form').hidden=true; return; }
 /* 결제 링크 방식: 링크 한 번 = 예약금 30만원 → 신청서 한 장에 과정 하나 */
 const ONE=!!CFG.depositPayLink;
+/* ── 특별 프로그램(워크숍) 신청: /apply/?e=행사id — 참가비 전액을 결제 링크로 ── */
+const EVQ=new URLSearchParams(location.search).get('e');
+const EV=EVQ?X.upcoming(X.D.events).find(e=>e.id===EVQ&&e.apply):null;
+const EVP=EV?(EV.tiers?X.tierPrice(EV):{now:EV.price,until:null,link:EV.payLink||''}):null;
+const mdw=d=>`${d.getMonth()+1}.${d.getDate()}(${'일월화수목금토'[d.getDay()]})`;
+const EVITEM=EV?{el:null,p:{id:'event:'+EV.id,name:`${EV.title} (${EV.sub})`},s:null,start:EV.dates[0],manual:false,
+  fee:EVP.now,pay:EVP.now,session:`${EV.place} · ${EV.slots.map(x=>x[0]+' '+x[1]).join(' / ')}`}:null;
+if(EVQ&&!EV){ $('offline').hidden=false; $('offline').querySelector('b').textContent='신청 기간이 끝났거나 없는 프로그램입니다'; $('form').hidden=true; return; }
+if(EV){
+  document.querySelector('.top h1').textContent='특별 프로그램 신청서';
+  document.querySelector('.top .eyebrow').textContent='Special Program';
+  document.querySelector('.top p:not(.eyebrow)').innerHTML=`신청서 작성과 함께 참가비 <b class="num">${man(EVP.now)}</b>을 결제합니다.`;
+  document.querySelector('.flow').innerHTML='<span><b>1</b>신청서 작성</span><span><b>2</b>참가비 결제</span><span><b>3</b>참가 확정 안내</span>';
+  const c2=$('courses').closest('.card');
+  c2.querySelector('h2').innerHTML='<span class="n">02</span>신청 프로그램';
+  c2.querySelector('.desc').textContent='';
+  $('courses').innerHTML=`<div class="course on" style="--c:var(--accent)"><label style="cursor:default"><span class="nm"><b>${esc(EV.title)}</b><small>${esc(EV.sub)} · ${X.rangeText(EV.dates)} · ${esc(EV.place)}</small></span><span class="fee">${man(EVP.now)}</span></label>
+    <div class="pick" style="display:block">${EV.slots.map(x=>`<p style="font-size:13.5px;margin-bottom:4px"><b class="num">${esc(x[0])}</b> ${esc(x[1])}</p>`).join('')}
+    ${EV.tiers?`<p style="font-size:12.5px;color:var(--soft);margin-top:8px">신청 시기별 참가비: ${EV.tiers.map(([u,a])=>`${u?mdw(X.day(u))+'까지':'이후'} ${man(a)}`).join(' · ')}</p>`:''}</div></div>`;
+  $('courseErr').style.display='none';
+  document.querySelector('.card .notice').innerHTML=`신청서와 함께 <b>참가비 ${man(EVP.now)}</b>을 결제합니다.${EVP.until?` (${mdw(EVP.until)}까지 신청 시 금액)`:''}${EVP.link?'':'<br>결제 링크는 신청 확인 후 1영업일 이내에 문자와 이메일로 보내드립니다.'}`;
+}
 if(ONE) document.querySelector('#courses').previousElementSibling.textContent='신청할 과정 하나를 고르고 교육 시작일을 선택해 주세요. 다른 과정도 신청하려면 신청서를 한 번 더 작성해 주세요.';
 
 /* ── 과정 목록: 교육 일정(schedule.js)에서 시작일을 자동으로 가져온다 ── */
@@ -269,6 +291,7 @@ $('courses').innerHTML=LIST.filter(g=>g.items.length).map(g=>`<div class="cat" s
     </div></div></div>`}).join('')}</div>`).join('');
 
 function selected(){
+  if(EV) return [EVITEM];
   return [...document.querySelectorAll('.course.on')].map(el=>{
     const p=P[el.dataset.id], sel=$('s-'+p.id), ss=sessOf(p.id);
     const useManual=!ss.length||sel.value==='manual';
@@ -278,13 +301,18 @@ function selected(){
   });
 }
 function drawSum(){
+  if(EV){
+    $('sum').innerHTML=`<div class="li"><span>${esc(EV.title)}<small>${X.rangeText(EV.dates)} · ${esc(EV.place)}</small></span><span>${won(EVP.now)}</span></div><div class="li tot"><span>결제할 참가비</span><span>${won(EVP.now)}</span></div>`;
+    $('submit').textContent=EVP.link?`신청하고 참가비 ${man(EVP.now)} 결제하기`:'신청서 제출하기';
+    return;
+  }
   const it=selected();
   $('sum').innerHTML=it.length?it.map(x=>`<div class="li"><span>${esc(x.p.name)}<small>${x.start?`시작일 ${x.start}${x.s?` · ${esc(x.s.cls)} · ${esc(x.s.place)}`:' (희망일)'}`:'시작일 미선택'}${x.fee?` · 수강료 ${man(x.fee)} 중 잔금 ${man(x.fee-DEP)}`:''}</small></span><span>${won(DEP)}</span></div>`).join('')
     +`<div class="li tot"><span>지금 결제할 예약금</span><span>${won(DEP*it.length)}</span></div>`
     :`<div class="li"><span style="color:var(--soft)">과정을 선택하면 예약금이 계산됩니다.</span><span></span></div>`;
   $('submit').textContent=it.length?`신청하고 예약금 ${man(DEP*it.length)} 결제하기`:'신청하고 예약금 결제하기';
 }
-document.querySelectorAll('.course').forEach(el=>{
+if(!EV) document.querySelectorAll('.course').forEach(el=>{
   const cb=el.querySelector('input[type=checkbox]'),sel=el.querySelector('select'),man_=el.querySelector('.manual');
   cb.addEventListener('change',()=>{
     if(ONE&&cb.checked) document.querySelectorAll('.course.on').forEach(o=>{if(o!==el){o.classList.remove('on');o.querySelector('input[type=checkbox]').checked=false}});
@@ -312,7 +340,7 @@ function validate(){
   let ok=true,first=null;
   for(const [k,f] of Object.entries(rules)){const bad=!f($(k).value);$(k).closest('.fld').classList.toggle('bad',bad);if(bad){ok=false;first=first||$(k)}}
   const it=selected(); $('courseErr').classList.toggle('show',!it.length); if(!it.length){ok=false;first=first||$('courses')}
-  it.forEach(x=>{const bad=!x.start;x.el.querySelector('.pick .fld').classList.toggle('bad',bad);if(bad){ok=false;first=first||x.el}});
+  it.forEach(x=>{if(!x.el)return;const bad=!x.start;x.el.querySelector('.pick .fld').classList.toggle('bad',bad);if(bad){ok=false;first=first||x.el}});
   if(!$('agree').checked||!$('agreeRefund').checked){ok=false;$('formErr').textContent=!$('agree').checked?'개인정보 수집·이용에 동의해 주세요.':'취소·환불 규정을 확인하고 체크해 주세요.';$('formErr').classList.add('show');first=first||(!$('agree').checked?$('agree'):$('agreeRefund'))}
   if(first){first.scrollIntoView({behavior:'smooth',block:'center'});if(first.focus)first.focus({preventScroll:true})}
   return ok;
@@ -333,8 +361,8 @@ $('form').addEventListener('submit',async e=>{
   const payload={action:'apply',website:$('form').website.value,
     nameKo:$('nameKo').value.trim(),nameEn:$('nameEn').value.trim().toUpperCase(),
     phone:$('phone').value.trim(),email:$('email').value.trim(),src,
-    items:it.map(x=>({progId:x.p.id,progName:x.p.name,start:x.start,manual:x.manual,fee:x.fee||'',
-      session:x.s?`${x.s.cls} · ${x.s.place} · ${x.s.time}`:''}))};
+    items:it.map(x=>({progId:x.p.id,progName:x.p.name,start:x.start,manual:x.manual,fee:x.fee||'',pay:x.pay||'',
+      session:x.s?`${x.s.cls} · ${x.s.place} · ${x.s.time}`:(x.session||'')}))};
   try{
     const res=CFG.applyEndpoint?await post(payload):{ok:true,orderId:'',amount:DEP*payload.items.length,local:true};
     if(!res.ok) throw new Error(res.error||'접수에 실패했습니다.');
@@ -346,6 +374,20 @@ $('form').addEventListener('submit',async e=>{
     $('formErr').classList.add('show'); btn.disabled=false; drawSum();
   }
 });
+
+/* ── 특별 프로그램 결제 ── */
+function eventPayment(res,payload){
+  $('form').hidden=true; $('payStep').classList.add('show'); window.scrollTo({top:0,behavior:'smooth'});
+  $('agreement').hidden=true; $('payBtn').hidden=true;
+  $('orderIdTxt').textContent=res.orderId||'';
+  document.querySelector('#payStep h2').innerHTML='<span class="n">03</span>참가비 결제';
+  $('payment-method').innerHTML=EVP.link
+    ?`<div class="lstep"><h3><b>1</b>참가비 ${won(EVP.now)} 결제</h3>
+       <p>토스페이먼츠 결제창에서 <b>신청서와 같은 이름·연락처</b>로 결제해 주세요. 결제가 확인되면 참가 확정 안내를 보내드립니다.</p>
+       <a class="go" id="payLinkGo" href="${esc(EVP.link)}" target="_blank" rel="noopener">참가비 ${won(EVP.now)} 결제하기</a></div>`
+    :`<div class="lstep"><h3><b>1</b>결제 링크 안내</h3><p>신청서가 접수되었습니다. 참가비 ${won(EVP.now)} 결제 링크를 1영업일 이내에 문자와 이메일로 보내드립니다.</p></div>`;
+  const g=$('payLinkGo'); if(g) g.addEventListener('click',()=>gaEvent('begin_checkout',{currency:'KRW',value:EVP.now,course:EV.title,start_date:EV.dates[0]}));
+}
 
 /* ── 토스 결제 링크 방식 ── */
 function linkPayment(res,payload){
@@ -385,6 +427,7 @@ function linkPayment(res,payload){
 
 function loadToss(){return new Promise((ok,no)=>{if(window.TossPayments)return ok();const s=document.createElement('script');s.src='https://js.tosspayments.com/v2/standard';s.onload=ok;s.onerror=()=>no(new Error('결제 모듈을 불러오지 못했습니다.'));document.head.appendChild(s)})}
 async function startPayment(res,payload){
+  if(EV) return eventPayment(res,payload);
   if(CFG.depositPayLink) return linkPayment(res,payload);
   $('form').hidden=true; $('payStep').classList.add('show'); $('orderIdTxt').textContent=res.orderId;
   window.scrollTo({top:0,behavior:'smooth'});

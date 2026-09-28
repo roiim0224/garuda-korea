@@ -16,7 +16,9 @@
      note   : 추가 안내 (선택)
 
    ▸ 특별 프로그램 (events) — 워크숍·체험 등 정규 과정이 아닌 것
-     tiers  : 기간별 가격 [[이 날짜까지, 금액], ...]. 마지막 금액이 정상가
+     tiers  : 기간별 가격 [[이 날짜까지, 금액, 토스 결제 링크], ...]. 마지막 금액이 정상가.
+              결제 링크가 비어 있는 기간에는 신청서만 받고 결제 링크를 따로 안내한다
+     apply  : true 면 홈페이지 신청서(/apply/?e=id)로 신청·결제. 없으면 카카오톡 신청
    ============================================================ */
 
 window.GARUDA_SCHEDULE = {
@@ -48,7 +50,8 @@ window.GARUDA_SCHEDULE = {
       sub: "James D'Silva 내한 특별수업",
       dates: ['2026-11-13', '2026-11-14', '2026-11-15'],
       place: '광화문센터',
-      tiers: [['2026-09-30', 1000000], ['2026-10-15', 1200000], [null, 1500000]],
+      apply: true,
+      tiers: [['2026-09-30', 1000000, 'https://buy.tosspayments.com/products/mVBoGj2eG4'], ['2026-10-15', 1200000, ''], [null, 1500000, '']],
       slots: [
         ['10:00–14:00', 'Foot-Knee-Hip', '', '지면반발력과 신체의 무게중심이동의 메카니즘을 이해하고 그에 따른 움직임을 배우는 시간입니다.'],
         ['15:00–19:00', 'Scoliosis', '', '척추측만을 대하는 새로운 방법과 GARUDA 의 모든 원리를 적용한 교정수업을 배우는 시간입니다.']
@@ -128,7 +131,7 @@ window.GARUDA_SCHED = (function () {
   }
   function tierPrice(ev) {
     const t = today();
-    for (const [until, amt] of ev.tiers) if (!until || t <= day(until)) return { now: amt, until: until ? day(until) : null };
+    for (const [until, amt, link] of ev.tiers) if (!until || t <= day(until)) return { now: amt, until: until ? day(until) : null, link: link || '' };
   }
   const upcoming = list => list.filter(x => day(x.dates[x.dates.length - 1]) >= today())
                                 .sort((a, b) => a.dates[0] < b.dates[0] ? -1 : a.dates[0] > b.dates[0] ? 1 : 0);
