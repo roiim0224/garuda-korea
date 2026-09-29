@@ -197,8 +197,12 @@ footer a{color:inherit;text-decoration:none}
 .ask p{color:rgba(255,255,255,.75);font-size:14px;margin-top:8px}
 .ask .kb{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:16px;padding:17px;background:var(--accent);color:#fff;border-radius:var(--r);font:700 16px/1 'IBM Plex Sans KR',sans-serif;text-decoration:none;cursor:pointer;border:0}
 .ask .kb svg{width:18px;height:18px}
-.ask textarea{width:100%;height:150px;margin-top:10px;padding:10px 12px;border-radius:var(--r);border:0;font:400 13px/1.6 'IBM Plex Sans KR',sans-serif;display:none}
-.ask textarea.show{display:block}
+.ask .form{margin-top:14px;padding:14px 16px;background:rgba(255,255,255,.08);border:1px dashed rgba(255,255,255,.3);border-radius:var(--r);font:400 14px/1.8 'IBM Plex Sans KR',sans-serif;color:#fff;white-space:pre-wrap;user-select:all;-webkit-user-select:all}
+.ask .two{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+@media(max-width:560px){.ask .two{grid-template-columns:1fr}}
+.ask .two .kb{margin-top:0}
+.ask .kb.line{background:transparent;border:1px solid rgba(255,255,255,.55);color:#fff}
+.ask .kb.line.done{background:#fff;color:var(--ink)}
 .ask .msg{font-size:12.5px;margin-top:8px;color:var(--accent-lt);font-weight:600}
 </style>
 </head>
@@ -255,10 +259,18 @@ footer a{color:inherit;text-decoration:none}
     </ol>
     <div class="ask">
       <h3>카카오톡으로 체험수업 신청하기</h3>
-      <p>버튼을 누르면 신청 양식이 복사되고 카카오톡 상담창이 열립니다. 붙여넣은 뒤 빈칸을 채워 보내 주세요.</p>
-      <a class="kb" id="kakaoGo" href="https://pf.kakao.com/_xexjbUT/chat" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.8 5.3 4.6 6.7l-1 3.7c-.1.4.3.7.6.5l4.4-2.9c.5.1.9.1 1.4.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>신청 양식 복사하고 카톡 열기</a>
-      <p class="msg" id="copyMsg"></p>
-      <textarea id="copyText" readonly></textarea>
+      <p>아래 양식을 복사해 카카오톡 채팅창에 붙여넣고, 빈칸을 채워 보내 주세요.</p>
+      <pre class="form" id="copyText">[GARUDA 체험수업 신청]
+1. 요청일자:
+2. 요청시간:
+3. 신청정원(명):
+4. 희망 프로그램:
+5. 이름 / 연락처:</pre>
+      <div class="two">
+        <button type="button" class="kb line" id="copyBtn">① 신청 양식 복사하기</button>
+        <a class="kb" id="kakaoGo" href="https://pf.kakao.com/_xexjbUT/chat" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.8 5.3 4.6 6.7l-1 3.7c-.1.4.3.7.6.5l4.4-2.9c.5.1.9.1 1.4.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>② 카카오톡으로 보내기</a>
+      </div>
+      <p class="msg" id="copyMsg" role="status"></p>
     </div>
   </section>
 </div></main>
@@ -283,12 +295,22 @@ footer a{color:inherit;text-decoration:none}
   $('pricePending').hidden=any; $('priceTbl').hidden=!any;   // 금액이 정해지기 전에는 표 대신 안내 문구만
   /* 영상: 누를 때만 불러온다 */
   $('yt').addEventListener('click',e=>{const id=e.currentTarget.dataset.yt;e.currentTarget.outerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="GARUDA 교육 후기 영상" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;window.gaEvent&&gaEvent('video_play',{course:'체험수업 안내',video_id:id})});
-  /* 카카오톡 신청 양식 복사 */
-  const text=['[GARUDA 체험수업 신청]','1. 요청일자: ','2. 요청시간: ','3. 신청정원(명): ','4. 희망 프로그램: ','5. 이름 / 연락처: '].join('\n');
-  $('kakaoGo').addEventListener('click',()=>{const ta=$('copyText'),msg=$('copyMsg');ta.value=text;
-    const ok=()=>{msg.textContent='✓ 신청 양식이 복사되었습니다. 카카오톡에 붙여넣고 빈칸을 채워 보내 주세요.'};
-    const fail=()=>{ta.classList.add('show');ta.select();msg.textContent='자동 복사가 되지 않았습니다. 아래 양식을 복사해 주세요.'};
-    if(navigator.clipboard&&window.isSecureContext) navigator.clipboard.writeText(text).then(ok,fail); else fail();});
+  /* 카카오톡 신청 양식 복사 — 창이 바뀌기 전에(버튼을 누른 순간) 복사해야 성공한다 */
+  const form=$('copyText'), btn=$('copyBtn'), msg=$('copyMsg');
+  function copyNow(){
+    const text=form.textContent;
+    let ok=false;
+    try{ const ta=document.createElement('textarea'); ta.value=text; ta.setAttribute('readonly','');
+      ta.style.cssText='position:fixed;top:0;left:0;opacity:0'; document.body.appendChild(ta);
+      ta.select(); ta.setSelectionRange(0,text.length); ok=document.execCommand('copy'); ta.remove(); }catch(e){}
+    if(!ok&&navigator.clipboard&&window.isSecureContext) navigator.clipboard.writeText(text).then(done,fail);
+    else ok?done():fail();
+  }
+  function done(){ btn.classList.add('done'); btn.textContent='✓ 복사되었습니다'; msg.textContent='이제 ② 카카오톡으로 보내기를 눌러 채팅창에 붙여넣어 주세요.'; }
+  function fail(){ const r=document.createRange(); r.selectNodeContents(form); const sel=getSelection(); sel.removeAllRanges(); sel.addRange(r);
+    msg.textContent='자동 복사가 되지 않았습니다. 선택된 양식을 길게 눌러(또는 Cmd+C) 복사해 주세요.'; }
+  btn.addEventListener('click',copyNow);
+  $('kakaoGo').addEventListener('click',()=>{ if(!btn.classList.contains('done')) msg.textContent='양식을 먼저 복사하셨나요? 채팅창에 붙여넣을 내용이 없으면 위 ① 버튼을 눌러 주세요.'; });
 })();
 </script>
 <script src="/assets/js/track.js?v=aa318820"></script>
