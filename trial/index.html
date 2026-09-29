@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/assets/js/analytics.js"></script>
+<title>GARUDA 상시 체험수업 신청 | 가루다 아카데미</title>
+<meta name="description" content="GARUDA 마스터와 함께하는 상시 체험수업. 원하는 날짜·시간에 Apparatus·Reformer·Barre 등 8개 프로그램을 경험하세요.">
+<!--seo:start (tools/build.mjs 가 생성 — 직접 고치지 말 것)-->
+<link rel="canonical" href="https://garudakorea.com/trial/">
+<meta name="google-site-verification" content="7YWf4TvDX4fgVs6OXHKc8jzmiodimNGyegwrAcU-jU0">
+<meta name="naver-site-verification" content="e34ed49f71f3f764f6b1e776197d0b84c9c1a802">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GARUDA Academy Korea">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:url" content="https://garudakorea.com/trial/">
+<meta property="og:title" content="GARUDA 상시 체험수업 신청 | 가루다 아카데미">
+<meta property="og:description" content="GARUDA 마스터와 함께하는 상시 체험수업. 원하는 날짜·시간에 Apparatus·Reformer·Barre 등 8개 프로그램을 경험하세요.">
+<meta property="og:image" content="https://garudakorea.com/assets/img/og/default.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<!--seo:end-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#32383E;--ink-2:#3D444B;
+  --paper:#F4F5F5;--card:#FFFFFF;--line:#D6D6D6;--line-2:#E6E7E7;
+  --text:#222222;--soft:#62686D;--accent:#EC008C;--accent-tx:#C8007A;--accent-lt:#FF7AC2;
+  --mat:#5C6E67;--app:#4A6072;--aux:#8E4A72;--ok:#3C6B52;--warn:#B4552C;
+  --r:2px;--pad:clamp(16px,4vw,56px);
+}
+header,.top,footer{--accent-tx:var(--accent-lt)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--text);font-family:'IBM Plex Sans KR',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3{font-family:'Gowun Batang',serif;font-weight:700;line-height:1.3;letter-spacing:-.01em}
+.wrap{max-width:860px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.eyebrow{font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:.22em;text-transform:uppercase}
+.num{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button,input,select,textarea{font-family:inherit}
+
+header{position:sticky;top:0;z-index:60;background:var(--ink);border-bottom:1px solid rgba(255,255,255,.12)}
+.hd{display:flex;align-items:center;justify-content:space-between;height:60px;max-width:1140px}
+.logo{font-family:'Gowun Batang',serif;font-weight:700;font-size:16.5px;letter-spacing:.04em;text-decoration:none;color:#fff}
+.logo span{color:var(--accent-tx)}
+.hd nav{display:flex;gap:22px;font-size:13.5px}
+.hd nav a{color:#fff;text-decoration:none;opacity:.75}.hd nav a:hover{opacity:1}
+@media(max-width:700px){.hd nav{display:none}}
+
+.top{background:var(--ink);color:#fff;padding:clamp(30px,4.5vw,50px) 0 clamp(26px,3.5vw,36px)}
+.top .eyebrow{color:var(--accent-tx);margin-bottom:14px}
+.top h1{font-size:clamp(24px,4vw,36px);color:#fff}
+.top p{margin-top:12px;font-size:14.5px;font-weight:300;color:rgba(255,255,255,.78);max-width:56ch}
+.flow{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px;font-size:12.5px}
+.flow span{padding:7px 12px;border:1px solid rgba(255,255,255,.22);border-radius:999px;color:rgba(255,255,255,.8)}
+.flow b{font-family:'IBM Plex Mono',monospace;color:var(--accent-tx);margin-right:5px}
+
+main{padding:clamp(26px,4vw,44px) 0 90px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:clamp(20px,3.5vw,32px);margin-bottom:14px}
+.card h2{font-size:20px;display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+.card h2 .n{font:500 12px/1 'IBM Plex Mono',monospace;color:var(--accent-tx);letter-spacing:.12em}
+.card .desc{font-size:13.5px;color:var(--soft);margin-bottom:18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:600px){.grid2{grid-template-columns:1fr}}
+.fld label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.fld label em{font-style:normal;color:var(--accent-tx);margin-left:3px}
+.fld small{display:block;font-size:12px;color:var(--soft);margin-top:5px}
+.fld input,.fld select{width:100%;padding:12px 13px;border:1px solid var(--line);background:#fff;border-radius:var(--r);font-size:15px;color:var(--text)}
+.fld input:focus,.fld select:focus{border-color:var(--ink);outline:none;box-shadow:0 0 0 3px rgba(50,56,62,.1)}
+.fld.bad input,.fld.bad select{border-color:var(--warn)}
+.fld .err{display:none;color:var(--warn);font-size:12px;margin-top:5px}
+.fld.bad .err{display:block}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+.cat{margin-top:18px}
+.cat:first-of-type{margin-top:0}
+.cat h3{font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--c);margin-bottom:8px}
+.course{border:1px solid var(--line);border-radius:var(--r);margin-bottom:6px;background:#fff;transition:border-color .15s}
+.course.on{border-color:var(--c);box-shadow:inset 3px 0 0 var(--c)}
+.course>label{display:flex;gap:12px;align-items:center;padding:13px 14px;cursor:pointer}
+.course input[type=checkbox]{width:19px;height:19px;accent-color:var(--c);flex:none}
+.course .nm{flex:1;min-width:0}
+.course .nm b{display:block;font-size:15px}
+.course .nm small{color:var(--soft);font-size:12.5px}
+.course .fee{font:500 13px/1.3 'IBM Plex Mono',monospace;color:var(--soft);text-align:right;white-space:nowrap}
+.course .pick{display:none;padding:0 14px 14px 45px}
+.course.on .pick{display:block}
+.pick .fld label{font-size:12.5px}
+.pick .manual{margin-top:8px;display:none}
+.pick .manual.show{display:block}
+.pick .none{font-size:12.5px;color:var(--soft);margin-bottom:8px}
+
+.sum{border-top:1px solid var(--line-2);margin-top:6px}
+.sum .li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line-2);font-size:14px}
+.sum .li span:last-child{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.sum .li small{display:block;color:var(--soft);font-size:12px}
+.sum .tot{font-weight:700;font-size:16px;border-bottom:0}
+.sum .tot span:last-child{color:var(--accent-tx)}
+.notice{margin-top:14px;padding:14px 16px;background:#FDF0F7;border:1px solid #F3C4DF;border-radius:var(--r);font-size:13.5px;line-height:1.7}
+.notice b{color:var(--accent-tx)}
+.agree{margin-top:16px;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+.agree label{display:flex;gap:10px;align-items:flex-start;padding:13px 14px;font-size:14px;cursor:pointer}
+.agree input{width:18px;height:18px;margin-top:2px;accent-color:var(--ink);flex:none}
+.agree details{border-top:1px solid var(--line-2);padding:10px 14px;font-size:12.5px;color:var(--soft)}
+.agree summary{cursor:pointer;font-weight:600;color:var(--text)}
+.agree dl{margin-top:8px;display:grid;grid-template-columns:80px 1fr;gap:4px 10px}
+
+.submit{width:100%;margin-top:18px;padding:18px;background:var(--accent);color:#fff;border:0;border-radius:var(--r);font:700 16px/1 'IBM Plex Sans KR',sans-serif;cursor:pointer}
+.submit:hover{filter:brightness(.92)}
+.submit[disabled]{opacity:.55;cursor:wait}
+.formerr{display:none;margin-top:12px;color:var(--warn);font-size:13.5px;font-weight:600}
+.formerr.show{display:block}
+
+.lstep{border:1px solid var(--line);border-radius:var(--r);padding:18px;margin-bottom:10px;background:#fff}
+.lstep h3{font-family:'IBM Plex Sans KR',sans-serif;font-size:15.5px;display:flex;gap:9px;align-items:center;margin-bottom:6px}
+.lstep h3 b{flex:none;width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font:600 12px/22px 'IBM Plex Mono',monospace;text-align:center}
+.lstep p{font-size:13.5px;color:var(--soft)}
+.lstep .go{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;padding:15px;border-radius:var(--r);font-weight:700;font-size:15px;text-decoration:none;color:#fff;background:var(--accent)}
+.lstep .go.k{background:var(--ink)}
+.lstep .go:hover{filter:brightness(.92)}
+.copybox{margin-top:10px;display:none}.copybox.show{display:block}
+.copybox p{font-size:12.5px;font-weight:600;margin-bottom:6px;color:var(--ok)}.copybox p.err{color:var(--warn)}
+.copybox textarea{width:100%;height:170px;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r);font:400 12.5px/1.6 'IBM Plex Sans KR',sans-serif;resize:vertical}
+#payStep{display:none}
+#payStep.show{display:block}
+.paid-head{display:flex;gap:10px;align-items:center;padding:12px 14px;background:#EFF6F1;border:1px solid #B9CBC0;border-radius:var(--r);font-size:13.5px;margin-bottom:14px;color:var(--ok);font-weight:600}
+#payment-method,#agreement{margin:0 -8px}
+
+.off{background:var(--card);border:1px dashed var(--line);border-radius:var(--r);padding:22px;margin-bottom:14px;font-size:14px}
+.off b{display:block;font-family:'Gowun Batang',serif;font-size:18px;margin-bottom:6px}
+.kbtn{display:inline-flex;align-items:center;gap:7px;margin-top:14px;padding:13px 18px;background:var(--accent);color:#fff;border-radius:var(--r);font-weight:600;font-size:14px;text-decoration:none}
+
+footer{background:var(--ink);color:rgba(255,255,255,.45);padding:26px 0;font-size:12.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{color:inherit;text-decoration:none}
+</style>
+<style>
+.top .tag{font-size:clamp(16px,2.2vw,19px);font-family:'Gowun Batang',serif;color:#fff;margin-top:14px;max-width:none}
+.facts{display:flex;gap:8px 22px;flex-wrap:wrap;margin-top:20px;font-size:14px;color:rgba(255,255,255,.85)}
+.facts b{font-family:'IBM Plex Mono',monospace;font-weight:500;color:#fff}
+.wmain{padding:clamp(28px,4vw,48px) 0 90px}
+.wwrap{max-width:1000px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.progs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.progs{grid-template-columns:1fr}}
+.prog{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;position:relative}
+.prog::before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:3px;background:var(--accent)}
+.prog .k{font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;color:var(--accent-tx)}
+.prog h2{font-size:21px;margin-top:10px}
+.prog .t{font:500 13.5px/1 'IBM Plex Mono',monospace;color:var(--soft);margin-top:8px}
+.prog p{font-size:14.5px;line-height:1.75;color:#383E43;margin-top:12px}
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:clamp(26px,4vw,40px)}
+@media(max-width:700px){.shots{grid-template-columns:1fr}}
+.shots img{width:100%;height:auto;display:block;border-radius:var(--r);background:#222}
+.info{margin-top:clamp(26px,4vw,40px);background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:clamp(22px,3.5vw,32px)}
+.info h2{font-size:20px;margin-bottom:14px}
+.info dl{display:grid;grid-template-columns:90px 1fr;gap:8px 14px;font-size:14.5px}
+.info dt{color:var(--soft)}
+.tiers{width:100%;border-collapse:collapse;margin-top:18px;font-size:14.5px}
+.tiers td{padding:12px 10px;border-bottom:1px solid var(--line-2)}
+.tiers td:nth-child(2){font-family:'IBM Plex Mono',monospace;font-weight:600;text-align:right}
+.tiers td:last-child{color:var(--soft);text-align:right;font-size:13px}
+.tiers tr.on td{background:#FDF0F7;color:var(--accent-tx)}
+.tiers tr.past td{opacity:.45;text-decoration:line-through}
+.cta{margin-top:18px;text-align:center}
+.paybtn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:19px;background:var(--accent);color:#fff;border-radius:var(--r);font:700 17px/1 'IBM Plex Sans KR',sans-serif;text-decoration:none}
+.paybtn:hover{filter:brightness(.92)}
+.paybtn.off{background:var(--line);color:var(--soft);pointer-events:none}
+.paybtn.k{background:var(--ink)}
+.cta p{font-size:13px;color:var(--soft);margin-top:10px;line-height:1.7}
+.cta p a{color:var(--accent-tx)}
+</style>
+<style>
+.sec{margin-top:clamp(28px,4vw,44px)}
+.sec h2{font-size:clamp(19px,2.6vw,23px);margin-bottom:14px;display:flex;align-items:baseline;gap:10px}
+.sec h2 .n{font:500 12px/1 'IBM Plex Mono',monospace;color:var(--accent-tx);letter-spacing:.12em}
+.video{position:relative;aspect-ratio:16/9;background:#000;border-radius:var(--r);overflow:hidden}
+.video button{all:unset;position:absolute;inset:0;cursor:pointer;display:block}
+.video img{width:100%;height:100%;object-fit:cover;opacity:.85}
+.video .play{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;border-radius:50%;background:var(--accent);display:grid;place-items:center}
+.video .play svg{width:26px;height:26px;margin-left:4px;fill:#fff}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.tbl{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);font-size:14.5px}
+.tbl th,.tbl td{padding:12px 14px;border-bottom:1px solid var(--line-2);text-align:left}
+.tbl th{background:var(--paper);font-size:12.5px;color:var(--soft);font-weight:600}
+.tbl td.num,.tbl th.num{text-align:right;font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+.note{margin-top:12px;font-size:13.5px;color:#454B50;line-height:1.8}
+.note li{margin-left:18px}
+.pending{margin-top:10px;padding:12px 14px;background:#FDF0F7;border:1px solid #F3C4DF;border-radius:var(--r);font-size:13.5px}
+.steps{list-style:none;counter-reset:s;display:grid;gap:8px}
+.steps li{counter-increment:s;display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;font-size:14.5px}
+.steps li::before{content:counter(s);flex:none;width:24px;height:24px;border-radius:50%;background:var(--ink);color:#fff;font:600 12px/24px 'IBM Plex Mono',monospace;text-align:center}
+.ask{margin-top:18px;background:var(--ink);color:#fff;border-radius:var(--r);padding:clamp(22px,3.5vw,32px)}
+.ask h3{color:#fff;font-size:20px}
+.ask p{color:rgba(255,255,255,.75);font-size:14px;margin-top:8px}
+.ask .kb{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:16px;padding:17px;background:var(--accent);color:#fff;border-radius:var(--r);font:700 16px/1 'IBM Plex Sans KR',sans-serif;text-decoration:none;cursor:pointer;border:0}
+.ask .kb svg{width:18px;height:18px}
+.ask textarea{width:100%;height:150px;margin-top:10px;padding:10px 12px;border-radius:var(--r);border:0;font:400 13px/1.6 'IBM Plex Sans KR',sans-serif;display:none}
+.ask textarea.show{display:block}
+.ask .msg{font-size:12.5px;margin-top:8px;color:var(--accent-lt);font-weight:600}
+</style>
+</head>
+<body>
+<header><div class="wrap hd">
+  <a href="/" class="logo">GARUDA <span>ACADEMY</span> KOREA</a>
+  <nav><a href="/programs/">교육과정 소개</a><a href="/academy/">교육 일정</a><a href="https://pf.kakao.com/_xexjbUT/chat" target="_blank" rel="noopener">카톡 문의</a></nav>
+</div></header>
+
+<section class="top"><div class="wrap">
+  <p class="eyebrow">Trial Class · 상시 체험수업</p>
+  <h1>상시 GARUDA 체험수업 신청안내</h1>
+  <p class="tag">GARUDA MASTER와 함께 다양한 프로그램을 경험해 보세요.</p>
+  <p style="margin-top:10px;color:rgba(255,255,255,.78);font-size:14.5px;max-width:56ch">신청하시는 분의 일정과 시간에 최대한 맞춰 GARUDA Program의 모든 수업을 직접 경험하실 수 있습니다.</p>
+</div></section>
+
+<main class="wmain"><div class="wwrap">
+
+  <div class="video"><button type="button" id="yt" data-yt="E3IX3VDbSAg" aria-label="GARUDA 교육 후기 영상 재생">
+    <img src="https://i.ytimg.com/vi/E3IX3VDbSAg/hqdefault.jpg" alt="" loading="lazy">
+    <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></button></div>
+
+  <section class="sec">
+    <h2><span class="n">01</span>신청구분</h2>
+    <table class="tbl" id="progTbl">
+      <thead><tr><th>Program</th><th class="num">최대 신청 정원</th><th>시간 (평일)</th><th>시간 (토요일)</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <ul class="note">
+      <li>토요일 수업은 교육일정과 겹쳐 있는 경우 체험수업이 불가할 수 있습니다.</li>
+      <li>체험수업은 신청인원과 프로그램에 따라 장소가 변경될 수 있습니다.</li>
+      <li>장소: <span id="places"></span></li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <h2><span class="n">02</span>체험수업 가격안내</h2>
+    <table class="tbl" id="priceTbl">
+      <thead><tr><th>신청정원</th><th class="num">금액 (1인) / 시간당</th><th class="num">총액 (시간당)</th><th class="num">연강 신청 시 10% 할인 (2타임 기준)</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <p class="pending" id="pricePending" hidden>체험수업 금액은 카카오톡 신청 시 인원과 프로그램에 맞춰 안내해 드립니다.</p>
+  </section>
+
+  <section class="sec">
+    <h2><span class="n">03</span>신청방법 및 절차안내</h2>
+    <p class="note" style="margin:0 0 12px">카카오톡 채널로 아래 내용을 작성해서 보내 주세요.</p>
+    <ol class="steps">
+      <li>요청일자</li>
+      <li>요청시간</li>
+      <li>신청정원 (희망 프로그램 함께 적어 주세요)</li>
+      <li>예약 일정 확인 후 결제 링크 제공</li>
+      <li>결제 완료 후 최종 수업 예약 완료</li>
+    </ol>
+    <div class="ask">
+      <h3>카카오톡으로 체험수업 신청하기</h3>
+      <p>버튼을 누르면 신청 양식이 복사되고 카카오톡 상담창이 열립니다. 붙여넣은 뒤 빈칸을 채워 보내 주세요.</p>
+      <a class="kb" id="kakaoGo" href="https://pf.kakao.com/_xexjbUT/chat" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.8 5.3 4.6 6.7l-1 3.7c-.1.4.3.7.6.5l4.4-2.9c.5.1.9.1 1.4.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>신청 양식 복사하고 카톡 열기</a>
+      <p class="msg" id="copyMsg"></p>
+      <textarea id="copyText" readonly></textarea>
+    </div>
+  </section>
+</div></main>
+
+<footer><div class="wrap">
+  <span><a href="/">홈</a> · <a href="/programs/">교육과정 소개</a> · <a href="/academy/">교육 일정</a></span>
+  <span>The Garuda Method는 D'Silva Ltd.의 등록상표입니다.</span>
+</div>
+<div class="bizinfo" style="max-width:1140px;margin:18px auto 0;padding:14px clamp(16px,4vw,60px) 0;border-top:1px solid rgba(255,255,255,.1);font-size:12px;line-height:1.8;color:rgba(255,255,255,.5)"><b style="color:rgba(255,255,255,.72);font-weight:600">주식회사 바디녹스인터내셔널</b> · 대표 임용호 · 사업자등록번호 884-81-01065 · 통신판매업 신고 제2021-서울용산-0111호<br>서울시 용산구 한강대로 366, 남산트윈시티 B동 105호 · 이메일 <a href="mailto:roiim@naver.com" style="color:inherit">roiim@naver.com</a><br><a href="/refund/" style="color:rgba(255,255,255,.72);text-decoration:underline">취소·환불 규정</a> · <a href="https://pf.kakao.com/_xexjbUT/chat" target="_blank" rel="noopener" style="color:inherit">카카오톡 채널 문의</a> · <a href="https://www.instagram.com/garuda.korea" target="_blank" rel="noopener" aria-label="가루다 코리아 인스타그램" style="color:rgba(255,255,255,.72);text-decoration:none"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" style="vertical-align:-3px;margin-right:5px"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg>@garuda.korea</a></div>
+</footer>
+<script src="/assets/data/trial.js"></script>
+<script>
+(function(){
+  const T=window.GARUDA_TRIAL, $=id=>document.getElementById(id);
+  const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
+  const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  $('progTbl').tBodies[0].innerHTML=T.programs.map(([n,c])=>`<tr><td>${esc(n)}</td><td class="num">${c}명</td><td>${esc(T.hours.weekday)}</td><td>${esc(T.hours.saturday)}</td></tr>`).join('');
+  $('places').textContent=T.places.join(' / ');
+  const ks=Object.keys(T.prices).map(Number).sort((a,b)=>a-b), any=ks.some(k=>T.prices[k]);
+  $('priceTbl').tBodies[0].innerHTML=ks.map(k=>{const p=T.prices[k];
+    return `<tr><td>${k}명</td><td class="num">${p?won(p):'문의'}</td><td class="num">${p?won(p*k):'문의'}</td><td class="num">${p?won(p*k*2*(1-T.discount)):'문의'}</td></tr>`}).join('');
+  $('pricePending').hidden=any; $('priceTbl').hidden=!any;   // 금액이 정해지기 전에는 표 대신 안내 문구만
+  /* 영상: 누를 때만 불러온다 */
+  $('yt').addEventListener('click',e=>{const id=e.currentTarget.dataset.yt;e.currentTarget.outerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="GARUDA 교육 후기 영상" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;window.gaEvent&&gaEvent('video_play',{course:'체험수업 안내',video_id:id})});
+  /* 카카오톡 신청 양식 복사 */
+  const text=['[GARUDA 체험수업 신청]','1. 요청일자: ','2. 요청시간: ','3. 신청정원(명): ','4. 희망 프로그램: ','5. 이름 / 연락처: '].join('\n');
+  $('kakaoGo').addEventListener('click',()=>{const ta=$('copyText'),msg=$('copyMsg');ta.value=text;
+    const ok=()=>{msg.textContent='✓ 신청 양식이 복사되었습니다. 카카오톡에 붙여넣고 빈칸을 채워 보내 주세요.'};
+    const fail=()=>{ta.classList.add('show');ta.select();msg.textContent='자동 복사가 되지 않았습니다. 아래 양식을 복사해 주세요.'};
+    if(navigator.clipboard&&window.isSecureContext) navigator.clipboard.writeText(text).then(ok,fail); else fail();});
+})();
+</script>
+<script src="/assets/js/track.js"></script>
+</body>
+</html>

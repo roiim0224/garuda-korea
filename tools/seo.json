@@ -60,6 +60,12 @@
       "image": "/assets/img/og/workshop-james.jpg",
       "priority": "0.8",
       "event": "james-2026-11"
+    },
+    "/trial/": {
+      "file": "trial/index.html",
+      "title": "GARUDA 상시 체험수업 신청 | 가루다 아카데미",
+      "description": "GARUDA 마스터와 함께하는 상시 체험수업. 원하는 날짜·시간에 Apparatus·Reformer·Barre 등 8개 프로그램을 경험하세요.",
+      "priority": "0.7"
     }
   },
   "limits": {

@@ -1,0 +1,20 @@
+/* ============================================================
+   GARUDA 상시 체험수업 (/trial/) 데이터
+   원본: 상시 GARUDA 체험수업 안내문.pages
+   - programs : [프로그램, 최대 신청 정원(명)]
+   - prices   : 신청정원(명)별 1인 1시간 금액(원). null 이면 "카카오톡 안내"로 표시
+                총액(= 1인 금액 × 인원)과 연강 10% 할인(2타임 기준)은 자동 계산
+   ============================================================ */
+window.GARUDA_TRIAL = {
+  programs: [
+    ['Apparatus', 3], ['Reformer', 5], ['Barre', 6], ['Brick', 6],
+    ['Chair (Dhara)', 7], ['Chakra', 6], ['Sling', 3], ['Mat', 7]
+  ],
+  hours: { weekday: '10:00 – 18:00', saturday: '09:00 – 15:00' },
+  places: ['GARUDA Korea Center (바디녹스 서울역센터)', '바디녹스 광화문 센터'],
+  video: 'E3IX3VDbSAg',
+  discount: 0.1,          // 연강 신청 시 할인율 (2타임 기준)
+  prices: {               // 신청정원(명): 1인 1시간 금액 — 안내문 표가 비어 있어 확정 대기
+    1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null, 8: null
+  }
+};
