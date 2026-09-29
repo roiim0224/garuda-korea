@@ -164,7 +164,27 @@ for (const p of PG.programs) {
   console.log('✓', url, p.ready ? '' : '(noindex: 소개 준비중)');
 }
 
-/* ── 3) sitemap.xml · robots.txt ── */
+/* ── 3) 캐시 무효화: 데이터·스크립트 파일 주소에 내용 기반 버전(?v=)을 붙인다 ──
+   파일이 바뀌면 주소가 바뀌어 방문자 브라우저가 옛 파일(최대 10분 저장)을 쓰지 않는다 */
+const crypto = await import('node:crypto');
+const ver = {};
+for (const dir of ['assets/data', 'assets/js']) for (const f of fs.readdirSync(path.join(ROOT, dir)).filter(f => f.endsWith('.js')))
+  ver['/' + dir + '/' + f] = crypto.createHash('md5').update(read(dir + '/' + f)).digest('hex').slice(0, 8);
+const htmlFiles = [];
+(function walk(d) { for (const e of fs.readdirSync(path.join(ROOT, d), { withFileTypes: true })) {
+  if (e.name.startsWith('.') || ['node_modules', 'apps-script', 'tools', 'assets'].includes(e.name)) continue;
+  const p = d ? d + '/' + e.name : e.name;
+  if (e.isDirectory()) walk(p); else if (e.name.endsWith('.html')) htmlFiles.push(p);
+} })('');
+let bumped = 0;
+for (const f of htmlFiles) {
+  const src = read(f);
+  const out = src.replace(/src="(\/assets\/(?:data|js)\/[\w.-]+\.js)(?:\?v=[\w]+)?"/g, (m, u) => ver[u] ? `src="${u}?v=${ver[u]}"` : m);
+  if (out !== src) { write(f, out); bumped++; }
+}
+console.log(`✓ 파일 버전 표시 갱신 (${bumped}개 페이지)`);
+
+/* ── 4) sitemap.xml · robots.txt ── */
 const today = new Date().toISOString().slice(0, 10);
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
   sitemap.map(([u, pr]) => `  <url><loc>${SITE}${u}</loc><lastmod>${today}</lastmod><priority>${pr}</priority></url>`).join('\n') + '\n</urlset>\n');
