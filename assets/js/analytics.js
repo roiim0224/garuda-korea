@@ -20,5 +20,6 @@
     var href = a.getAttribute('href') || '';
     if (href.indexOf('pf.kakao.com') > -1) window.gaEvent('kakao_click', { link_text: (a.textContent || '').trim().slice(0, 40), page_path: location.pathname });
     else if (href.indexOf('/apply/') === 0) window.gaEvent('apply_click', { link_url: href, page_path: location.pathname });
+    else if (href.indexOf('/trial/') === 0) window.gaEvent('trial_click', { link_text: (a.textContent || '').trim().slice(0, 40), page_path: location.pathname });
   }, true);
 })();

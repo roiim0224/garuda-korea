@@ -3,7 +3,7 @@
 <html lang="ko"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="/assets/js/analytics.js?v=0300d5dc"></script>
+<script src="/assets/js/analytics.js?v=b3cc1a0b"></script>
 <title>가루다 교육 일정·수강 신청 | 얼리버드 20%</title>
 <meta name="description" content="가루다 지도자 과정 교육 일정. 기수별 날짜·시간·장소·수강료와 얼리버드 20% 할인, 특별 워크숍 일정을 확인하세요.">
 <!--seo:start (tools/build.mjs 가 생성 — 직접 고치지 말 것)-->
@@ -148,6 +148,16 @@ header{position:sticky;top:0;z-index:60;background:var(--ink);color:#fff;border-
   .rhead .apply{grid-column:1/-1;width:100%;padding:13px}
   .mlabel{display:block;font:400 10px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:5px}
 }
+
+/* 상시 체험수업 안내 띠 */
+.trialcta{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:22px 0 6px;padding:clamp(18px,3vw,26px) clamp(18px,3vw,30px);background:var(--ink);color:#fff;border-radius:var(--r);position:relative;overflow:hidden}
+.trialcta::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent)}
+.trialcta .k{font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-lt)}
+.trialcta h3{font-size:clamp(17px,2.3vw,21px);color:#fff;margin-top:8px}
+.trialcta p{font-size:13.5px;color:rgba(255,255,255,.75);margin-top:5px}
+.trialcta .btn{flex:none;padding:14px 22px;background:var(--accent);color:#fff;border-radius:var(--r);font:700 14.5px/1 'IBM Plex Sans KR',sans-serif;text-decoration:none;white-space:nowrap}
+.trialcta .btn:hover{filter:brightness(.92)}
+@media(max-width:640px){.trialcta .btn{width:100%;text-align:center}}
 
 /* 펼침 */
 .detail{display:none;padding:0 18px 22px;border-top:1px solid var(--line-2)}
@@ -472,7 +482,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         <a class="kbtn line" href="https://pf.kakao.com/_xexjbUT/chat" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.8 5.3 4.6 6.7l-1 3.7c-.1.4.3.7.6.5l4.4-2.9c.5.1.9.1 1.4.1 5.5 0 10-3.6 10-8S17.5 3 12 3z"></path></svg>카톡 문의</a></div>
     </div>
   </div></div>
- </article><p class="month">2027년 2월</p><article class="row" data-cat="Mat" data-place="서울역센터" style="--c:var(--mat)">
+ </article><aside class="trialcta" aria-label="GARUDA 상시 체험수업">
+    <div><p class="k">Trial Class</p><h3>정규 과정 전에, 먼저 몸으로 경험해 보세요</h3>
+      <p>원하는 날짜·시간에 GARUDA 마스터와 함께하는 상시 체험수업 · 8개 프로그램 · 1인 1시간 3만원부터</p></div>
+    <a class="btn" href="/trial/">GARUDA 상시체험 신청</a></aside><p class="month">2027년 2월</p><article class="row" data-cat="Mat" data-place="서울역센터" style="--c:var(--mat)">
   <div class="rhead" role="button" tabindex="0" aria-expanded="false">
     <span class="cname"><span class="arw">▶</span><span>Mat Foundation<small>매트 파운데이션</small><span class="cls">주중반(집중반)</span></span></span>
     <span class="cell date"><span class="mlabel">교육일</span><span class="mono">2.15(월) – 2.20(토)</span><small>2027년 · 6일</small></span>
@@ -699,6 +712,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 <script src="/assets/data/courses.js?v=3bf0b90d"></script>
 <script src="/assets/data/programs.js?v=c2f55847"></script>
 <script src="/assets/data/schedule.js?v=d08f2a1b"></script>
+<script src="/assets/data/trial.js?v=a53b3053"></script>
 <script>
 const C=Object.fromEntries(window.GARUDA_COURSES.map(c=>[c.id,c]));
 const PG=window.GARUDA_PROGRAMS, P=Object.fromEntries(PG.programs.map(p=>[p.id,p]));
@@ -786,16 +800,29 @@ function rowHTML(x){
   </div></div>
  </article>`;
 }
+/* 상시 체험수업 행동 유도 띠 */
+function trialCTA(){
+  const T=window.GARUDA_TRIAL, ps=T?Object.values(T.prices).filter(Boolean):[];
+  const from=ps.length?`1인 1시간 ${(Math.min(...ps)/10000).toLocaleString('ko-KR')}만원부터`:'';
+  return `<aside class="trialcta" aria-label="GARUDA 상시 체험수업">
+    <div><p class="k">Trial Class</p><h3>정규 과정 전에, 먼저 몸으로 경험해 보세요</h3>
+      <p>원하는 날짜·시간에 GARUDA 마스터와 함께하는 상시 체험수업${T?` · ${T.programs.length}개 프로그램`:''}${from?` · ${from}`:''}</p></div>
+    <a class="btn" href="/trial/">GARUDA 상시체험 신청</a></aside>`;
+}
 function render(){
   const cat=document.querySelector('#f-cat [aria-pressed="true"]').dataset.v;
   const pl=document.querySelector('#f-place [aria-pressed="true"]').dataset.v;
   const list=S.filter(x=>(cat==='all'||x.p.cat===cat)&&(pl==='all'||x.place===pl));
-  let h='',m='';
+  let h='',m='',n=0,cta=false;
+  const half=Math.ceil(list.length/2);
   for(const x of list){
     const d=X.day(x.dates[0]),k=`${d.getFullYear()}년 ${d.getMonth()+1}월`;
+    // 목록 가운데쯤, 달이 바뀌는 자리에 체험수업 안내 띠를 한 번 넣는다
+    if(k!==m&&!cta&&n>=half&&list.length>=4){h+=trialCTA();cta=true}
     if(k!==m){h+=`<p class="month">${k}</p>`;m=k}
-    h+=rowHTML(x);
+    h+=rowHTML(x);n++;
   }
+  if(!cta&&list.length) h+=trialCTA();
   document.getElementById('rows').innerHTML=h||'<p class="empty">조건에 맞는 일정이 없습니다.</p>';
 }
 render();
