@@ -237,7 +237,7 @@ footer a{color:inherit;text-decoration:none}
   <section class="sec">
     <h2><span class="n">02</span>체험수업 가격안내</h2>
     <table class="tbl" id="priceTbl">
-      <thead><tr><th>신청정원</th><th class="num">금액 (1인) / 시간당</th><th class="num">총액 (시간당)</th><th class="num">연강 신청 시 10% 할인 (2타임 기준)</th></tr></thead>
+      <thead><tr><th>신청정원</th><th class="num">금액 (1인) / 시간당</th><th class="num">총액 (1시간)</th><th class="num">연강 신청 시 10% 할인<br>(1인 · 2타임 기준)</th></tr></thead>
       <tbody></tbody>
     </table>
     <p class="pending" id="pricePending" hidden>체험수업 금액은 카카오톡 신청 시 인원과 프로그램에 맞춰 안내해 드립니다.</p>
@@ -279,7 +279,7 @@ footer a{color:inherit;text-decoration:none}
   $('places').textContent=T.places.join(' / ');
   const ks=Object.keys(T.prices).map(Number).sort((a,b)=>a-b), any=ks.some(k=>T.prices[k]);
   $('priceTbl').tBodies[0].innerHTML=ks.map(k=>{const p=T.prices[k];
-    return `<tr><td>${k}명</td><td class="num">${p?won(p):'문의'}</td><td class="num">${p?won(p*k):'문의'}</td><td class="num">${p?won(p*k*2*(1-T.discount)):'문의'}</td></tr>`}).join('');
+    return `<tr><td>${k}명</td><td class="num">${p?won(p):'문의'}</td><td class="num">${p?won(p*k):'문의'}</td><td class="num">${p?won(p*2*(1-T.discount)):'문의'}</td></tr>`}).join('');
   $('pricePending').hidden=any; $('priceTbl').hidden=!any;   // 금액이 정해지기 전에는 표 대신 안내 문구만
   /* 영상: 누를 때만 불러온다 */
   $('yt').addEventListener('click',e=>{const id=e.currentTarget.dataset.yt;e.currentTarget.outerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="GARUDA 교육 후기 영상" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;window.gaEvent&&gaEvent('video_play',{course:'체험수업 안내',video_id:id})});
