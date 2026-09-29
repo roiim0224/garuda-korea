@@ -1,4 +1,4 @@
-/* 구글 애널리틱스(GA4) — 모든 페이지 <head> 에서 불러온다.
+/* 구글 애널리틱스(GA4) + 네이버 애널리틱스 — 모든 페이지 <head> 에서 불러온다.
    실제 주소(garudakorea.com)에서만 기록한다. 로컬 확인 중에는 ?ga_debug 를 붙이면 기록.
    페이지에서 행동을 기록할 때는 gaEvent('이벤트이름', {항목}) 를 쓴다. */
 (function () {
@@ -13,6 +13,14 @@
   window.gtag = function () { window.dataLayer.push(arguments); };
   window.gtag('js', new Date());
   window.gtag('config', ID);
+
+  /* 네이버 애널리틱스 (사이트 ID 123773d6fb95e90) */
+  window.wcs_add = window.wcs_add || {};
+  window.wcs_add['wa'] = '123773d6fb95e90';
+  var nv = document.createElement('script'); nv.async = true;
+  nv.src = 'https://wcs.pstatic.net/wcslog.js';
+  nv.onload = function () { if (window.wcs) window.wcs_do(); };
+  document.head.appendChild(nv);
 
   /* 모든 페이지 공통: 카카오톡 상담·신청 버튼 클릭 */
   document.addEventListener('click', function (e) {
