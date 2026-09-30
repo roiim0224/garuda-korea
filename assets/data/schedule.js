@@ -51,6 +51,8 @@ window.GARUDA_SCHEDULE = {
       title: 'GARUDA Special Workshop',
       sub: "James D'Silva 내한 특별수업",
       page: '/workshop/james/',          // 전용 소개 페이지
+      promote: true,                     // 메인 상단 공지 띠 + 메인 소개 영역에 노출 (마감 후 자동으로 사라짐)
+      image: '/assets/img/workshop/james/1.webp',
       dates: ['2026-11-13', '2026-11-14', '2026-11-15'],
       place: 'BODYNOX 광화문',
       deadline: '2026-10-30',            // 등록 마감

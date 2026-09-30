@@ -172,6 +172,22 @@ footer a{color:inherit;text-decoration:none}
 .paybtn.k{background:var(--ink)}
 .cta p{font-size:13px;color:var(--soft);margin-top:10px;line-height:1.7}
 .cta p a{color:var(--accent-tx)}
+.who{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+.who h2{font-size:18px;margin-bottom:10px}
+.who ul{list-style:none;display:grid;gap:8px}
+.who li{font-size:14.5px;line-height:1.6;padding-left:22px;position:relative}
+.who li::before{content:"✓";position:absolute;left:0;color:var(--accent-tx);font-weight:700}
+.pbar{display:none}
+@media(max-width:700px){
+  .pbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:90;gap:10px;align-items:center;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(50,56,62,.97);color:#fff;transition:transform .25s}
+  .pbar.hide{transform:translateY(110%)}
+  .pbar .pr{flex:none;font-size:12px;line-height:1.35;color:rgba(255,255,255,.75)}
+  .pbar .pr b{display:block;font:700 16px/1.2 'IBM Plex Mono',monospace;color:#fff}
+  .pbar a{flex:1;display:flex;align-items:center;justify-content:center;padding:14px 10px;background:var(--accent);color:#fff;border-radius:var(--r);font:700 15px/1 'IBM Plex Sans KR',sans-serif;text-decoration:none}
+  .pbar a.k{background:#fff;color:var(--ink)}
+  body{padding-bottom:76px}
+}
+@media(prefers-reduced-motion:reduce){.pbar{transition:none}}
 </style>
 </head>
 <body>
@@ -194,6 +210,15 @@ footer a{color:inherit;text-decoration:none}
     <article class="prog"><p class="k">PROGRAM TWO</p><h2>Scoliosis</h2><p class="t">15:00–19:00 · 3일</p>
       <p>척추측만의 구조적 문제점을 이해하고 유형별 회원에게 실전 적용할 수 있는 호흡, 신체 위치별 운동방법을 집중적으로 탐구하고 방법론을 학습합니다.</p></article>
   </div>
+
+  <section class="who" aria-label="이런 분께 추천합니다">
+    <h2>이런 분께 추천합니다</h2>
+    <ul>
+      <li>척추측만 회원을 지도하는 필라테스·재활 강사</li>
+      <li>발목·무릎·고관절 등 하지 정렬 문제가 있는 회원을 지도하는 필라테스·재활 강사</li>
+      <li>GARUDA 창시자에게 움직임 원리를 직접 배우고 싶은 지도자</li>
+    </ul>
+  </section>
 
   <div class="shots">
     <img src="/assets/img/workshop/james/1.webp" width="1122" height="1402" alt="James D'Silva — GARUDA Method 창시자, 이번 11월 한국에서 직접 가르칩니다">
@@ -225,13 +250,15 @@ footer a{color:inherit;text-decoration:none}
   </section>
 </div></main>
 
+<div class="pbar" id="pbar" hidden><span class="pr" id="pbarPr"></span><a id="pbarBtn" href="#pay" target="_blank" rel="noopener">교육참가 결제하기</a></div>
+
 <footer><div class="wrap">
   <span><a href="/">홈</a> · <a href="/programs/">교육과정 소개</a> · <a href="/academy/">교육 일정</a></span>
   <span>The Garuda Method는 D'Silva Ltd.의 등록상표입니다.</span>
 </div>
 <div class="bizinfo" style="max-width:1140px;margin:18px auto 0;padding:14px clamp(16px,4vw,60px) 0;border-top:1px solid rgba(255,255,255,.1);font-size:12px;line-height:1.8;color:rgba(255,255,255,.5)"><b style="color:rgba(255,255,255,.72);font-weight:600">주식회사 바디녹스인터내셔널</b> · 대표 임용호 · 사업자등록번호 884-81-01065 · 통신판매업 신고 제2021-서울용산-0111호<br>서울시 용산구 한강대로 366, 남산트윈시티 B동 105호 · 이메일 <a href="mailto:roiim@naver.com" style="color:inherit">roiim@naver.com</a><br><a href="/refund/" style="color:rgba(255,255,255,.72);text-decoration:underline">취소·환불 규정</a> · <a href="https://pf.kakao.com/_xexjbUT/chat" target="_blank" rel="noopener" style="color:inherit">카카오톡 채널 문의</a> · <a href="https://www.instagram.com/garuda.korea" target="_blank" rel="noopener" aria-label="가루다 코리아 인스타그램" style="color:rgba(255,255,255,.72);text-decoration:none"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" style="vertical-align:-3px;margin-right:5px"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg>@garuda.korea</a></div>
 </footer>
-<script src="/assets/data/schedule.js?v=d08f2a1b"></script>
+<script src="/assets/data/schedule.js?v=8c210743"></script>
 <script>
 /* 참가비·결제 버튼: 신청 시기(schedule.js)에 맞춰 자동으로 바뀐다 */
 (function(){
@@ -247,6 +274,14 @@ footer a{color:inherit;text-decoration:none}
     b.addEventListener('click',()=>window.gaEvent&&gaEvent('begin_checkout',{currency:'KRW',value:tp.now,course:ev.title,start_date:ev.dates[0]})); }
   else { b.href='https://pf.kakao.com/_xexjbUT/chat'; b.textContent=`카카오톡으로 참가 신청 · ${won(tp.now)}`; b.classList.add('k');
     note.innerHTML='현재 참가비 결제 링크를 준비하고 있습니다. 카카오톡으로 신청해 주시면 결제 방법을 안내해 드립니다.<br><a href="/refund/">취소·환불 규정</a>'; }
+  /* 휴대폰 하단 고정 결제 버튼 — 본문 결제 버튼이 보이면 숨김 */
+  const bar=document.getElementById('pbar'), bb=document.getElementById('pbarBtn');
+  const label=ev.tiers.length-1===ev.tiers.findIndex(t=>t[1]===tp.now)?'정상가':`${ev.tiers.findIndex(t=>t[1]===tp.now)+1}차 얼리버드`;
+  document.getElementById('pbarPr').innerHTML=`${label}${tp.until?' · '+(tp.until.getMonth()+1)+'/'+tp.until.getDate()+'까지':''}<b>${won(tp.now)}</b>`;
+  bb.href=b.href; bb.textContent=tp.link?'교육참가 결제하기':'카카오톡으로 신청'; if(!tp.link) bb.classList.add('k');
+  bb.addEventListener('click',()=>window.gaEvent&&gaEvent(tp.link?'begin_checkout':'kakao_click',{currency:'KRW',value:tp.now,course:ev.title,placement:'sticky'}));
+  bar.hidden=false;
+  new IntersectionObserver(([e])=>bar.classList.toggle('hide',e.isIntersecting),{threshold:.3}).observe(document.getElementById('pay'));
 })();
 </script>
 <script src="/assets/js/track.js?v=aa318820"></script>

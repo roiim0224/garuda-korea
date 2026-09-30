@@ -73,6 +73,33 @@ header.solid{background:var(--ink);border-bottom:1px solid rgba(255,255,255,.12)
 .hero .sub{margin-top:18px;max-width:44ch;font-size:clamp(14.5px,1.6vw,16.5px);font-weight:300;color:rgba(255,255,255,.8)}
 .hero .sub .flag{display:inline-block;width:1.6em;height:.8em;vertical-align:-.05em;margin:0 .15em;border-radius:1px;box-shadow:0 0 0 1px rgba(255,255,255,.25)}
 
+.annc{position:fixed;top:0;left:0;right:0;height:40px;z-index:80;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;padding:0 44px;font-size:13.5px}
+.annc a{color:#fff;text-decoration:none;display:flex;gap:8px;align-items:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.annc a b{font-weight:700}
+.annc a .go{text-decoration:underline;text-underline-offset:3px;flex:none}
+.annc button{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:0;color:#fff;font-size:20px;line-height:1;cursor:pointer;padding:6px 8px;opacity:.8}
+@media(max-width:560px){.annc{font-size:12.5px;padding:0 36px 0 12px;justify-content:flex-start}.annc .hide-m{display:none}}
+body.has-annc header{top:40px}
+body.has-annc .hero{padding-top:150px}
+
+/* James 특별 워크숍 소개 영역 */
+.wshop{background:var(--card);border-bottom:1px solid var(--line)}
+.wsgrid{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+@media(max-width:820px){.wsgrid{grid-template-columns:1fr}.wsgrid .ph{max-width:360px}}
+.wsgrid .ph img{width:100%;height:auto;display:block;border-radius:var(--r)}
+.wshop .eyebrow{color:var(--accent-tx);margin-bottom:12px}
+.wshop h2{font-size:clamp(23px,3.4vw,34px)}
+.wshop .lead{margin-top:12px;font-size:15.5px;color:var(--soft)}
+.wshop dl{display:grid;grid-template-columns:70px 1fr;gap:6px 14px;margin-top:18px;font-size:14.5px}
+.wshop dt{color:var(--soft)}
+.wshop .tiers{display:flex;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:18px}
+.wshop .tiers div{flex:1;background:#fff;padding:11px 12px;font-size:12px;color:var(--soft)}
+.wshop .tiers b{display:block;font:600 16px/1.3 'IBM Plex Mono',monospace;color:var(--text);margin-top:3px}
+.wshop .tiers .on{background:#FDF0F7}.wshop .tiers .on b{color:var(--accent-tx)}
+.wshop .tiers .past{opacity:.4}.wshop .tiers .past b{text-decoration:line-through}
+.wshop .dday{margin-top:12px;font-size:13.5px;font-weight:600;color:var(--accent-tx)}
+.wshop .cta2{margin-top:18px}
+
 /* 창시자 인터뷰 */
 .founder{background:var(--ink);color:#fff}
 .fgrid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.4fr);gap:clamp(26px,4vw,56px);align-items:center}
@@ -148,6 +175,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:38px 0 30px;font
 </head>
 <body>
 
+<div class="annc" id="annc" hidden><a id="anncLink" href="/workshop/james/"></a><button type="button" id="anncX" aria-label="공지 닫기">×</button></div>
 <header id="hdr"><div class="wrap hd">
   <a href="/" class="logo">GARUDA <span>ACADEMY</span> KOREA</a>
   <nav>
@@ -166,6 +194,21 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:38px 0 30px;font
       <a href="/academy/" class="btn btn-p">자격과정 일정 보기</a>
       <a href="#paths" class="btn btn-g">스튜디오 도입 안내</a>
       <a href="/trial/" class="btn btn-g">GARUDA 상시 체험수업 신청</a>
+    </div>
+  </div>
+</section>
+
+<section class="wshop" id="workshop" hidden>
+  <div class="wrap wsgrid">
+    <a class="ph" id="wsImgLink" href="/workshop/james/"><img id="wsImg" src="" width="1122" height="1402" alt="James D'Silva 특별 워크숍" loading="lazy"></a>
+    <div>
+      <p class="eyebrow">Special Workshop · 창시자 직강</p>
+      <h2>창시자 James D'Silva에게<br>직접 배우는 3일</h2>
+      <p class="lead">Foot-Knee-Hip &amp; Scoliosis — 척추측만·하지 정렬 회원을 지도하는 필라테스·재활 강사를 위한 특별 워크숍입니다.</p>
+      <dl id="wsFacts"></dl>
+      <div class="tiers" id="wsTiers"></div>
+      <p class="dday" id="wsDday"></p>
+      <div class="cta2"><a class="btn btn-p" id="wsGo" href="/workshop/james/">자세히 보고 결제하기</a><a class="btn btn-d" href="https://pf.kakao.com/_xexjbUT/chat" target="_blank" rel="noopener">카카오톡 문의</a></div>
     </div>
   </div>
 </section>
@@ -295,7 +338,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:38px 0 30px;font
 
 <script src="/assets/data/courses.js?v=3bf0b90d"></script>
 <script src="/assets/data/programs.js?v=c2f55847"></script>
-<script src="/assets/data/schedule.js?v=d08f2a1b"></script>
+<script src="/assets/data/schedule.js?v=8c210743"></script>
 <script>
 /* 다가오는 기수 — schedule.js */
 function upcomingCards(filter,n){
@@ -325,6 +368,41 @@ document.getElementById('up-list').innerHTML=upcomingCards(()=>true,3);
     if(!player) return;
     player.setCurrentTime(+b.dataset.t).then(()=>player.play()).catch(()=>{});
   }));
+})();
+
+/* ── 메인 노출 특별 프로그램(promote): 상단 공지 띠 + 소개 영역. 날짜에 따라 문구·가격 자동, 마감 후 사라짐 ── */
+(function(){
+  const X=window.GARUDA_SCHED; if(!X) return;
+  const T0=new Date();T0.setHours(0,0,0,0);
+  const ev=X.upcoming(X.D.events).find(e=>e.promote&&e.page&&!(e.deadline&&X.day(e.deadline)<T0)); if(!ev) return;
+  const man=n=>(n/10000).toLocaleString('ko-KR')+'만원', md=d=>`${d.getMonth()+1}/${d.getDate()}`;
+  const dd=d=>Math.round((X.day(d)-T0)/864e5);
+  const tp=ev.tiers?X.tierPrice(ev):{now:ev.price,until:null};
+  const ti=ev.tiers?ev.tiers.findIndex(t=>t[1]===tp.now):-1, last=ev.tiers&&ti===ev.tiers.length-1;
+  const label=ev.tiers?(last?'정상가':`${ti+1}차 얼리버드`):'참가비';
+  let urgent;
+  if(tp.until){ const n=dd(X.iso(tp.until)); urgent=n===0?`${label} ${man(tp.now)} <b>오늘 마감</b>`:`${label} ${man(tp.now)} · ${md(tp.until)}까지 <b>D-${n}</b>`; }
+  else if(ev.deadline){ const n=dd(ev.deadline); urgent=`${man(tp.now)} · 등록 마감 ${md(X.day(ev.deadline))} <b>${n===0?'오늘':'D-'+n}</b>`; }
+  else urgent=man(tp.now);
+  const track=p=>()=>window.gaEvent&&gaEvent('workshop_promo_click',{placement:p,course:ev.title});
+  /* 상단 공지 띠 — 닫으면 이번 방문 동안 숨김 */
+  let closed=false; try{closed=sessionStorage.getItem('annc_x')===ev.id}catch(e){}
+  if(!closed){
+    const a=document.getElementById('anncLink'); a.href=ev.page;
+    a.innerHTML=`<span class="hide-m">James D'Silva 내한 워크숍 ${X.rangeText(ev.dates)} ·</span><span>${urgent}</span><span class="go">자세히 →</span>`;
+    a.addEventListener('click',track('annc'));
+    document.getElementById('annc').hidden=false; document.body.classList.add('has-annc');
+    document.getElementById('anncX').onclick=()=>{document.getElementById('annc').hidden=true;document.body.classList.remove('has-annc');try{sessionStorage.setItem('annc_x',ev.id)}catch(e){}};
+  }
+  /* 소개 영역 */
+  const sec=document.getElementById('workshop'); sec.hidden=false;
+  document.getElementById('wsImg').src=ev.image||''; document.getElementById('wsImgLink').href=ev.page;
+  document.getElementById('wsFacts').innerHTML=`<dt>일정</dt><dd>${X.rangeText(ev.dates)} · 3일 24시간</dd><dt>시간</dt><dd>${ev.slots.map(s=>s[0]+' '+s[1]).join('<br>')}</dd><dt>장소</dt><dd>${ev.place}</dd>${ev.deadline?`<dt>등록 마감</dt><dd>${md(X.day(ev.deadline))}</dd>`:''}`;
+  if(ev.tiers) document.getElementById('wsTiers').innerHTML=ev.tiers.map(([u,a],i)=>{const past=u&&X.day(u)<T0,on=i===ti;
+    return `<div class="${on?'on':past?'past':''}">${i===ev.tiers.length-1?'정상가':`${i+1}차 얼리버드`}<b>${man(a)}</b>${u?`~${md(X.day(u))}`:''}</div>`}).join('');
+  document.getElementById('wsDday').innerHTML=tp.until?(dd(X.iso(tp.until))===0?`오늘이 ${label} 마지막 날입니다. 내일부터 ${man(ev.tiers[ti+1][1])}`:`${label} 마감까지 ${dd(X.iso(tp.until))}일 · 이후 ${man(ev.tiers[ti+1][1])}`):(ev.deadline?(dd(ev.deadline)===0?'오늘 등록이 마감됩니다':`등록 마감까지 ${dd(ev.deadline)}일`):'');
+  const go=document.getElementById('wsGo'); go.href=ev.page; go.addEventListener('click',track('section'));
+  document.getElementById('wsImgLink').addEventListener('click',track('section_image'));
 })();
 
 const hdr=document.getElementById('hdr');
