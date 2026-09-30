@@ -57,7 +57,7 @@ window.GARUDA_SCHEDULE = {
       place: 'BODYNOX 광화문',
       deadline: '2026-10-30',            // 등록 마감
       /* 6번 안내 이미지 기준 (2026-09-28 확정): 1차 얼리버드 ~9/30, 2차 ~10/20, 이후 정상가 */
-      tiers: [['2026-09-30', 1000000, 'https://buy.tosspayments.com/products/mVBoGj2eG4'], ['2026-10-20', 1500000, ''], [null, 2000000, '']],
+      tiers: [['2026-09-30', 1000000, 'https://buy.tosspayments.com/products/mVBoGj2eG4'], ['2026-10-20', 1500000, 'https://buy.tosspayments.com/products/OiBoPOa1to'], [null, 2000000, '']],
       slots: [
         ['10:00–14:00', 'Foot-Knee-Hip', '', '발목, 무릎 그리고 고관절이 지면반발력에 의해 신체에 미치는 영향과 체중이동에 따른 각 관절의 움직임 메카니즘을 이해하고, GARUDA Method로 움직임의 기능을 향상시키는 과정을 학습합니다.'],
         ['15:00–19:00', 'Scoliosis', '', '척추측만의 구조적 문제점을 이해하고, 유형별 회원에게 실전 적용할 수 있는 호흡과 신체 위치별 운동방법을 집중적으로 탐구합니다.']
