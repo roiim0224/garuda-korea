@@ -55,7 +55,6 @@ window.GARUDA_SCHEDULE = {
       image: '/assets/img/workshop/james/1.webp',
       dates: ['2026-11-13', '2026-11-14', '2026-11-15'],
       place: 'BODYNOX 광화문',
-      deadline: '2026-10-30',            // 등록 마감
       /* 얼리버드 종료(10/20) — 2026-10-24부터 정상가 200만원만 노출. 토스 상품 OiBoPOa1to 금액을 2,000,000원으로 변경해 사용 */
       tiers: [[null, 2000000, 'https://buy.tosspayments.com/products/OiBoPOa1to']],
       slots: [
