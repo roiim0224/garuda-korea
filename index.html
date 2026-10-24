@@ -338,7 +338,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:38px 0 30px;font
 
 <script src="/assets/data/courses.js?v=3bf0b90d"></script>
 <script src="/assets/data/programs.js?v=c2f55847"></script>
-<script src="/assets/data/schedule.js?v=302e0d9f"></script>
+<script src="/assets/data/schedule.js?v=e6b8b67a"></script>
 <script>
 /* 다가오는 기수 — schedule.js */
 function upcomingCards(filter,n){
@@ -379,7 +379,7 @@ document.getElementById('up-list').innerHTML=upcomingCards(()=>true,3);
   const dd=d=>Math.round((X.day(d)-T0)/864e5);
   const tp=ev.tiers?X.tierPrice(ev):{now:ev.price,until:null};
   const ti=ev.tiers?ev.tiers.findIndex(t=>t[1]===tp.now):-1, last=ev.tiers&&ti===ev.tiers.length-1;
-  const label=ev.tiers?(last?'정상가':`${ti+1}차 얼리버드`):'참가비';
+  const label=ev.tiers?(last?(ev.tiers.length>1?'정상가':'참가비'):`${ti+1}차 얼리버드`):'참가비';
   let urgent;
   if(tp.until){ const n=dd(X.iso(tp.until)); urgent=n===0?`${label} ${man(tp.now)} <b>오늘 마감</b>`:`${label} ${man(tp.now)} · ${md(tp.until)}까지 <b>D-${n}</b>`; }
   else if(ev.deadline){ const n=dd(ev.deadline); urgent=`${man(tp.now)} · 등록 마감 ${md(X.day(ev.deadline))} <b>${n===0?'오늘':'D-'+n}</b>`; }
@@ -399,7 +399,7 @@ document.getElementById('up-list').innerHTML=upcomingCards(()=>true,3);
   document.getElementById('wsImg').src=ev.image||''; document.getElementById('wsImgLink').href=ev.page;
   document.getElementById('wsFacts').innerHTML=`<dt>일정</dt><dd>${X.rangeText(ev.dates)} · 3일 24시간</dd><dt>시간</dt><dd>${ev.slots.map(s=>s[0]+' '+s[1]).join('<br>')}</dd><dt>장소</dt><dd>${ev.place}</dd>${ev.deadline?`<dt>등록 마감</dt><dd>${md(X.day(ev.deadline))}</dd>`:''}`;
   if(ev.tiers) document.getElementById('wsTiers').innerHTML=ev.tiers.map(([u,a],i)=>{const past=u&&X.day(u)<T0,on=i===ti;
-    return `<div class="${on?'on':past?'past':''}">${i===ev.tiers.length-1?'정상가':`${i+1}차 얼리버드`}<b>${man(a)}</b>${u?`~${md(X.day(u))}`:''}</div>`}).join('');
+    return `<div class="${on?'on':past?'past':''}">${i===ev.tiers.length-1?(ev.tiers.length>1?'정상가':'참가비'):`${i+1}차 얼리버드`}<b>${man(a)}</b>${u?`~${md(X.day(u))}`:''}</div>`}).join('');
   document.getElementById('wsDday').innerHTML=tp.until?(dd(X.iso(tp.until))===0?`오늘이 ${label} 마지막 날입니다. 내일부터 ${man(ev.tiers[ti+1][1])}`:`${label} 마감까지 ${dd(X.iso(tp.until))}일 · 이후 ${man(ev.tiers[ti+1][1])}`):(ev.deadline?(dd(ev.deadline)===0?'오늘 등록이 마감됩니다':`등록 마감까지 ${dd(ev.deadline)}일`):'');
   const go=document.getElementById('wsGo'); go.href=ev.page; go.addEventListener('click',track('section'));
   document.getElementById('wsImgLink').addEventListener('click',track('section_image'));

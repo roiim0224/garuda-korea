@@ -223,7 +223,7 @@ footer a{color:inherit;text-decoration:none}
 <script src="/assets/data/config.js?v=a6dddecd"></script>
 <script src="/assets/data/courses.js?v=3bf0b90d"></script>
 <script src="/assets/data/programs.js?v=c2f55847"></script>
-<script src="/assets/data/schedule.js?v=302e0d9f"></script>
+<script src="/assets/data/schedule.js?v=e6b8b67a"></script>
 <script>
 (function(){
 const CFG=window.GARUDA_CONFIG, X=window.GARUDA_SCHED;
@@ -260,7 +260,7 @@ if(EV){
   c2.querySelector('.desc').textContent='';
   $('courses').innerHTML=`<div class="course on" style="--c:var(--accent)"><label style="cursor:default"><span class="nm"><b>${esc(EV.title)}</b><small>${esc(EV.sub)} · ${X.rangeText(EV.dates)} · ${esc(EV.place)}</small></span><span class="fee">${man(EVP.now)}</span></label>
     <div class="pick" style="display:block">${EV.slots.map(x=>`<p style="font-size:13.5px;margin-bottom:4px"><b class="num">${esc(x[0])}</b> ${esc(x[1])}</p>`).join('')}
-    ${EV.tiers?`<p style="font-size:12.5px;color:var(--soft);margin-top:8px">신청 시기별 참가비: ${EV.tiers.map(([u,a])=>`${u?mdw(X.day(u))+'까지':'이후'} ${man(a)}`).join(' · ')}</p>`:''}</div></div>`;
+    ${EV.tiers&&EV.tiers.length>1?`<p style="font-size:12.5px;color:var(--soft);margin-top:8px">신청 시기별 참가비: ${EV.tiers.map(([u,a])=>`${u?mdw(X.day(u))+'까지':'이후'} ${man(a)}`).join(' · ')}</p>`:''}</div></div>`;
   $('courseErr').style.display='none';
   document.querySelector('.card .notice').innerHTML=`신청서와 함께 <b>참가비 ${man(EVP.now)}</b>을 결제합니다.${EVP.until?` (${mdw(EVP.until)}까지 신청 시 금액)`:''}${EVP.link?'':'<br>결제 링크는 신청 확인 후 1영업일 이내에 문자와 이메일로 보내드립니다.'}`;
 }
