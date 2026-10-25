@@ -99,6 +99,22 @@ body.has-annc .hero{padding-top:150px}
 .wshop .tiers .past{opacity:.4}.wshop .tiers .past b{text-decoration:line-through}
 .wshop .dday{margin-top:12px;font-size:13.5px;font-weight:600;color:var(--accent-tx)}
 .wshop .cta2{margin-top:18px}
+.gw{border-bottom:1px solid var(--line)}
+.gwgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px}
+.gwcard{border:1px solid var(--ink);border-radius:var(--r);overflow:hidden;background:var(--card);display:flex;flex-direction:column}
+.gwcard .h{background:var(--ink);color:#fff;padding:18px 20px}
+.gwcard .h .eyebrow{color:var(--accent-lt);margin-bottom:8px}
+.gwcard .h b{display:block;font:600 19px/1.3 'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+.gwcard .h span{display:block;font-size:13px;color:rgba(255,255,255,.68);margin-top:5px}
+.gwcard ol{list-style:none;padding:6px 20px;flex:1}
+.gwcard li{display:grid;grid-template-columns:56px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line-2);font-size:14.5px}
+.gwcard li:last-child{border-bottom:0}
+.gwcard li .t{font:500 12px/1.7 'IBM Plex Mono',monospace;color:var(--accent-tx)}
+.gwcard li small{display:block;font-size:12.5px;color:var(--soft);margin-top:2px}
+.gwcard .f{padding:16px 20px;border-top:1px solid var(--line-2)}
+.gwcard .f .btn{width:100%}
+.gwcard .f p{font-size:12.5px;color:var(--soft);margin-top:9px;text-align:center}
+.gw .note{margin-top:16px;font-size:13.5px;color:var(--soft)}
 
 /* 창시자 인터뷰 */
 .founder{background:var(--ink);color:#fff}
@@ -210,6 +226,18 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:38px 0 30px;font
       <p class="dday" id="wsDday"></p>
       <div class="cta2"><a class="btn btn-p" id="wsGo" href="/workshop/james/">자세히 보고 결제하기</a><a class="btn btn-d" href="https://pf.kakao.com/_xexjbUT/chat" target="_blank" rel="noopener">카카오톡 문의</a></div>
     </div>
+  </div>
+</section>
+
+<section class="gw" id="gateway" hidden>
+  <div class="wrap">
+    <div class="sec-head rise">
+      <p class="eyebrow">Gateway · 체험 수업</p>
+      <h2>정규 과정 전에<br>GARUDA를 먼저 경험해 보세요</h2>
+      <p id="gwLead"></p>
+    </div>
+    <div class="gwgrid rise" id="gwList"></div>
+    <p class="note" id="gwNote"></p>
   </div>
 </section>
 
@@ -403,6 +431,21 @@ document.getElementById('up-list').innerHTML=upcomingCards(()=>true,3);
   document.getElementById('wsDday').innerHTML=tp.until?(dd(X.iso(tp.until))===0?`오늘이 ${label} 마지막 날입니다. 내일부터 ${man(ev.tiers[ti+1][1])}`:`${label} 마감까지 ${dd(X.iso(tp.until))}일 · 이후 ${man(ev.tiers[ti+1][1])}`):(ev.deadline?(dd(ev.deadline)===0?'오늘 등록이 마감됩니다':`등록 마감까지 ${dd(ev.deadline)}일`):'');
   const go=document.getElementById('wsGo'); go.href=ev.page; go.addEventListener('click',track('section'));
   document.getElementById('wsImgLink').addEventListener('click',track('section_image'));
+})();
+
+/* ── Gateway 체험 수업: schedule.js 의 Gateway 일정 중 지나지 않은 것 전부. 없으면 영역이 숨는다 ── */
+(function(){
+  const X=window.GARUDA_SCHED; if(!X) return;
+  const evs=X.upcoming(X.D.events).filter(e=>/Gateway/.test(e.title)); if(!evs.length) return;
+  document.getElementById('gwLead').textContent=evs[0].desc?evs[0].desc[0]:'';
+  document.getElementById('gwNote').textContent=evs[0].desc?evs[0].desc.slice(-1)[0]:'';
+  document.getElementById('gwList').innerHTML=evs.map(e=>{const d=X.day(e.dates[0]);
+    const go=e.payNow?`<a class="btn btn-p" href="${e.payNow}" target="_blank" rel="noopener" data-pay="${e.id}">바로 결제하고 신청하기 · ${e.price.toLocaleString('ko-KR')}원</a>`
+      :`<a class="btn btn-p" href="https://pf.kakao.com/_xexjbUT/chat" target="_blank" rel="noopener">카카오톡으로 신청하기 · ${e.price.toLocaleString('ko-KR')}원</a>`;
+    return `<div class="gwcard"><div class="h"><p class="eyebrow">${e.sub}</p><b>${d.getMonth()+1}월 ${d.getDate()}일 (${X.wd(e.dates[0])})</b><span>${e.place}</span></div>
+      <ol>${e.slots.map(([t,n])=>`<li><span class="t">${t}</span><span>${n}<small>50분 수업</small></span></li>`).join('')}</ol>
+      <div class="f">${go}${e.badge?`<p>${e.badge}</p>`:''}</div></div>`}).join('');
+  document.getElementById('gateway').hidden=false;
 })();
 
 const hdr=document.getElementById('hdr');
