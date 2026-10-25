@@ -371,7 +371,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 <script src="/assets/data/courses.js?v=3bf0b90d"></script>
 <script src="/assets/data/programs.js?v=c2f55847"></script>
-<script src="/assets/data/schedule.js?v=42ddb7fb"></script>
+<script src="/assets/data/schedule.js?v=0e881615"></script>
 <script>
 /* 체험 수업 — schedule.js 의 특별 프로그램 중 바레 수업이 포함된 가장 가까운 일정 */
 (function(){
@@ -387,7 +387,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   document.getElementById('ws-sub').textContent=`${ev.sub} · ${ev.place}${ev.cap?` · 정원 ${ev.cap}명`:''}`;
   list.innerHTML=`<div class="wsdate"><span><span class="d">${d.getMonth()+1}월 ${d.getDate()}일 (${X.wd(ev.dates[0])})</span><br><span class="c">${ev.slots[0][0]} 시작 · ${ev.slots.length}개 수업 · ${ev.place}</span></span>
     <span class="s w">${ev.cap?`${ev.cap}명 한정`:'모집중'}</span></div>`;
-  document.getElementById('ws-btn').textContent=`카카오톡으로 신청하기 · ${ev.price.toLocaleString('ko-KR')}원`;
+  const btn=document.getElementById('ws-btn');
+  if(ev.payNow){ btn.href=ev.payNow; btn.dataset.pay=ev.id; btn.textContent=`바로 결제하고 신청하기 · ${ev.price.toLocaleString('ko-KR')}원`; }
+  else btn.textContent=`카카오톡으로 신청하기 · ${ev.price.toLocaleString('ko-KR')}원`;
   document.getElementById('ws-note').textContent=(ev.desc||[]).slice(-1)[0]||'';
   slots.innerHTML=ev.slots.map(([t,name])=>`<li><span class="dn">${t}</span><span><span class="dt">${name}</span><span class="dd">50분 수업</span></span></li>`).join('');
 })();
