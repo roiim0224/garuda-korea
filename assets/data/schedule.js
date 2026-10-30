@@ -27,25 +27,6 @@ window.GARUDA_SCHEDULE = {
 
   events: [
     {
-      id: 'gateway-2026-10-31',
-      title: 'GARUDA Gateway',
-      sub: 'Barre · Sling 체험',
-      dates: ['2026-10-31'],
-      place: '서울역센터',
-      price: 100000,
-      cap: 5,
-      slots: [
-        ['14:00', 'GARUDA Barre', 'barre-foundation'],
-        ['15:00', 'GARUDA Sling', 'sling']
-      ],
-      desc: [
-        '이 프로그램은 GARUDA 정규과정 전에 GARUDA 움직임원리와 특징을 경험하고 자신들만의 도입방향을 설계할 수 있는 시간입니다.',
-        '각 수업시간은 50분간 진행되며 2가지 수업을 모두 참가하는 일정입니다.'
-      ],
-      badge: '5명 한정 · 사전등록 할인 없음',
-      payNow: 'https://buy.tosspayments.com/products/tPBnLp-5bk'   // Gateway 10/31 10만원 토스 결제 링크
-    },
-    {
       id: 'gateway-2026-11-07',
       title: 'GARUDA Gateway',
       sub: 'Barre · Brick 체험',
