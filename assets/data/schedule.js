@@ -46,6 +46,24 @@ window.GARUDA_SCHEDULE = {
       payNow: 'https://buy.tosspayments.com/products/CQBoXSIyZU'   // Gateway 11/7 10만원 토스 결제 링크
     },
     {
+      id: 'gateway-james-2026-11-12',
+      title: "GARUDA Gateway with James D'Silva",
+      sub: 'Barre · Brick · Chair 체험',
+      dates: ['2026-11-12'],
+      place: '광화문센터',
+      price: 150000,
+      slots: [
+        ['14:00', 'GARUDA Barre', 'barre-foundation'],
+        ['15:00', 'GARUDA Brick', 'brick-ghara'],
+        ['16:00', 'GARUDA Chair', 'chair-dhara']
+      ],
+      desc: [
+        '이 프로그램은 GARUDA 정규과정 전에 GARUDA 움직임원리와 특징을 경험하고 자신들만의 도입방향을 설계할 수 있는 시간입니다.',
+        '각 수업시간은 50분간 진행되며 3가지 수업을 모두 참가하는 일정입니다.'
+      ],
+      payNow: 'https://buy.tosspayments.com/products/tPBnLp-5bk'   // Gateway with James 15만원 토스 결제 링크 (10/31 상품을 이름·금액 바꿔 재사용)
+    },
+    {
       id: 'james-2026-11',
       title: 'GARUDA Special Workshop',
       sub: "James D'Silva 내한 특별수업",

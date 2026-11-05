@@ -104,6 +104,7 @@ body.has-annc .hero{padding-top:150px}
 .gwcard{border:1px solid var(--ink);border-radius:var(--r);overflow:hidden;background:var(--card);display:flex;flex-direction:column}
 .gwcard .h{background:var(--ink);color:#fff;padding:18px 20px}
 .gwcard .h .eyebrow{color:var(--accent-lt);margin-bottom:8px}
+.gwcard .h em{display:block;font-style:normal;font-weight:600;font-size:14px;color:#fff;margin-bottom:6px}
 .gwcard .h b{display:block;font:600 19px/1.3 'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
 .gwcard .h span{display:block;font-size:13px;color:rgba(255,255,255,.68);margin-top:5px}
 .gwcard ol{list-style:none;padding:6px 20px;flex:1}
@@ -237,7 +238,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:38px 0 30px;font
       <p id="gwLead"></p>
     </div>
     <div class="gwgrid rise" id="gwList"></div>
-    <p class="note" id="gwNote"></p>
   </div>
 </section>
 
@@ -366,7 +366,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.5);padding:38px 0 30px;font
 
 <script src="/assets/data/courses.js?v=3bf0b90d"></script>
 <script src="/assets/data/programs.js?v=c2f55847"></script>
-<script src="/assets/data/schedule.js?v=579c54f0"></script>
+<script src="/assets/data/schedule.js?v=4cb2d7e0"></script>
 <script>
 /* 다가오는 기수 — schedule.js */
 function upcomingCards(filter,n){
@@ -438,13 +438,12 @@ document.getElementById('up-list').innerHTML=upcomingCards(()=>true,3);
   const X=window.GARUDA_SCHED; if(!X) return;
   const evs=X.upcoming(X.D.events).filter(e=>/Gateway/.test(e.title)); if(!evs.length) return;
   document.getElementById('gwLead').textContent=evs[0].desc?evs[0].desc[0]:'';
-  document.getElementById('gwNote').textContent=evs[0].desc?evs[0].desc.slice(-1)[0]:'';
   document.getElementById('gwList').innerHTML=evs.map(e=>{const d=X.day(e.dates[0]);
     const go=e.payNow?`<a class="btn btn-p" href="${e.payNow}" target="_blank" rel="noopener" data-pay="${e.id}">바로 결제하고 신청하기 · ${e.price.toLocaleString('ko-KR')}원</a>`
       :`<a class="btn btn-p" href="https://pf.kakao.com/_xexjbUT/chat" target="_blank" rel="noopener">카카오톡으로 신청하기 · ${e.price.toLocaleString('ko-KR')}원</a>`;
-    return `<div class="gwcard"><div class="h"><p class="eyebrow">${e.sub}</p><b>${d.getMonth()+1}월 ${d.getDate()}일 (${X.wd(e.dates[0])})</b><span>${e.place}</span></div>
+    return `<div class="gwcard"><div class="h"><p class="eyebrow">${e.sub}</p>${e.title!=='GARUDA Gateway'?`<em>${e.title.replace('GARUDA ','')}</em>`:''}<b>${d.getMonth()+1}월 ${d.getDate()}일 (${X.wd(e.dates[0])})</b><span>${e.place}</span></div>
       <ol>${e.slots.map(([t,n])=>`<li><span class="t">${t}</span><span>${n}<small>50분 수업</small></span></li>`).join('')}</ol>
-      <div class="f">${go}${e.badge?`<p>${e.badge}</p>`:''}</div></div>`}).join('');
+      <div class="f">${go}<p>${e.slots.length}개 수업 모두 참가${e.badge?` · ${e.badge}`:''}</p></div></div>`}).join('');
   document.getElementById('gateway').hidden=false;
 })();
 
